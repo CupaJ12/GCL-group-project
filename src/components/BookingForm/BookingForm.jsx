@@ -67,8 +67,8 @@ const BookingForm = () => {
                 <button className="add-property-btn" onClick={addAProperty}>+</button>
             </div>
 
-            <div className="section-header">
-                Tenant
+                    </div> {/* end of tenant-container */}
+                </form>
             </div>
 
             <form key="booking-form" onSubmit={onSubmit}>
