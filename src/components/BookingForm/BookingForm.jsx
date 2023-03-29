@@ -67,9 +67,6 @@ const BookingForm = () => {
                 <button className="add-property-btn" onClick={addAProperty}>+</button>
             </div>
 
-                    </div> {/* end of tenant-container */}
-                </form>
-            </div>
 
             <form key="booking-form" onSubmit={onSubmit}>
 
@@ -160,6 +157,23 @@ const BookingForm = () => {
                 <div className="section-header">
                     Financial
                 </div>
+
+                <form onSubmit={onSubmit}>
+
+                    <div className="tenant-container">
+                        <div className="tenant-input-div">
+                            <label className="label" htmlFor="first-name">First Name</label>
+                            <input
+                                id="first-name"
+                                name="first-name"
+                                type="text"
+                                value={firstName}
+                                placeholder="first name"
+                                required
+                                className="tenant-input"
+                                onChange={(event) => setFirstName(event.target.value)}
+                            />
+                        </div>
 
                 <div className="financial-container">
                     <div className="financial-input-div">
