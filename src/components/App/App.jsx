@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import BookingForm from '../BookingForm/BookingForm';
 
 import './App.css';
 
@@ -60,6 +61,14 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
+            {/* Protected route for Booking Form - bryan */}
+          <ProtectedRoute
+            exact
+            path="/bookingform"
+          >
+            <BookingForm />
+          </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -67,6 +76,9 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
+
+         
+
 
           <Route
             exact
