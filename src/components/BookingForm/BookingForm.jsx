@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './BookingForm.css';
 
 // npm install react-select
 
@@ -15,10 +16,12 @@ const BookingForm = () => {
     return (
         <div className="booking-form-container">
             <h1>Booking Form</h1>
-            <select className="property-dropdown">
-                <option value="goldClaimLodge">Gold Claim Lodge</option>
-            </select>
-            <button className="add-property-btn" >+</button>
+            <div className="property-select-container">
+                <select className="property-dropdown">
+                    <option value="goldClaimLodge">Gold Claim Lodge</option>
+                </select>
+                <button className="add-property-btn" onClick={addAProperty}>+</button>
+            </div>
         </div>
     )
 };
