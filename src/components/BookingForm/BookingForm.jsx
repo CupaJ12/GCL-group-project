@@ -37,6 +37,7 @@ const BookingForm = () => {
     return (
         
             <div className="booking-form-container">
+                
                 <div className="property-select-container">
                     <select className="property-dropdown">
                         <option value="goldClaimLodge">Gold Claim Lodge</option>
@@ -47,7 +48,9 @@ const BookingForm = () => {
                 <div className="section-header">
                     Tenant
                 </div>
+
                 <form onSubmit={onSubmit}>
+
                     <div className="tenant-container">
                         <div className="tenant-input-div">
                             <label className="label" htmlFor="first-name">First Name</label>
@@ -101,36 +104,39 @@ const BookingForm = () => {
                                 onChange={(event) => setEmail(event.target.value)}
                             />
                         </div>
+                    </div> {/* end of tenant-container */}
                         
-                        <div className="tenant-input-div">
+                    <div className="tenant-input-date-div">
+                        <div className="date-picker">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DatePicker  
+                                <DatePicker
                                     label={'check-in'}
                                     value={checkIn}
-                                    onChange={(newValue) => console.log(newValue)}
+                                    onChange={(newValue) => setCheckIn(newValue)}
                                     showDaysOutsideCurrentMonth
-                                    
                                     // onChange={(event) => setCheckIn(event.target.value)}
-                                    
                                 />
                             </LocalizationProvider>
                         </div>
-
-                        <div className="tenant-input-div">
+                    
+                        <div className="date-picker">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker  
                                     label={'check-out'}
                                     value={checkOut}
-                                    onChange={(newValue) => console.log(newValue)}
+                                    onChange={(newValue) => setCheckOut(newValue)}
                                     showDaysOutsideCurrentMonth
-                                    
                                     // onChange={(event) => setCheckIn(event.target.value)}
-                                    
                                 />
                             </LocalizationProvider>
                         </div>
+                    </div>
 
-                    </div> {/* end of tenant-container */}
+                    <div className="section-header">
+                        Financial
+                    </div>
+
+
                 </form>
             </div>
     )
