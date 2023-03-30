@@ -1,0 +1,145 @@
+body {
+    background-color: #a8bba2;
+}
+
+.booking-form-container {
+    margin: auto;
+    margin-top: 50px;
+    background-color: white;
+    padding: 30px;
+    width: 50%;
+    border-radius: 30px;
+}
+
+.property-dropdown {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    color: #3c6a2f;
+}
+
+.property-select-container {
+    text-align: center;
+}
+
+.add-property-btn {
+    margin-left: 15px;
+    font-size: 30px;
+    background-color: #a8bba2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.add-property-btn:hover {
+    background-color: #3c6a2f;
+    transition: .5s;
+}
+
+.section-header {
+    width: 95%;
+    margin: auto;
+    background-color: #3c6a2f;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3c6a2f;
+}
+
+.tenant-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 95%;
+    margin: auto;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+
+.tenant-input-div {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+}
+
+.tenant-input {
+    font-size: 18px;
+    border-radius: 10px;
+    border-color: #3c6a2f;
+    width: 90%;
+    height: 30px;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+.tenant-input-date-div {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.date-picker {
+    margin: 15px;
+    display: inline-block;
+}
+
+.financial-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 95%;
+    margin: auto;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.financial-input {
+    font-size: 18px;
+    border-radius: 10px;
+    border-color: #3c6a2f;
+    width: 90%;
+    height: 30px;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+.financial-headers {
+    color: #3c6a2f;
+    text-align: center;
+}
+
+.money-total {
+    display: inline-block;
+    margin: auto;
+    text-align: center;
+    background-color: #3c6a2f;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gross-booking-amount {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+hr.rounded {
+    border-top: 1.5px solid #a8bba2;
+    border-radius: 15px;
+    width: 90%;
+}
