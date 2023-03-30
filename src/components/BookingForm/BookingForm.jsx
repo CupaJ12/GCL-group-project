@@ -158,7 +158,7 @@ const BookingForm = () => {
                     Financial
                 </div>
 
-                <form onSubmit={onSubmit}>
+                <form key="booking-form" onSubmit={onSubmit}>
 
                     <div className="tenant-container">
                         <div className="tenant-input-div">
