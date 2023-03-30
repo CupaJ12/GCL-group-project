@@ -135,4 +135,11 @@ body {
 
 .gross-booking-amount {
     text-align: center;
+    margin-bottom: 30px;
+}
+
+hr.rounded {
+    border-top: 1.5px solid #a8bba2;
+    border-radius: 15px;
+    width: 90%;
 }
