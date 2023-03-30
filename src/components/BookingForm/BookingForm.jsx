@@ -213,8 +213,16 @@ const BookingForm = () => {
                             />
                         </div>
 
-                        <h1>Gross Booking Amount</h1>
                     </div> {/* end of financial-container */}
+                    
+                    {grossBookingAmount > 0 && 
+                        <div className="gross-booking-amount">
+                            <h2 className="financial-headers">Gross Booking Amount</h2>
+                            <div className="money-total">
+                                ${grossBookingAmount.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers */}
+                            </div>
+                        </div>
+                    }
 
 
                 </form>

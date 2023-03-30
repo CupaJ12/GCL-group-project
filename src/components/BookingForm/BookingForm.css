@@ -115,3 +115,24 @@ body {
     padding: 5px;
     padding-left: 15px;
 }
+
+.financial-headers {
+    color: #3c6a2f;
+    text-align: center;
+}
+
+.money-total {
+    display: inline-block;
+    margin: auto;
+    text-align: center;
+    background-color: #3c6a2f;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gross-booking-amount {
+    text-align: center;
+}
