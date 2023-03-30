@@ -67,6 +67,9 @@ const BookingForm = () => {
                 <button className="add-property-btn" onClick={addAProperty}>+</button>
             </div>
 
+            <div className="section-header">
+                Tenant
+            </div>
 
             <form key="booking-form" onSubmit={onSubmit}>
 
@@ -157,22 +160,6 @@ const BookingForm = () => {
                 <div className="section-header">
                     Financial
                 </div>
-
-                <div className="financial-container">
-                    <div className="financial-input-div">
-                        <label className="label" htmlFor="cost-per-night">Cost Per Night</label>
-
-                        <CurrencyInput
-                            key="currency-input-cost-per-night"
-                            placeholder="$0.00" 
-                            type="text"
-                            id="cost-per-night"
-                            name="cost-per-night"
-                            value={costPerNight}
-                            required
-                            className="financial-input"
-                            onChange={(event) => {setCostPerNight(event.target.value); setChange(change)}}
-                        />
 
                 <div className="financial-container">
                     <div className="financial-input-div">
