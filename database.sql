@@ -67,3 +67,6 @@ INSERT INTO "date" ("date") VALUES ('12-31-2023'); -- month/day/year
 INSERT INTO "money" ("money") VALUES (500);     -- no quotation marks
 INSERT INTO "money" ("money") VALUES ('300');	-- with quotation marks
 INSERT INTO "money" ("money") VALUES (1000.50);	-- with decimal
+
+
+-- testing
