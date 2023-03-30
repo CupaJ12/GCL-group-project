@@ -65,7 +65,6 @@ body {
     margin: auto;
     padding-top: 30px;
     margin-bottom: 20px;
-
 }
 
 
@@ -96,4 +95,23 @@ body {
 .date-picker {
     margin: 15px;
     display: inline-block;
+}
+
+.financial-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 95%;
+    margin: auto;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.financial-input {
+    font-size: 18px;
+    border-radius: 10px;
+    border-color: #3c6a2f;
+    width: 90%;
+    height: 30px;
+    padding: 5px;
+    padding-left: 15px;
 }
