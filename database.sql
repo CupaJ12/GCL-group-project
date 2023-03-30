@@ -70,3 +70,5 @@ INSERT INTO "money" ("money") VALUES (1000.50);	-- with decimal
 
 
 -- testing
+
+--- testing 2
