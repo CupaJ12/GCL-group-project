@@ -158,22 +158,21 @@ const BookingForm = () => {
                     Financial
                 </div>
 
-                <form key="booking-form" onSubmit={onSubmit}>
+                <div className="financial-container">
+                    <div className="financial-input-div">
+                        <label className="label" htmlFor="cost-per-night">Cost Per Night</label>
 
-                    <div className="tenant-container">
-                        <div className="tenant-input-div">
-                            <label className="label" htmlFor="first-name">First Name</label>
-                            <input
-                                id="first-name"
-                                name="first-name"
-                                type="text"
-                                value={firstName}
-                                placeholder="first name"
-                                required
-                                className="tenant-input"
-                                onChange={(event) => setFirstName(event.target.value)}
-                            />
-                        </div>
+                        <CurrencyInput
+                            key="currency-input-cost-per-night"
+                            placeholder="$0.00" 
+                            type="text"
+                            id="cost-per-night"
+                            name="cost-per-night"
+                            value={costPerNight}
+                            required
+                            className="financial-input"
+                            onChange={(event) => {setCostPerNight(event.target.value); setChange(change)}}
+                        />
 
                 <div className="financial-container">
                     <div className="financial-input-div">
