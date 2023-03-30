@@ -14,6 +14,10 @@ function BookingsFolder() {
         })
     }, [])
 
+    const homeButton = () => {
+        history.push('/')
+    };
+
     return (
         <div>
             <section>
@@ -24,9 +28,14 @@ function BookingsFolder() {
                         <h3> {booking} </h3>
                         <h3> {booking} </h3>
                         <h3> {booking} </h3>
+                        <br></br>
                     </div>
                 ))}
             </section>
+            
+            <div>
+                <button onClick={() => homeButton()}> Go Home </button>
+            </div>
 
         </div>
     )
