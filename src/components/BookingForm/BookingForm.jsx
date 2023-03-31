@@ -32,15 +32,31 @@ const BookingForm = () => {
     const [vendorFees, setVendorFees] = useState('');
     const [discount, setDiscount] = useState('');
     const [submitDisabled, setSubmitDisabled] = useState(true);
-    const [change, setChange] = useState(0);
-    
+    const [change, setChange] = useState(0);  
 
     useEffect(() => {
         checkFormComplete();
     }, [change])
 
     // Number(costPerNight.replace(/[^0-9.]/g, ''));  - - - removes all special characters EXCEPT for numbers and decimal and converts to an integer
-    const grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+    // const grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+    // const feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
+    
+    const grossBookingAmount = () => {
+        if (taxResponsible === false) {
+            return (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+        } else {
+            return (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
+        }
+    }
+
+    const feesOwed = () => { 
+        if (taxResponsible) {
+            return (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+        } else {
+            return (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
+        }
+    };
 
     const addAProperty = () => {
         return (
@@ -252,7 +268,7 @@ const BookingForm = () => {
                 </div> {/* end of financial-container */}
                 
                 {grossBookingAmount > 0 && 
-                    <div className="gross-booking-amount">
+                    <div className="booking-amount">
                         <h2 className="financial-headers">Gross Booking Amount</h2>
                         <div className="money-total">
                             ${grossBookingAmount.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers */}
@@ -320,10 +336,16 @@ const BookingForm = () => {
 
                     <TaxToggleSwitch />
                     <FeesFinalizedToggleSwitch />
+
                 </div>
-
-
-
+                    {grossBookingAmount > 0 && 
+                        <div className="booking-amount">
+                            <h2 className="financial-headers">Net Payout</h2>
+                            <div className="money-total">
+                                ${netPayout.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers */}
+                            </div>
+                        </div>
+                    }
 
                 <button type="submit" disabled={submitDisabled}>SUBMIT</button>
 

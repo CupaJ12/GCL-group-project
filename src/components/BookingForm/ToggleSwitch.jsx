@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './ToggleSwitch.css';
 
 const TaxToggleSwitch = () => {
     const [taxResponsible, setTaxResponsible] = useState(false);
+
+    useEffect(() => {
+        console.log('tax: ', taxResponsible);
+    }, [taxResponsible]);
 
     return (
         <label className="toggle">
@@ -19,6 +23,10 @@ const TaxToggleSwitch = () => {
 const FeesFinalizedToggleSwitch = () => {
     const [feesFinalized, setFeesFinalized] = useState(false);
 
+    useEffect(() => {
+        console.log('fees: ', feesFinalized);
+    }, [feesFinalized]);
+
     return (
         <label className="toggle">
             <div className="slider-div">
@@ -29,6 +37,7 @@ const FeesFinalizedToggleSwitch = () => {
             <div className="responsibility-text">{feesFinalized === false ? 'no' : 'yes'}</div>
         </label>
     )
-}
+};
+
 
 export { TaxToggleSwitch, FeesFinalizedToggleSwitch };

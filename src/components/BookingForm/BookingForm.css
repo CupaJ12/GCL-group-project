@@ -193,7 +193,7 @@ body {
     font-weight: bold;
 }
 
-.gross-booking-amount {
+.booking-amount {
     text-align: center;
     margin-bottom: 30px;
 }
@@ -203,3 +203,4 @@ hr.rounded {
     border-radius: 15px;
     width: 90%;
 }
+
