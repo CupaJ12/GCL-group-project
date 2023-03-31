@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import MaskedInput from 'react-text-mask';
 import CurrencyInput from './CurrencyInput';
+import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
 import './BookingForm.css';
 
 // npm install @mui/x-date-pickers
@@ -26,8 +27,13 @@ const BookingForm = () => {
     const [petFees, setPetFees] = useState('');
     const [cleaningFees, setCleaningFees] = useState('');
     const [lodgingTax, setLodgingTax] = useState('');
+    const [vendor, setVendor] = useState('');
+    const [vendorCommissions, setVendorCommissions] = useState('');
+    const [vendorFees, setVendorFees] = useState('');
+    const [discount, setDiscount] = useState('');
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const [change, setChange] = useState(0);
+    
 
     useEffect(() => {
         checkFormComplete();
@@ -55,9 +61,20 @@ const BookingForm = () => {
     };
 
     const checkFormComplete = () => {
-        if (firstName.length > 0 && lastName.length > 0 && checkIn != null && checkOut != null && checkOut > checkIn && costPerNight.length > 0 && cleaningFees.length > 0 && lodgingTax.length > 0) {
+        if (
+                firstName.length > 0 
+                && lastName.length > 0 
+                && checkIn != null 
+                && checkOut != null 
+                && checkOut > checkIn 
+                && costPerNight.length > 0 
+                && cleaningFees.length > 0 
+                && lodgingTax.length > 0
+                && vendor.length > 0
+                && vendorCommissions.length > 0
+                && vendorFees.length > 0
+            ) {
             setSubmitDisabled(false);
-            console.log('first name: ', firstName)
         } else {
             setSubmitDisabled(true);
         }
@@ -90,7 +107,7 @@ const BookingForm = () => {
                             placeholder="first name"
                             required
                             className="tenant-input"
-                            onChange={(event) => {setFirstName(event.target.value); setChange(change)}}
+                            onChange={(event) => {setFirstName(event.target.value); setChange(change + 1)}}
                         />
                     </div>
 
@@ -104,7 +121,7 @@ const BookingForm = () => {
                             placeholder="last name"
                             required
                             className="tenant-input"
-                            onChange={(event) => {setLastName(event.target.value); setChange(change)}}
+                            onChange={(event) => {setLastName(event.target.value); setChange(change + 1)}}
                         />
                     </div>
 
@@ -118,7 +135,7 @@ const BookingForm = () => {
                             value={phone}
                             placeholder="phone (optional)"
                             className="tenant-input"
-                            onChange={(event) => {setPhone(event.target.value); setChange(change)}}
+                            onChange={(event) => {setPhone(event.target.value); setChange(change + 1)}}
                         />
                     </div>
 
@@ -131,7 +148,7 @@ const BookingForm = () => {
                             value={email}
                             placeholder="email (optional)"
                             className="tenant-input"
-                            onChange={(event) => {setEmail(event.target.value); setChange(change)}}
+                            onChange={(event) => {setEmail(event.target.value); setChange(change + 1)}}
                         />
                     </div>
                 </div> {/* end of tenant-container */}
@@ -142,7 +159,7 @@ const BookingForm = () => {
                             <DatePicker
                                 label={'check-in'}
                                 value={checkIn}
-                                onChange={(newValue) => {setCheckIn(newValue); setChange(change)}}
+                                onChange={(newValue) => {setCheckIn(newValue); setChange(change + 1)}}
                                 showDaysOutsideCurrentMonth
                             />
                         </LocalizationProvider>
@@ -153,7 +170,7 @@ const BookingForm = () => {
                             <DatePicker  
                                 label={'check-out'}
                                 value={checkOut}
-                                onChange={(newValue) => {setCheckOut(newValue); setChange(change)}}
+                                onChange={(newValue) => {setCheckOut(newValue); setChange(change + 1)}}
                                 showDaysOutsideCurrentMonth
                             />
                         </LocalizationProvider>
@@ -180,7 +197,7 @@ const BookingForm = () => {
                             value={costPerNight}
                             required
                             className="financial-input"
-                            onChange={(event) => {setCostPerNight(event.target.value); setChange(change)}}
+                            onChange={(event) => {setCostPerNight(event.target.value); setChange(change + 1)}}
                         />
 
                     </div>
@@ -196,7 +213,7 @@ const BookingForm = () => {
                             name="pet-fees"
                             value={petFees}
                             className="financial-input"
-                            onChange={(event) => {setPetFees(event.target.value); setChange(change)}}
+                            onChange={(event) => {setPetFees(event.target.value); setChange(change + 1)}}
                         />
                     </div>
 
@@ -212,7 +229,7 @@ const BookingForm = () => {
                             value={cleaningFees}
                             required
                             className="financial-input"
-                            onChange={(event) => {setCleaningFees(event.target.value); setChange(change)}}
+                            onChange={(event) => {setCleaningFees(event.target.value); setChange(change + 1)}}
                         />
                     </div>
 
@@ -228,7 +245,7 @@ const BookingForm = () => {
                             value={lodgingTax}
                             required
                             className="financial-input"
-                            onChange={(event) => {setLodgingTax(event.target.value); setChange(change)}}
+                            onChange={(event) => {setLodgingTax(event.target.value); setChange(change + 1)}}
                         />
                     </div>
 
@@ -244,17 +261,67 @@ const BookingForm = () => {
                 }
 
                 <hr className="rounded"/>
-
                 <div className="vendor-container">
+                    
                     <div className="vendor-input-div">
-                        <select className="vendor-dropdown">
-                            <option value="Airbnb">Airbnb</option>
-                            <option value="Vrbo">Vrbo</option>
-                        </select>
-                        <button type="button" className="add-vendor-btn" onClick={addAVendor}>+</button>
+                        <label className="label" htmlFor="vendor">Vendor</label>
+                        <input
+                            id="vendor"
+                            name="vendor"
+                            type="text"
+                            value={vendor}
+                            placeholder="vendor"
+                            className="vendor-input"
+                            onChange={(event) => {setVendor(event.target.value); setChange(change + 1)}}
+                        />
                     </div>
-                    <div><h2>hi</h2></div>
+
+                    <div className="vendor-input-div">
+                        <label className="label" htmlFor="vendor-commissions">Vendor Commissions</label>
+                        <CurrencyInput
+                            key="currency-input-vendor-commissions"
+                            placeholder="$0.00" 
+                            type="text"
+                            id="vendor-commissions"
+                            name="vendor-commissions"
+                            value={vendorCommissions}
+                            className="financial-input"
+                            onChange={(event) => {setVendorCommissions(event.target.value); setChange(change + 1)}}
+                        />
+                    </div>
+
+                    <div className="vendor-input-div">
+                        <label className="label" htmlFor="vendor-fees">Vendor Fees</label>
+                        <CurrencyInput
+                            key="currency-input-vendor-fees"
+                            placeholder="$0.00" 
+                            type="text"
+                            id="vendor-fees"
+                            name="vendor-fees"
+                            value={vendorFees}
+                            className="financial-input"
+                            onChange={(event) => {setVendorFees(event.target.value); setChange(change + 1)}}
+                        />
+                    </div>
+
+                    <div className="vendor-input-div">
+                        <label className="label" htmlFor="discount">Discount</label>
+                        <CurrencyInput
+                            key="currency-input-discount"
+                            placeholder="$0.00 (optional)" 
+                            type="text"
+                            id="discount"
+                            name="discount"
+                            value={discount}
+                            className="financial-input"
+                            onChange={(event) => {setDiscount(event.target.value); setChange(change + 1)}}
+                        />
+                    </div>
+
+                    <TaxToggleSwitch />
+                    <FeesFinalizedToggleSwitch />
                 </div>
+
 
 
 

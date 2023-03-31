@@ -11,15 +11,6 @@ body {
     border-radius: 30px;
 }
 
-.vendor-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 95%;
-    margin: auto;
-    padding-top: 30px;
-    margin-bottom: 20px;
-}
-
 .property-dropdown {
     font-size: 25px;
     font-weight: bold;
@@ -54,6 +45,7 @@ body {
     border: none;
     border-radius: 5px;
 }
+
 
 .add-vendor-btn {
     margin-left: 15px;
@@ -92,17 +84,28 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: #3c6a2f;
+    margin-right: 15px;
 }
 
 .tenant-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
     width: 95%;
     margin: auto;
     padding-top: 30px;
     margin-bottom: 20px;
 }
 
+.vendor-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
+    width: 95%;
+    margin: auto;
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
 
 .tenant-input-div {
     text-align: left;
@@ -114,6 +117,11 @@ body {
     text-align: left;
     width: 100%;
     margin: auto;
+}
+
+.vendor-btn-div {
+    display: inline-block;
+    padding-top: 10px;
 }
 
 .tenant-input {
@@ -133,7 +141,7 @@ body {
     margin-bottom: 30px;
 }
 
-.vendor-dropdown {
+.vendor-input {
     font-size: 18px;
     border-radius: 10px;
     border-color: #3c6a2f;
@@ -143,7 +151,6 @@ body {
     padding-left: 15px;
 }
 
-
 .date-picker {
     margin: 15px;
     display: inline-block;
@@ -152,6 +159,7 @@ body {
 .financial-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
     width: 95%;
     margin: auto;
     padding-top: 30px;
