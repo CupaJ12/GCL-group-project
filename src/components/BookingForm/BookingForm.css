@@ -11,6 +11,15 @@ body {
     border-radius: 30px;
 }
 
+.vendor-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 95%;
+    margin: auto;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
 .property-dropdown {
     font-size: 25px;
     font-weight: bold;
@@ -24,6 +33,19 @@ body {
     text-align: center;
 }
 
+.vendor-select-container {
+    text-align: center;
+}
+
+.vendor-dropdown {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    color: #3c6a2f;
+}
+
 .add-property-btn {
     margin-left: 15px;
     font-size: 30px;
@@ -33,7 +55,21 @@ body {
     border-radius: 5px;
 }
 
+.add-vendor-btn {
+    margin-left: 15px;
+    font-size: 30px;
+    background-color: #a8bba2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
 .add-property-btn:hover {
+    background-color: #3c6a2f;
+    transition: .5s;
+}
+
+.add-vendor-btn:hover {
     background-color: #3c6a2f;
     transition: .5s;
 }
@@ -74,6 +110,12 @@ body {
     margin: auto;
 }
 
+.vendor-input-div {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+}
+
 .tenant-input {
     font-size: 18px;
     border-radius: 10px;
@@ -89,6 +131,16 @@ body {
     margin: auto;
     text-align: center;
     margin-bottom: 30px;
+}
+
+.vendor-dropdown {
+    font-size: 18px;
+    border-radius: 10px;
+    border-color: #3c6a2f;
+    width: 90%;
+    height: 30px;
+    padding: 5px;
+    padding-left: 15px;
 }
 
 

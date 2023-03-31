@@ -38,7 +38,13 @@ const BookingForm = () => {
 
     const addAProperty = () => {
         return (
-        console.log('you clicked add a property with checkin: ', checkIn)
+        console.log('you clicked add a property with checkin')
+        )
+    };
+
+    const addAVendor = () => {
+        return (
+        console.log('you clicked add a vendor')
         )
     };
 
@@ -64,7 +70,7 @@ const BookingForm = () => {
                 <select className="property-dropdown">
                     <option value="goldClaimLodge">Gold Claim Lodge</option>
                 </select>
-                <button className="add-property-btn" onClick={addAProperty}>+</button>
+                <button type="button" className="add-property-btn" onClick={addAProperty}>+</button>
             </div>
 
             <div className="section-header">
@@ -239,9 +245,20 @@ const BookingForm = () => {
 
                 <hr className="rounded"/>
 
+                <div className="vendor-container">
+                    <div className="vendor-input-div">
+                        <select className="vendor-dropdown">
+                            <option value="Airbnb">Airbnb</option>
+                            <option value="Vrbo">Vrbo</option>
+                        </select>
+                        <button type="button" className="add-vendor-btn" onClick={addAVendor}>+</button>
+                    </div>
+                    <div><h2>hi</h2></div>
+                </div>
 
 
-                <button disabled={submitDisabled}>SUBMIT</button>
+
+                <button type="submit" disabled={submitDisabled}>SUBMIT</button>
 
             </form>
         </div>
