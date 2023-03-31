@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingForm from '../BookingForm/BookingForm';
 
 import './App.css';
+import EditBooking from '../EditBooking/EditBooking';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +68,13 @@ function App() {
             path="/bookingform"
           >
             <BookingForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+          exact
+          path="/editBooking"
+          >
+            <EditBooking />
           </ProtectedRoute>
 
           <ProtectedRoute
