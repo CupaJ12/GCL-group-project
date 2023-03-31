@@ -70,6 +70,7 @@ function App() {
             <BookingForm />
           </ProtectedRoute>
 
+          {/* Protected route for EditBooking */}
           <ProtectedRoute
           exact
           path="/editBooking"
