@@ -26,10 +26,14 @@ const TaxToggleSwitch = () => {
 };
 
 const FeesFinalizedToggleSwitch = () => {
+    const dispatch = useDispatch();
     const [feesFinalized, setFeesFinalized] = useState(false);
 
     useEffect(() => {
-        console.log('fees: ', feesFinalized);
+        dispatch({
+            type: 'SET_FEES_FINALIZED',
+            payload: feesFinalized
+        })
     }, [feesFinalized]);
 
     return (

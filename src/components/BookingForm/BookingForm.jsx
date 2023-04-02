@@ -38,30 +38,19 @@ const BookingForm = () => {
     const [vendor, setVendor] = useState('');
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
-
-    
-    // Number(costPerNight.replace(/[^0-9.]/g, ''));  - - - removes all special characters EXCEPT for numbers and decimal and converts to an integer
-    // const grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
-    // const feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
-    // const netPayout = grossBookingAmount - feesOwed;
    
-        useEffect(() => {
-            checkFormComplete();
-            calculateGross();
-        }, [change]);
+    useEffect(() => {
+        checkFormComplete();
+        calculateGross();
+    }, [change]);
 
-        useEffect(() => {
-            calculateGross();
-        }, [feesChange]);
+    useEffect(() => {
+        calculateGross();
+    }, [feesChange]);
 
-        useEffect(() => {
-            calculateGross();
-            // calculateNet();
-        }, [taxResponsibility]);
-
-        // useEffect(() => {
-        //     calculateNet();
-        // }, [taxResponsibility]);
+    useEffect(() => {
+        calculateGross();
+    }, [taxResponsibility]);
 
     const calculateGross = () => {
         if (!taxResponsibility) {
@@ -69,45 +58,26 @@ const BookingForm = () => {
             let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
-            // setChange(change + 1);
-            // calculateNet();
         } 
         else if (taxResponsibility && feesChange === 0) {
             let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
             let feesOwed = (Number(lodgingTax.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
-            // calculateNet();
         }
         else if (taxResponsibility && feesChange > 0) {
             let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
             let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
-            // calculateNet();
         }
     };
-
-    // const calculateNet = () => {
-    //     if (!taxResponsibility) {
-    //         let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
-    //         setNetPayout(grossBookingAmount - feesOwed);
-    //     } 
-    //     else if (taxResponsibility && feesChange == 0) {
-    //         let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));;
-    //         setNetPayout(grossBookingAmount - feesOwed);
-    //     } 
-    //     else if (taxResponsibility) {
-    //         let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
-    //         setNetPayout(grossBookingAmount - feesOwed);
-    //     } 
-    // };
-                            
-        const addAProperty = () => {
-            return (
-                console.log('you clicked add a property with checkin')
-            )
-        };
+               
+    const addAProperty = () => {
+        return (
+            console.log('you clicked add a property with checkin')
+        )
+    };
 
     const addAVendor = () => {
         return (
@@ -167,6 +137,7 @@ const BookingForm = () => {
                             value={firstName}
                             placeholder="first name"
                             required
+                            disabled={feesFinalized}
                             className="tenant-input"
                             onChange={(event) => {setFirstName(event.target.value); setChange(change + 1)}}
                         />
@@ -181,6 +152,7 @@ const BookingForm = () => {
                             value={lastName}
                             placeholder="last name"
                             required
+                            disabled={feesFinalized}
                             className="tenant-input"
                             onChange={(event) => {setLastName(event.target.value); setChange(change + 1)}}
                         />
@@ -195,6 +167,7 @@ const BookingForm = () => {
                             name="phone"
                             value={phone}
                             placeholder="phone (optional)"
+                            disabled={feesFinalized}
                             className="tenant-input"
                             onChange={(event) => {setPhone(event.target.value); setChange(change + 1)}}
                         />
@@ -208,6 +181,7 @@ const BookingForm = () => {
                             type="email"
                             value={email}
                             placeholder="email (optional)"
+                            disabled={feesFinalized}
                             className="tenant-input"
                             onChange={(event) => {setEmail(event.target.value); setChange(change + 1)}}
                         />
@@ -222,6 +196,7 @@ const BookingForm = () => {
                                 value={checkIn}
                                 onChange={(newValue) => {setCheckIn(newValue); setChange(change + 1)}}
                                 showDaysOutsideCurrentMonth
+                                disabled={feesFinalized}
                             />
                         </LocalizationProvider>
                     </div>
@@ -233,6 +208,7 @@ const BookingForm = () => {
                                 value={checkOut}
                                 onChange={(newValue) => {setCheckOut(newValue); setChange(change + 1)}}
                                 showDaysOutsideCurrentMonth
+                                disabled={feesFinalized}
                             />
                         </LocalizationProvider>
                     </div>
@@ -257,6 +233,7 @@ const BookingForm = () => {
                             name="cost-per-night"
                             value={costPerNight}
                             required
+                            disabled={feesFinalized}
                             className="financial-input"
                             onChange={(event) => {setCostPerNight(event.target.value); setChange(change + 1)}}
                         />
@@ -273,6 +250,7 @@ const BookingForm = () => {
                             id="pet-fees"
                             name="pet-fees"
                             value={petFees}
+                            disabled={feesFinalized}
                             className="financial-input"
                             onChange={(event) => {setPetFees(event.target.value); setChange(change + 1)}}
                         />
@@ -289,6 +267,7 @@ const BookingForm = () => {
                             name="cleaning-fees"
                             value={cleaningFees}
                             required
+                            disabled={feesFinalized}
                             className="financial-input"
                             onChange={(event) => {setCleaningFees(event.target.value); setChange(change + 1)}}
                         />
@@ -305,6 +284,7 @@ const BookingForm = () => {
                             name="lodging-tax"
                             value={lodgingTax}
                             required
+                            disabled={feesFinalized}
                             className="financial-input"
                             onChange={(event) => {setLodgingTax(event.target.value); setChange(change + 1)}}
                         />
@@ -332,6 +312,7 @@ const BookingForm = () => {
                             type="text"
                             value={vendor}
                             placeholder="vendor"
+                            disabled={feesFinalized}
                             className="vendor-input"
                             onChange={(event) => {setVendor(event.target.value); setChange(change + 1)}}
                         />
@@ -346,6 +327,7 @@ const BookingForm = () => {
                             id="vendor-commissions"
                             name="vendor-commissions"
                             value={vendorCommissions}
+                            disabled={feesFinalized}
                             className="financial-input"
                             onChange={(event) => {setVendorCommissions(event.target.value); setFeesChange(feesChange + 1)}}
                         />
@@ -360,6 +342,7 @@ const BookingForm = () => {
                             id="vendor-fees"
                             name="vendor-fees"
                             value={vendorFees}
+                            disabled={feesFinalized}
                             className="financial-input"
                             onChange={(event) => {setVendorFees(event.target.value); setFeesChange(feesChange + 1)}}
                         />
@@ -374,6 +357,7 @@ const BookingForm = () => {
                             id="discount"
                             name="discount"
                             value={discount}
+                            disabled={feesFinalized}
                             className="financial-input"
                             onChange={(event) => {setDiscount(event.target.value); setFeesChange(feesChange + 1)}}
                         />
