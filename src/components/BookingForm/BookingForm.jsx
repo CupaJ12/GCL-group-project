@@ -50,9 +50,9 @@ const BookingForm = () => {
             calculateGross();
         }, [change]);
 
-        // useEffect(() => {
-        //     calculateNet();
-        // }, [feesChange]);
+        useEffect(() => {
+            calculateGross();
+        }, [feesChange]);
 
         useEffect(() => {
             calculateGross();
@@ -69,12 +69,19 @@ const BookingForm = () => {
             let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
-            setChange(change + 1);
+            // setChange(change + 1);
             // calculateNet();
         } 
         else if (taxResponsibility && feesChange === 0) {
             let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
             let feesOwed = (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+            setGrossBookingAmount(grossBookingAmount);
+            setNetPayout(grossBookingAmount - feesOwed);
+            // calculateNet();
+        }
+        else if (taxResponsibility && feesChange > 0) {
+            let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
+            let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
             // calculateNet();
