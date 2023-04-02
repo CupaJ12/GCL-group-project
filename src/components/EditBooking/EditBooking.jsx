@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EditModal from "../EditModal/EditModal";
+import EditTenantModal from "../EditModal/EditTenantModal";
 
 
 function EditBooking() {
@@ -9,10 +9,14 @@ function EditBooking() {
     return (
         <div>
             <h1>Edit Booking Page</h1>
+            {/* when button click, state set to true and opens modal */}
             <button onClick={() => setShow(true)}>
                 Open Modal
             </button>
-            <EditModal onClose={() => setShow(false)} show={show}/>
+            <EditTenantModal
+                onClose={() => setShow(false)}
+                show={show}
+            />
 
         </div>
     )
