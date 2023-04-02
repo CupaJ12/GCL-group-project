@@ -14,7 +14,7 @@
 // 8. make a PUT request to the server to edit a comment from the booking
 
 import React from 'react';
-import './LogHistoryPage.css';
+import './BookingSheet.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
