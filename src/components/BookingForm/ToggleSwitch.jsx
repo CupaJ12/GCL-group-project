@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './ToggleSwitch.css';
 
 const TaxToggleSwitch = () => {
+    const dispatch = useDispatch();
     const [taxResponsible, setTaxResponsible] = useState(false);
 
     useEffect(() => {
-        console.log('tax: ', taxResponsible);
+        dispatch({
+            type: 'SET_TAX_RESPONSIBILITY',
+            payload: taxResponsible
+        })
     }, [taxResponsible]);
 
     return (

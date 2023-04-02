@@ -17,52 +17,90 @@ import './BookingForm.css';
 // npm i prop-types
 
 const BookingForm = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
     const [checkIn, setCheckIn] = useState(null);
     const [checkOut, setCheckOut] = useState(null);
-    const [costPerNight, setCostPerNight] = useState('');
-    const [petFees, setPetFees] = useState('');
+    const [change, setChange] = useState(0);  
     const [cleaningFees, setCleaningFees] = useState('');
+    const [costPerNight, setCostPerNight] = useState('');
+    const [discount, setDiscount] = useState('');
+    const [email, setEmail] = useState('');
+    const [feesChange, setFeesChange] = useState(0);
+    const feesFinalized = useSelector((store) => store.feesFinalized);
+    const [firstName, setFirstName] = useState('');
+    const [grossBookingAmount, setGrossBookingAmount] = useState(0);
+    const [lastName, setLastName] = useState('');
     const [lodgingTax, setLodgingTax] = useState('');
+    const [netPayout, setNetPayout] = useState(0);
+    const [petFees, setPetFees] = useState('');
+    const [phone, setPhone] = useState('');
+    const [submitDisabled, setSubmitDisabled] = useState(true);
+    const taxResponsibility = useSelector((store) => store.taxResponsibility);
     const [vendor, setVendor] = useState('');
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
-    const [discount, setDiscount] = useState('');
-    const [submitDisabled, setSubmitDisabled] = useState(true);
-    const [change, setChange] = useState(0);  
 
-    useEffect(() => {
-        checkFormComplete();
-    }, [change])
-
+    
     // Number(costPerNight.replace(/[^0-9.]/g, ''));  - - - removes all special characters EXCEPT for numbers and decimal and converts to an integer
     // const grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
     // const feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
-    
-    const grossBookingAmount = () => {
-        if (taxResponsible === false) {
-            return (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
-        } else {
-            return (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
-        }
-    }
+    // const netPayout = grossBookingAmount - feesOwed;
+   
+        useEffect(() => {
+            checkFormComplete();
+            calculateGross();
+        }, [change]);
 
-    const feesOwed = () => { 
-        if (taxResponsible) {
-            return (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
-        } else {
-            return (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
+        // useEffect(() => {
+        //     calculateNet();
+        // }, [feesChange]);
+
+        useEffect(() => {
+            calculateGross();
+            // calculateNet();
+        }, [taxResponsibility]);
+
+        // useEffect(() => {
+        //     calculateNet();
+        // }, [taxResponsibility]);
+
+    const calculateGross = () => {
+        if (!taxResponsibility) {
+            let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+            let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
+            setGrossBookingAmount(grossBookingAmount);
+            setNetPayout(grossBookingAmount - feesOwed);
+            setChange(change + 1);
+            // calculateNet();
+        } 
+        else if (taxResponsibility && feesChange === 0) {
+            let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
+            let feesOwed = (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+            setGrossBookingAmount(grossBookingAmount);
+            setNetPayout(grossBookingAmount - feesOwed);
+            // calculateNet();
         }
     };
 
-    const addAProperty = () => {
-        return (
-        console.log('you clicked add a property with checkin')
-        )
-    };
+    // const calculateNet = () => {
+    //     if (!taxResponsibility) {
+    //         let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
+    //         setNetPayout(grossBookingAmount - feesOwed);
+    //     } 
+    //     else if (taxResponsibility && feesChange == 0) {
+    //         let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));;
+    //         setNetPayout(grossBookingAmount - feesOwed);
+    //     } 
+    //     else if (taxResponsibility) {
+    //         let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+    //         setNetPayout(grossBookingAmount - feesOwed);
+    //     } 
+    // };
+                            
+        const addAProperty = () => {
+            return (
+                console.log('you clicked add a property with checkin')
+            )
+        };
 
     const addAVendor = () => {
         return (
@@ -302,7 +340,7 @@ const BookingForm = () => {
                             name="vendor-commissions"
                             value={vendorCommissions}
                             className="financial-input"
-                            onChange={(event) => {setVendorCommissions(event.target.value); setChange(change + 1)}}
+                            onChange={(event) => {setVendorCommissions(event.target.value); setFeesChange(feesChange + 1)}}
                         />
                     </div>
 
@@ -316,7 +354,7 @@ const BookingForm = () => {
                             name="vendor-fees"
                             value={vendorFees}
                             className="financial-input"
-                            onChange={(event) => {setVendorFees(event.target.value); setChange(change + 1)}}
+                            onChange={(event) => {setVendorFees(event.target.value); setFeesChange(feesChange + 1)}}
                         />
                     </div>
 
@@ -330,7 +368,7 @@ const BookingForm = () => {
                             name="discount"
                             value={discount}
                             className="financial-input"
-                            onChange={(event) => {setDiscount(event.target.value); setChange(change + 1)}}
+                            onChange={(event) => {setDiscount(event.target.value); setFeesChange(feesChange + 1)}}
                         />
                     </div>
 
