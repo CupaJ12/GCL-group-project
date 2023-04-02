@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import EditTenantModal from "../EditModal/EditTenantModal";
 
 
 function EditBooking() {
+     const [show, setShow] = useState(false);
+     
+     const booking = useSelector((store) => store.booking);
 
-    const [show, setShow] = useState(false);
+     console.log(booking);
 
     return (
         <div>
@@ -16,6 +20,7 @@ function EditBooking() {
             <EditTenantModal
                 onClose={() => setShow(false)}
                 show={show}
+                booking={booking}
             />
 
         </div>
