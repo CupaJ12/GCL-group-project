@@ -2,7 +2,7 @@
 
 // TODO:
 // 1. make a GET request to the server to get the booking data (WIP)
-// 1A. make a saga to get the booking data
+// 1A. make a saga to get the booking data (✅)
 // 1B. make a reducer to store the booking data (✅)
 
 // 2. display the booking data on the DOM
