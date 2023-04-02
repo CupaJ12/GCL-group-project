@@ -4,11 +4,8 @@ import EditTenantModal from "../EditModal/EditTenantModal";
 
 
 function EditBooking() {
-     const [show, setShow] = useState(false);
-     
+     const [show, setShow] = useState(false); 
      const booking = useSelector((store) => store.booking);
-
-     console.log(booking);
 
     return (
         <div>
