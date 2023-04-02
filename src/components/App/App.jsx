@@ -20,7 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingForm from '../BookingForm/BookingForm';
-
+import BookingSheet from '../BookingSheet/BookingSheet';
 import './App.css';
 
 function App() {
@@ -68,6 +68,16 @@ function App() {
           >
             <BookingForm />
           </ProtectedRoute>
+
+          {/* Protected route for Booking Sheet - Jaffer */}
+          <ProtectedRoute
+            exact
+            path="/bookingsheet"
+          >
+            <BookingSheet />
+          </ProtectedRoute>
+          
+          
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
