@@ -7,7 +7,7 @@ const taxResponsibility = (state = '', action) => {
     }
   };
 
-  const feesFinalized = (state = '', action) => {
+  const feesFinalized = (state = false, action) => {
     switch (action.type) {
       case 'SET_FEES_FINALIZED':
         return action.payload;

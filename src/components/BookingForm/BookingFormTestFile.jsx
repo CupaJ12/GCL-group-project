@@ -383,7 +383,7 @@ const BookingForm = () => {
                             />
                         </div>
 
-                        <TaxToggleSwitch feesFinalized={feesFinalized}/>
+                        <TaxToggleSwitch />
                         <FeesFinalizedToggleSwitch submitDisabled={submitDisabled}/>
 
                     </div>

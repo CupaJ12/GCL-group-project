@@ -107,6 +107,16 @@ body {
     margin-bottom: 20px;
 }
 
+.nav-btn-div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
+    width: 95%;
+    margin: auto;
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
 .tenant-input-div {
     text-align: left;
     width: 100%;
@@ -128,6 +138,7 @@ body {
     font-size: 18px;
     border-radius: 10px;
     border-color: #3c6a2f;
+    border-width: thin;
     width: 90%;
     height: 30px;
     padding: 5px;
@@ -145,6 +156,7 @@ body {
     font-size: 18px;
     border-radius: 10px;
     border-color: #3c6a2f;
+    border-width: thin;
     width: 90%;
     height: 30px;
     padding: 5px;
@@ -170,6 +182,7 @@ body {
     font-size: 18px;
     border-radius: 10px;
     border-color: #3c6a2f;
+    border-width: thin;
     width: 90%;
     height: 30px;
     padding: 5px;
@@ -202,5 +215,44 @@ hr.rounded {
     border-top: 1.5px solid #a8bba2;
     border-radius: 15px;
     width: 90%;
+}
+
+.submit-btn {
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 4px black;
+    border-radius: 10px;
+    padding: 20px;
+    border-color: #3c6a2f;
+    background-color: white;
+    color: #3c6a2f;
+}
+
+.submit-btn:disabled {
+    opacity: 20%;
+}
+
+.submit-btn:hover:not([disabled]) {
+    background-color: #3c6a2f;
+    color: white;
+    box-shadow: 0 0 15px #a8bba2;
+}
+
+.cancel-btn {
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #a8bba2;
+    box-shadow: 0 0 4px black;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #3c6a2f;
+    color: white;
+    box-shadow: 0 0 15px #a8bba2;
 }
 
