@@ -1,4 +1,17 @@
-//this component
+//component for displaying a single booking. 
+
+// TODO: 
+// 1. make a GET request to the server to get the booking data (WIP)
+// 1A. make a saga to get the booking data
+// 1B. make a reducer to store the booking data (✅)
+
+// 2. display the booking data on the DOM
+// 3. make a DELETE request to the server to delete the booking
+// 4. make a PUT request to the server to edit the booking
+// 5. make a GET request to the server to get the comments for the booking
+// 6. make a POST request to the server to add a comment to the booking
+// 7. make a DELETE request to the server to delete a comment from the booking
+// 8. make a PUT request to the server to edit a comment from the booking
 
 import React from 'react';
 import './LogHistoryPage.css';
