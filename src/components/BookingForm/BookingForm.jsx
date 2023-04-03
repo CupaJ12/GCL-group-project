@@ -8,6 +8,7 @@ import MaskedInput from 'react-text-mask';
 import CurrencyInput from './CurrencyInput';
 import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
 import './BookingForm.css';
+import './BookingFormResponsive.css';
 
 // npm install @mui/x-date-pickers
 // npm install @mui/material @emotion/react @emotion/styled
@@ -100,13 +101,13 @@ const BookingForm = () => {
         }
     };
                
-    const addAProperty = () => {
+    const addProperty = () => {
         return (
-            console.log('you clicked add a property with checkin')
+            console.log('you clicked add a property')
         )
     };
 
-    const addAVendor = () => {
+    const addVendor = () => {
         return (
         console.log('you clicked add a vendor')
         )
@@ -134,6 +135,18 @@ const BookingForm = () => {
                 // property_id: ,
             }
         });
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setVendor('');
+        setCheckIn(null);
+        setCheckOut(null);
+        setPetFees('');
+        setCostPerNight('');
+        setVendorCommissions('');
+        setVendorFees('');
+        setDiscount('');
+        setLodgingTax('');
     };
 
     const checkFormComplete = () => {
@@ -163,7 +176,7 @@ const BookingForm = () => {
                     >
                         <option value="goldClaimLodge">Gold Claim Lodge</option>
                     </select>
-                    <button type="button" className="add-property-btn" onClick={addAProperty}>+</button>
+                    <button type="button" className="add-property-btn" onClick={addProperty}>+</button>
                 </div>
 
                 <div className="section-header">
@@ -346,21 +359,24 @@ const BookingForm = () => {
                     }
 
                     <hr className="rounded"/>
-                    <div className="vendor-container">
                         
+                    <div className="vendor-container">
                         <div className="vendor-input-div">
                             <label className="label" htmlFor="vendor">Vendor</label>
-                            <input
-                                id="vendor"
-                                name="vendor"
-                                type="text"
-                                value={vendor}
-                                placeholder="vendor"
-                                disabled={feesFinalized}
-                                className="vendor-input"
-                                onChange={(event) => {setVendor(event.target.value); setChange(change + 1)}}
-                            />
+                            <br />
+                            <select 
+                                disabled={feesFinalized} 
+                                className="vendor-dropdown"
+                                defaultValue={"Airbnb"} 
+                                onChange={(event) => setVendor(event.target.value)}  
+                            >
+                                <option value="Airbnb">Airbnb</option>
+                                <option value="Vrbo">Vrbo</option>
+                            </select>
+                            <button type="button" className="add-vendor-btn" onClick={addVendor}>+</button>
                         </div>
+                        
+                        {/* <div></div> */}
 
                         <div className="vendor-input-div">
                             <label className="label" htmlFor="vendor-commissions">Vendor Commissions</label>
@@ -406,6 +422,7 @@ const BookingForm = () => {
                                 onChange={(event) => {setDiscount(event.target.value); setFeesChange(feesChange + 1)}}
                             />
                         </div>
+                        {/* <div></div> */}
 
                         <TaxToggleSwitch feesFinalized={feesFinalized}/>
                         <FeesFinalizedToggleSwitch submitDisabled={submitDisabled}/>

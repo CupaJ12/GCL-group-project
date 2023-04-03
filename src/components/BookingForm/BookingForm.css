@@ -29,12 +29,15 @@ body {
 }
 
 .vendor-dropdown {
-    font-size: 25px;
-    font-weight: bold;
-    padding: 15px;
+    font-size: 18px;
     border-radius: 10px;
-    margin-bottom: 30px;
-    color: #3c6a2f;
+    border-color: #3c6a2f;
+    border-width: thin;
+    width: 75%;
+    height: 42px;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 15px;
 }
 
 .add-property-btn {
@@ -48,8 +51,8 @@ body {
 
 
 .add-vendor-btn {
-    margin-left: 15px;
-    font-size: 30px;
+    margin-left: 5px;
+    font-size: 20px;
     background-color: #a8bba2;
     color: white;
     border: none;
@@ -90,6 +93,7 @@ body {
 .tenant-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    column-width: 15rem;
     column-gap: 15px;
     width: 95%;
     margin: auto;
@@ -100,6 +104,7 @@ body {
 .vendor-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    column-width: 15rem;
     column-gap: 15px;
     width: 95%;
     margin: auto;
@@ -111,6 +116,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 15px;
+    column-width: 15rem;
     width: 95%;
     margin: auto;
     padding-top: 15px;
@@ -127,6 +133,13 @@ body {
     text-align: left;
     width: 100%;
     margin: auto;
+}
+
+.vendor-dropdown-div {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+    margin-top: 20px;
 }
 
 .vendor-btn-div {
@@ -255,4 +268,3 @@ hr.rounded {
     color: white;
     box-shadow: 0 0 15px #a8bba2;
 }
-

@@ -51,7 +51,7 @@ const AddNewPropertyForm = () => {
     };
 
     return (
-        <div className="booking-form-container">
+        <div className="property-form-container">
             
             <form key="add-property-form" onSubmit={onSubmit}>
 
@@ -59,95 +59,100 @@ const AddNewPropertyForm = () => {
                     Add Property
                 </div>
 
-                    <div className="property-name-container">
-                        <div className="property-input-div">
-                            <label className="label" htmlFor="property-name">Property Name</label>
-                            <input
-                                id="property-name"
-                                name="property-name"
-                                type="text"
-                                value={propertyName}
-                                placeholder="property name"
-                                required
-                                className="tenant-input"
-                                onChange={(event) => {setPropertyName(event.target.value); checkFormComplete(); setChange(change + 1)}}
-                            />
-                        </div>
-
-                        <div className="property-input-div">
-                            <label className="label" htmlFor="address">Address</label>
-                            <input
-                                id="address"
-                                name="address"
-                                type="text"
-                                value={address}
-                                placeholder="address"
-                                required
-                                className="tenant-input"
-                                onChange={(event) => {setAddress(event.target.value); checkFormComplete(); setChange(change + 1)}}
-                            />
-                        </div>
-
-                        <div className="property-input-div">
-                            <label className="label" htmlFor="city">City</label>
-                            <input
-                                id="city"
-                                name="city"
-                                type="text"
-                                value={city}
-                                placeholder="city"
-                                required
-                                className="tenant-input"
-                                onChange={(event) => {setCity(event.target.value); checkFormComplete(); setChange(change + 1)}}
-                            />
-                        </div>
-
-                        <div className="property-input-div">
-                            <label className="label" htmlFor="state">State</label>
-                            <input
-                                id="state"
-                                name="state"
-                                type="text"
-                                value={state}
-                                placeholder="state"
-                                required
-                                className="tenant-input"
-                                onChange={(event) => {setState(event.target.value); checkFormComplete(); setChange(change + 1)}}
-                            />
-                        </div>
-
-                        <div className="property-input-div">
-                            <label className="label" htmlFor="zip-code">Zip Code</label>
-                            <input
-                                id="zip-code"
-                                name="zip-code"
-                                type="text"
-                                value={zipCode}
-                                placeholder="zip code"
-                                required
-                                className="tenant-input"
-                                onChange={(event) => {setZipCode(event.target.value); checkFormComplete(); setChange(change + 1)}}
-                            />
-                        </div>
+                <div className="property-name-container">
+                    <div className="property-input-div">
+                        <label className="label" htmlFor="property-name">Property Name</label>
+                        <br />
+                        <input
+                            id="property-name"
+                            name="property-name"
+                            type="text"
+                            value={propertyName}
+                            placeholder="property name"
+                            required
+                            className="tenant-input"
+                            onChange={(event) => {setPropertyName(event.target.value); checkFormComplete(); setChange(change + 1)}}
+                        />
                     </div>
 
-                    <div className="nav-btn-div">
-                        <button 
-                            type="submit"
-                            className="submit-btn"
-                            disabled={submitDisabled}
-                        >
-                            SUBMIT
-                        </button>
-
-                        <button 
-                            type="button"
-                            className="cancel-btn"
-                            onClick={cancel}
-                        >
-                            CANCEL
-                        </button>
+                    <div className="property-input-div">
+                        <label className="label" htmlFor="address">Address</label>
+                        <br />
+                        <input
+                            id="address"
+                            name="address"
+                            type="text"
+                            value={address}
+                            placeholder="address"
+                            required
+                            className="tenant-input"
+                            onChange={(event) => {setAddress(event.target.value); checkFormComplete(); setChange(change + 1)}}
+                        />
                     </div>
+
+                    <div className="property-input-div">
+                        <label className="label" htmlFor="city">City</label>
+                        <br />
+                        <input
+                            id="city"
+                            name="city"
+                            type="text"
+                            value={city}
+                            placeholder="city"
+                            required
+                            className="tenant-input"
+                            onChange={(event) => {setCity(event.target.value); checkFormComplete(); setChange(change + 1)}}
+                        />
+                    </div>
+
+                    <div className="property-input-div">
+                        <label className="label" htmlFor="state">State</label>
+                        <br />
+                        <input
+                            id="state"
+                            name="state"
+                            type="text"
+                            value={state}
+                            placeholder="state"
+                            required
+                            className="tenant-input"
+                            onChange={(event) => {setState(event.target.value); checkFormComplete(); setChange(change + 1)}}
+                        />
+                    </div>
+
+                    <div className="property-input-div">
+                        <label className="label" htmlFor="zip-code">Zip Code</label>
+                        <br />
+                        <input
+                            id="zip-code"
+                            name="zip-code"
+                            type="text"
+                            value={zipCode}
+                            placeholder="zip code"
+                            required
+                            className="tenant-input"
+                            onChange={(event) => {setZipCode(event.target.value); checkFormComplete(); setChange(change + 1)}}
+                        />
+                    </div>
+                </div>
+
+                <div className="nav-btn-div">
+                    <button 
+                        type="submit"
+                        className="submit-btn"
+                        disabled={submitDisabled}
+                    >
+                        SUBMIT
+                    </button>
+
+                    <button 
+                        type="button"
+                        className="cancel-btn"
+                        onClick={cancel}
+                    >
+                        CANCEL
+                    </button>
+                </div>
 
             </form>
         </div>

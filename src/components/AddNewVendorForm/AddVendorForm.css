@@ -1,11 +1,11 @@
-.property-input-div {
+.vendor-input-div {
     text-align: left;
     width: 100%;
     margin: auto;
     margin-top: 10px;
 }
 
-.property-form-container {
+.vendor-form-container {
     margin: auto;
     margin-top: 50px;
     background-color: white;
