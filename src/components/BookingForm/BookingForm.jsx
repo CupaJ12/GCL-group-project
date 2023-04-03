@@ -17,8 +17,8 @@ import './BookingForm.css';
 // npm i prop-types
 
 const BookingForm = () => {
-    const [checkIn, setCheckIn] = useState('');
-    const [checkOut, setCheckOut] = useState('');
+    const [checkIn, setCheckIn] = useState(null);
+    const [checkOut, setCheckOut] = useState(null);
     const [change, setChange] = useState(0);  
     const [cleaningFees, setCleaningFees] = useState('');
     const [costPerNight, setCostPerNight] = useState('');
@@ -34,6 +34,7 @@ const BookingForm = () => {
     const [lodgingTax, setLodgingTax] = useState('');
     const [netPayout, setNetPayout] = useState(0);
     const [petFees, setPetFees] = useState('');
+    const [rentalCost, setRentalCost] = useState(0);
     const [phone, setPhone] = useState('');
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const taxResponsibility = useSelector((store) => store.taxResponsibility);
@@ -56,21 +57,43 @@ const BookingForm = () => {
         calculateGross();
     }, [taxResponsibility]);
 
+    useEffect(() => {
+        calculateRentalCost();
+    }, [checkIn]);
+
+    useEffect(() => {
+        calculateRentalCost();
+    }, [checkOut]);
+
+    useEffect(() => {
+        calculateRentalCost();
+    }, [costPerNight]);
+
+
+
+    const calculateRentalCost = () => {
+        if (checkIn != null && checkOut != null && checkOut > checkIn) {
+            let numberOfNights = checkOut.diff(checkIn, 'days');
+            setRentalCost((Number(costPerNight.replace(/[^0-9.]/g, ''))) * numberOfNights);
+            setChange(change + 1);
+        };
+    };
+
     const calculateGross = () => {
-        if (!taxResponsibility) {
-            let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
+        if (!taxResponsibility) {  
+            let grossBookingAmount = rentalCost + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
             let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
         } 
         else if (taxResponsibility && feesChange === 0) {
-            let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
+            let grossBookingAmount = rentalCost + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
             let feesOwed = (Number(lodgingTax.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
         }
         else if (taxResponsibility && feesChange > 0) {
-            let grossBookingAmount = (Number(costPerNight.replace(/[^0-9.]/g, ''))) + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
+            let grossBookingAmount = rentalCost + (Number(petFees.replace(/[^0-9.]/g, ''))) + (Number(cleaningFees.replace(/[^0-9.]/g, '')));
             let feesOwed = (Number(vendorCommissions.replace(/[^0-9.]/g, ''))) + (Number(vendorFees.replace(/[^0-9.]/g, ''))) + (Number(discount.replace(/[^0-9.]/g, ''))) + (Number(lodgingTax.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);
@@ -90,6 +113,7 @@ const BookingForm = () => {
     };
 
     const onSubmit = () => {
+        event.preventDefault();
         dispatch({
             type: 'POST_BOOKING',
             payload: {
@@ -116,8 +140,8 @@ const BookingForm = () => {
         setSubmitDisabled(
             firstName.length == 0 
             || lastName.length == 0 
-            || checkIn === Date() 
-            || checkOut === Date() 
+            || checkIn === null 
+            || checkOut === null 
             || checkOut < checkIn 
             || costPerNight.length == 0 
             || cleaningFees.length == 0 
@@ -312,7 +336,7 @@ const BookingForm = () => {
 
                     </div> {/* end of financial-container */}
                     
-                    {grossBookingAmount > 0 && 
+                    {(grossBookingAmount > 0 && rentalCost > 0) &&
                         <div className="booking-amount">
                             <h2 className="financial-headers">Gross Booking Amount</h2>
                             <div className="money-total">
@@ -387,11 +411,11 @@ const BookingForm = () => {
                         <FeesFinalizedToggleSwitch submitDisabled={submitDisabled}/>
 
                     </div>
-                        {grossBookingAmount > 0 && 
+                        {(grossBookingAmount > 0 && rentalCost > 0) && 
                             <div className="booking-amount">
                                 <h2 className="financial-headers">Net Payout</h2>
                                 <div className="money-total">
-                                    ${netPayout.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers */}
+                                    ${netPayout.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers, at the thousandth decimal (54.305) */}
                                 </div>
                             </div>
                         }
