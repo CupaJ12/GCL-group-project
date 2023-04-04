@@ -41,13 +41,13 @@ function EditTenantModal(props) {
     }
 
     // if show equal false, show nothing
-    if (!props.show) {
-        return null
-    }
+    // if (!props.show) {
+    //     return null
+    // }
 
     // show this div if show equal true
     return (
-        <div className="modal" onClick={props.onClose}>
+        <div className={`modal ${props.show ? 'show' : ''}`} onClick={props.onClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <div className="modal-body">
                     <form className="edit-tenant-form" onSubmit={saveTenant}>
