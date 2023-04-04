@@ -29,7 +29,7 @@ function EditTenantModal(props) {
     // dispatch updated inputs to updateTenant saga
     const saveTenant = () => {
         console.log('submit clicked');
-        dispatch ({
+        dispatch({
             type: 'UPDATE_TENANT',
             payload: {
                 firstName: firstName,
@@ -47,8 +47,13 @@ function EditTenantModal(props) {
 
     // show this div if show equal true
     return (
-        <div className={`modal ${props.show ? 'show' : ''}`} onClick={props.onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className={`modal ${props.show ? 'show' : ''}`} >
+            <div className="modal-content">
+                <div className="modal-header">
+                    <button className="close-modal-btn" onClick={props.onClose}>
+                        X
+                    </button>
+                </div>
                 <div className="modal-body">
                     <form className="edit-tenant-form" onSubmit={saveTenant}>
                         <div>
@@ -97,9 +102,6 @@ function EditTenantModal(props) {
                         </div>
                         <button type="submit">Save</button>
                     </form>
-                </div>
-                <div className="modal-footer">
-                    <button onClick={props.onClose}>close modal</button>
                 </div>
             </div>
 

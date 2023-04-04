@@ -23,6 +23,7 @@ import BookingForm from '../BookingForm/BookingForm';
 
 import './App.css';
 import EditBooking from '../EditBooking/EditBooking';
+import ModalParent from '../ModalParent/ModalParent';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,14 @@ function App() {
             path="/about"
           >
             <AboutPage />
+          </Route>
+
+          {/* route for modal page */}
+          <Route 
+            exact
+            path="/modal"
+          >
+            <ModalParent />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
