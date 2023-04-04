@@ -12,9 +12,9 @@ function EditTenantModal(props) {
         <CSSTransition
             in={props.show}
             unmountOnExit
-            timeout={{ enter: 0, exit: 300 }}
+            timeout={{ enter: 50, exit: 200 }}
         >
-            <div className={`modal ${props.show ? 'show' : ''}`} >
+            <div className="modal" >
                 <div className="modal-content">
                     {/* modal header, for x button (optional) */}
                     <div className="modal-header">
