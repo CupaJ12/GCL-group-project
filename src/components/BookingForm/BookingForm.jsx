@@ -7,6 +7,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import MaskedInput from 'react-text-mask';
 import CurrencyInput from './CurrencyInput';
 import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
+import ModalChild from '../Modal/ModalChild';
+import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
+import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 import './BookingForm.css';
 import './BookingFormResponsive.css';
 
@@ -35,6 +38,7 @@ const BookingForm = () => {
     const [lodgingTax, setLodgingTax] = useState('');
     const [netPayout, setNetPayout] = useState(0);
     const [petFees, setPetFees] = useState('');
+    const [propertyModalVisible, setPropertyModalVisible] = useState(false);
     const [rentalCost, setRentalCost] = useState(0);
     const [phone, setPhone] = useState('');
     const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -42,6 +46,7 @@ const BookingForm = () => {
     const [vendor, setVendor] = useState('');
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
+    const [vendorModalVisible, setVendorModalVisible] = useState(false);
    
     useEffect(() => {
         checkFormComplete();
@@ -71,6 +76,9 @@ const BookingForm = () => {
     }, [costPerNight]);
 
 
+    const cancel = () => {
+            console.log('you clicked cancel');
+    };
 
     const calculateRentalCost = () => {
         if (checkIn != null && checkOut != null && checkOut > checkIn) {
@@ -101,11 +109,9 @@ const BookingForm = () => {
         }
     };
                
-    const addProperty = () => {
-        return (
-            console.log('you clicked add a property')
-        )
-    };
+    // const addProperty = () => {
+    //     return ( )
+    // };
 
     const addVendor = () => {
         return (
@@ -176,7 +182,8 @@ const BookingForm = () => {
                     >
                         <option value="goldClaimLodge">Gold Claim Lodge</option>
                     </select>
-                    <button type="button" className="add-property-btn" onClick={addProperty}>+</button>
+                    <button type="button" className="add-property-btn" onClick={() => setPropertyModalVisible(true)}>+</button>
+                    <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => setPropertyModalVisible(false)}/>
                 </div>
 
                 <div className="section-header">
@@ -373,7 +380,8 @@ const BookingForm = () => {
                                 <option value="Airbnb">Airbnb</option>
                                 <option value="Vrbo">Vrbo</option>
                             </select>
-                            <button type="button" className="add-vendor-btn" onClick={addVendor}>+</button>
+                            <button type="button" className="add-vendor-btn" onClick={() => setVendorModalVisible(true)}>+</button>
+                            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => setVendorModalVisible(false)}/>
                         </div>
                         
                         {/* <div></div> */}
@@ -448,8 +456,7 @@ const BookingForm = () => {
                         <button 
                             type="button"
                             className="cancel-btn"
-                            onClick={() => history.goBack()}
-                            disabled={submitDisabled}
+                            onClick={() => console.log('you clicked cancel')}
                         >
                             CANCEL
                         </button>

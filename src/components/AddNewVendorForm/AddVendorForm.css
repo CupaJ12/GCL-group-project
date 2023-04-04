@@ -7,10 +7,13 @@
 
 .vendor-form-container {
     margin: auto;
-    margin-top: 50px;
     background-color: white;
     padding: 30px;
     width: 50%;
     border-radius: 30px;
+}
+
+.vendor-name-container {
+    margin-top: 15px;
 }
 

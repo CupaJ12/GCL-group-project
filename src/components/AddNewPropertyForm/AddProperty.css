@@ -14,3 +14,25 @@
     border-radius: 30px;
 }
 
+.cancel-add-property-btn {
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #a8bba2;
+    box-shadow: 0 0 4px black;
+    color: white;
+}
+
+.cancel-add-property-btn:hover {
+    background-color: #3c6a2f;
+    color: white;
+    box-shadow: 0 0 15px #a8bba2;
+}
+
+.modal.visible {
+    opacity: 1;
+    pointer-events: visible;
+    z-index: 1;
+}
