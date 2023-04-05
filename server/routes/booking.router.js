@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
 		pool
 			.query(queryText, [id])
 			.then((result) => {
-				res.send(result.rows);
+				res.send(result.rows[0]);
 			})
 			.catch((error) => {
 				console.log('post route booking by ID error: ', error);
@@ -24,5 +24,7 @@ router.get('/:id', (req, res) => {
 		res.sendStatus(403); // forbidden status code
 	}
 });
+
+
 
 module.exports = router;

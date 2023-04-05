@@ -25,11 +25,11 @@ function BookingSheet() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	// booking is an unmade reducer
-	const booking = useSelector((store) => store.booking);
+	const booking = useSelector((store) => store.bookingByID);
 
 	// declare functions: dispatch, history, useEffect etc:
 	useEffect(() => {
-		dispatch({ type: 'FETCH_BOOKING_BY_ID' });
+		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: 1 });
 	}, []);
 
 	// declare variables: useState, etc:
@@ -73,6 +73,8 @@ function BookingSheet() {
 		<div>
 			<h1> WIP</h1>
 			<h2>🤠</h2>
+			<h1>{booking.id}</h1>
+			<h2>{booking.customer_first_name + ' ' + booking.customer_last_name}</h2>
 		</div>
 	);
 }
