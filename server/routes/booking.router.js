@@ -9,8 +9,8 @@ router.post('/', (req, res) => {
         const queryText = `INSERT INTO "booking" (
             customer_first_name, 
             customer_last_name,
-            customer_address,
             customer_email,
+            customer_phone,
             vendor,
             check_in_date,
             check_out_date,
@@ -27,8 +27,8 @@ router.post('/', (req, res) => {
         pool.query(queryText, [
             req.body.customer_first_name, 
             req.body.customer_last_name,
-            req.body.customer_address,
             req.body.customer_email,
+            req.body.customer_phone,
             req.body.vendor,
             req.body.check_in_date,
             req.body.check_out_date,

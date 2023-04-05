@@ -11,8 +11,18 @@ function* postNewProperty(action) {
   }
 };
 
+function* getProperties() {
+  try {
+      const properties = yield axios.get(`/api/property`);
+      yield put({ type: 'SET_PROPERTIES', payload: properties.data});
+  } catch (error) {
+    console.log('error getting properties', error);
+  }
+};
+
 function* propertySaga() {
   yield takeEvery('POST_NEW_PROPERTY', postNewProperty);
+  yield takeEvery('GET_PROPERTIES', getProperties)
 };
 
 export default propertySaga;

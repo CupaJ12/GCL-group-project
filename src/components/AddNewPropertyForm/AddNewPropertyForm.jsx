@@ -12,6 +12,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
     const [change, setChange] = useState(0);
     const [city, setCity] = useState('');
     const dispatch = useDispatch();
+    const history = useHistory();
     const [propertyName, setPropertyName] = useState('');
     const [state, setState] = useState('');
     const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -63,6 +64,11 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
             type: 'POST_NEW_PROPERTY',
             payload: newProperty
         });
+        setAddress('');
+        setCity('');
+        setState('');
+        setZipCode('');
+        history.push('/bookingform');
     };
 
     return ReactDOM.createPortal(
