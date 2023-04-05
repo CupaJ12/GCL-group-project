@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
-import CancelValidation from '../CancelValidation/CancelValidation';
+import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 import './AddProperty.css';
 
 const AddNewPropertyForm = ({modalVisible, onClose}) => {
@@ -17,7 +17,6 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
     const [state, setState] = useState('');
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const [zipCode, setZipCode] = useState('');
-    // const [visble, setVisible] = useState(modalVisible);
 
     useEffect(() => {
         checkFormComplete();
@@ -25,12 +24,12 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
 
     useEffect(() => {
         setCancelModalVisible(false);
+        setAddress('');
+        setCity('');
+        setPropertyName('');
+        setState('');
+        setZipCode('');
     }, [modalVisible]);
-
-    // const cancel = () => {
-    //     setCancelModalVisible(false);
-    //     onClose;
-    // };
 
     const checkFormComplete = () => {
         setSubmitDisabled(
@@ -40,11 +39,6 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
             || state.length < 2   
             || zipCode.length < 5 
         );
-    };
-
-    const onConfirm = () => {
-        onClose; 
-        setCancelModalVisible(false);
     };
 
     const onSubmit = () => {
@@ -77,7 +71,6 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
             unmountOnExit
             timeout={{ enter: 300, exit: 300 }}
         >
-            {/* <div className={`modal ${modalVisible ? 'visible' : ''}`} > */}
             <div className="modal">
                 <div className="property-form-container">
                     

@@ -2,7 +2,7 @@ import React from "react";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
-import './CancelValidation.css';
+import './CancelValidationModal.css';
 
 const CancelValidation = ({ onConfirm, onDeny, show }) => {
 

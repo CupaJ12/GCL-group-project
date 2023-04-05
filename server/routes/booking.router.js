@@ -2,9 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-
 router.post('/', (req, res) => {
-    console.log('in booking router');
+    console.log('in booking router post request with: ', req.body);
     if (req.isAuthenticated()) {
         const queryText = `INSERT INTO "booking" (
             customer_first_name, 
@@ -21,9 +20,9 @@ router.post('/', (req, res) => {
             vendor_fee,
             discount,
             lodging_tax,
-            finalized
-        )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id;`;
+            finalized,
+            property_id
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id;`;
         pool.query(queryText, [
             req.body.customer_first_name, 
             req.body.customer_last_name,
@@ -39,12 +38,18 @@ router.post('/', (req, res) => {
             req.body.vendor_fee,
             req.body.discount,
             req.body.lodging_tax,
-            req.body.finalized
+            req.body.finalized,
+            req.body.property_id,
         ])
         .then((query) => {
             //query to add comment with new booking id that was just created
-            pool.query('INSERT INTO "comment" (comment, user_id, booking_id) VALUES ($1, $2, $3);', [req.body.comment, req.user.id, query.rows[0].id])
-        .then(() => res.sendStatus(201))
+                pool.query(`INSERT INTO "comment" (comment, user_id, booking_id) VALUES ($1, $2, $3);`, [req.body.comment, req.user.id, query.rows[0].id])
+            .then(result => {
+                res.sendStatus(201);
+            })
+            .catch((err) => {
+                res.sendStatus(500);
+            });
         })
         .catch((err) => {
             res.sendStatus(500);

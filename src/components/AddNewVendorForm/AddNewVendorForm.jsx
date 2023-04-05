@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
-import CancelValidation from '../CancelValidation/CancelValidation';
+import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 import './AddVendorForm.css';
 
 const AddNewVendorForm = ({ modalVisible, onClose }) => {
@@ -19,6 +19,7 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
 
     useEffect(() => {
         setCancelModalVisible(false);
+        setVendorName('');
     }, [modalVisible]);
 
     const checkFormComplete = () => {
@@ -45,7 +46,6 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
             unmountOnExit
             timeout={{ enter: 0, exit: 300 }}
         >
-            {/* <div className={`modal ${modalVisible ? 'visible' : ''}`} > */}
             <div className="modal">
                 <div className="vendor-form-container">
                     

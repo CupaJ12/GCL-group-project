@@ -40,12 +40,13 @@ const BookingForm = () => {
     const [netPayout, setNetPayout] = useState(0);
     const [petFees, setPetFees] = useState('');
     const [phone, setPhone] = useState('');
+    const [propertyId, setPropertyId] = useState(1);
     const propertyList = useSelector((store) => store.propertyList);
     const [propertyModalVisible, setPropertyModalVisible] = useState(false);
     const [rentalCost, setRentalCost] = useState(0);
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const taxResponsibility = useSelector((store) => store.taxResponsibility);
-    const [vendor, setVendor] = useState('');
+    const [vendor, setVendor] = useState(1);
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
     const [vendorModalVisible, setVendorModalVisible] = useState(false);
@@ -73,12 +74,10 @@ const BookingForm = () => {
 
     useEffect(() => {
         calculateRentalCost();
-        // checkDatesNotValid();
     }, [checkIn]);
 
     useEffect(() => {
         calculateRentalCost();
-        // checkDatesNotValid();
     }, [checkOut]);
 
     useEffect(() => {
@@ -86,11 +85,12 @@ const BookingForm = () => {
     }, [costPerNight]);
 
     const calculateRentalCost = () => {
+        console.log('check in and out: ', checkIn, checkOut)
         if (checkIn != null && checkOut != null && checkOut > checkIn) {
             let numberOfNights = checkOut.diff(checkIn, 'days');
             setRentalCost((Number(costPerNight.replace(/[^0-9.]/g, ''))) * numberOfNights);
             setChange(change + 1);
-        };
+        }; 
     };
 
     const calculateGross = () => {
@@ -135,23 +135,11 @@ const BookingForm = () => {
                 lodging_tax: lodgingTax,
                 finalized: feesFinalized,
                 comment,
-                // property_id: ,
+                property_id: propertyId,
             }
         });
-        window.location.reload(false);
+        // window.location.reload(false);
     };
-
-    // const checkDatesNotValid = () => {
-    //     if (checkOut < checkIn && checkOut != null && checkIn != null) {
-    //         return true;
-    //     }
-    //     if (checkOut != null && checkIn != null) {
-    //         if (checkOut.diff(checkIn, 'days') == 0) {
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-    // };
 
     const checkFormComplete = () => {
         setSubmitDisabled(
@@ -163,7 +151,6 @@ const BookingForm = () => {
             || costPerNight.length == 0 
             || cleaningFees.length == 0 
             || lodgingTax.length == 0
-            || vendor.length == 0
             || vendorCommissions.length == 0
             || vendorFees.length == 0
         )
@@ -178,12 +165,13 @@ const BookingForm = () => {
                     <select 
                         disabled={feesFinalized} 
                         className="property-dropdown"
-                        defaultValue={"goldClaimLodge"}   
+                        value={propertyId} 
+                        onChange={(event) => setPropertyId(event.target.value)}
                     >
                         {propertyList.map((property, index) => {
-                            return (
-                                <option value={property.name}>{property.name}</option>
-                            )
+                                return (
+                                    <option key={`${property.id}-${index}`} value={property.id}>{property.name}</option>
+                                )
                         })}
                     </select>
                     <button type="button" className="add-property-btn" onClick={() => setPropertyModalVisible(true)}>+</button>
@@ -287,9 +275,7 @@ const BookingForm = () => {
                         <h3 className="alert" role="alert">Check-out date must come after check-in date!</h3>
                     }
 
-                    {/* {checkDatesNotValid &&
-                        <h3 className="alert" role="alert">Dates not valid!</h3>
-                    } */}
+                    {/* try to find way to check if dates are the same */}
 
                 </div> {/* end of tenant-input-date-div */}
 
@@ -387,13 +373,12 @@ const BookingForm = () => {
                             <select 
                                 disabled={feesFinalized} 
                                 className="vendor-dropdown"
-                                defaultValue={"Airbnb"} 
+                                value={vendor} 
                                 onChange={(event) => setVendor(event.target.value)}  
                             >
                                 {vendorList.map((vendor, index) => {
-                                    console.log('vendor name in map: ', vendor.name);
                                     return (
-                                        <option value={vendor.name}>{vendor.name}</option>
+                                        <option key={`${vendor.id}-${index}`} value={vendor.name}>{vendor.name}</option>
                                     )
                                 })}          
                             </select>
@@ -473,7 +458,6 @@ const BookingForm = () => {
                             type="text"
                             value={comment}
                             placeholder="comment (optional)"
-                            required
                             className="tenant-input"
                             onChange={(event) => {setComment(event.target.value)}}
                         />
