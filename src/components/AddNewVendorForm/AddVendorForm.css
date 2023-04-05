@@ -1,0 +1,29 @@
+.vendor-input-div {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.vendor-form-container {
+    margin: auto;
+    background-color: white;
+    padding: 30px;
+    width: 50%;
+    border-radius: 30px;
+    transform: translateY(-200px);
+    transition: all 0.3s ease-in-out;
+}
+
+.vendor-name-container {
+    margin-top: 15px;
+}
+
+.modal.enter-done .vendor-form-container {
+    transform: translateY(0);
+}
+
+.modal.exit .vendor-form-container {
+    transform: translateY(-200px);
+}
+
