@@ -29,12 +29,13 @@ CREATE TABLE "booking" (
 	"id" SERIAL PRIMARY KEY,
 	"customer_first_name" VARCHAR (200) NOT NULL,
 	"customer_last_name" VARCHAR (200) NOT NULL,
-	"customer_address" VARCHAR (200),
 	"customer_email" VARCHAR (200),
+	"customer_phone" VARCHAR (200),
 	"vendor" VARCHAR (200) NOT NULL,
 	"check_in_date" DATE NOT NULL,
 	"check_out_date" DATE NOT NULL,
 	"tax_responsible" BOOLEAN,
+	"cleaning_fee" MONEY NOT NULL,
 	"pet_fee" MONEY NOT NULL,
 	"cost_per_night" MONEY NOT NULL,
 	"vendor_commission" MONEY NOT NULL,
@@ -52,6 +53,14 @@ CREATE TABLE "comment" (
 	"user_id" INT REFERENCES "user",
 	"booking_id" INT REFERENCES "booking"
 );
+
+-- create vendor table
+CREATE TABLE "vendor" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR (500) NOT NULL
+);
+
+
 
 ------- for testing only ----------
 -- testing tables (money/date)
