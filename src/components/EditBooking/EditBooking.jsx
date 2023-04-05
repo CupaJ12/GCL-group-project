@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import EditTenantModal from "../EditModal/EditTenantModal";
+import EditFinancialModal from "../EditFinancialModal/EditFinancialModal";
 
 
 function EditBooking() {
-     const [show, setShow] = useState(false); 
+     const [showTenant, setShowTenant] = useState(false); 
+     const [showFinancial, setShowFinancial] = useState(false);
      const booking = useSelector((store) => store.booking);
 
     return (
         <div>
             <h1>Edit Booking Page</h1>
             {/* when button click, state set to true and opens modal */}
-            <button onClick={() => setShow(true)}>
-                Open Modal
+            <button onClick={() => setShowTenant(true)}>
+                Edit Tenant
+            </button>
+            <br/>
+            <button onClick={() => setShowFinancial(true)}>
+                Edit Financial
             </button>
             <EditTenantModal
-                onClose={() => setShow(false)}
-                show={show}
+                onClose={() => setShowTenant(false)}
+                show={showTenant}
                 booking={booking}
             />
-
+            <EditFinancialModal
+                onClose={() => setShowFinancial(false)}
+                show={showFinancial}
+                booking={booking}
+            />
         </div>
     )
 }

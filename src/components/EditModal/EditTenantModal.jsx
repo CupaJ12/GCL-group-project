@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
-import './EditModal.css';
+import MaskedInput from "react-text-mask";
+import './EditTenantModal.css';
+
 
 
 function EditTenantModal(props) {
@@ -15,6 +17,9 @@ function EditTenantModal(props) {
 
     // fetched booking info
     const booking = props.booking;
+
+    //phone input masking
+
 
     // set tenant info so it can show up in inputs
     useEffect(() => {
@@ -96,13 +101,24 @@ function EditTenantModal(props) {
                             <div>
                                 <label htmlFor="phone">
                                     Phone:
-                                    <input
+                                    {/* <input
                                         type="tel"
                                         name="phone"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
+                                    /> */}
+                                    <MaskedInput
+                                        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                        id="phone"
+                                        name="phone"
+                                        value={phone}
+                                        placeholder="phone (optional)"
+                                        // disabled={feesFinalized}
+                                        // className="tenant-input"
+                                        onChange={(e) => setPhone(e.target.value)}
                                     />
                                 </label>
+
                             </div>
                             <button type="submit">Save</button>
                         </form>
