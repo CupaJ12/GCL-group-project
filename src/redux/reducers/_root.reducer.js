@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import { taxResponsibility, feesFinalized } from './toggle.reducer';
+import vendorList from './vendor.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   taxResponsibility, // contains boolean value for tax responsibility
   feesFinalized, //contains finalized fees boolean value
+  vendorList, //contains an array of vendor names
 });
 
 export default rootReducer;

@@ -12,6 +12,8 @@
     padding: 30px;
     width: 50%;
     border-radius: 30px;
+    transform: translateY(-200px);
+    transition: all 0.3s ease-in-out;
 }
 
 .cancel-add-property-btn {
@@ -31,8 +33,20 @@
     box-shadow: 0 0 15px #a8bba2;
 }
 
-.modal.visible {
+.modal.enter-done {
     opacity: 1;
     pointer-events: visible;
     z-index: 1;
+}
+
+.modal.exit {
+    opacity: 0;
+}
+
+.modal.enter-done .property-form-container {
+    transform: translateY(0);
+}
+
+.modal.exit .property-form-container {
+    transform: translateY(-200px);
 }

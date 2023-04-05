@@ -3,21 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
+import CancelValidation from '../CancelValidation/CancelValidation';
 import './AddVendorForm.css';
 
 const AddNewVendorForm = ({ modalVisible, onClose }) => {
-    const [vendorName, setVendorName] = useState('');
-    const [change, setChange] = useState(0);
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const dispatch = useDispatch();
     const [submitDisabled, setSubmitDisabled] = useState(true);
+    const [vendorName, setVendorName] = useState('');
 
     useEffect(() => {
         checkFormComplete();
     }, [vendorName]);
 
-    const cancel = () => {
-        console.log('you clicked cancel');
-    };
+    useEffect(() => {
+        setCancelModalVisible(false);
+    }, [modalVisible]);
 
     const checkFormComplete = () => {
         if (vendorName.length > 0) {
@@ -41,7 +42,8 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
             unmountOnExit
             timeout={{ enter: 0, exit: 300 }}
         >
-            <div className={`modal ${modalVisible ? 'visible' : ''}`} >
+            {/* <div className={`modal ${modalVisible ? 'visible' : ''}`} > */}
+            <div className="modal">
                 <div className="vendor-form-container">
                     
                     <form key="add-vendor-form" onSubmit={onSubmit}>
@@ -52,7 +54,7 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
 
                         <div className="vendor-name-container">
                             <div className="vendor-input-div">
-                                <label className="label" htmlFor="vendor-name">Vendor Name</label>
+                                <label className="label" htmlFor="vendor-name">Vendor Name *</label>
                                 <br />
                                 <input
                                     id="vendor-name"
@@ -78,11 +80,12 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
 
                             <button 
                                 type="button"
-                                className="cancel-btn"
-                                onClick={onClose}
+                                className="cancel-add-property-btn"
+                                onClick={() => setCancelModalVisible(true)}
                             >
                                 CANCEL
                             </button>
+                            <CancelValidation show={cancelModalVisible} onConfirm={onClose} onDeny={() => setCancelModalVisible(false)}/>
                         </div>
 
                     </form>

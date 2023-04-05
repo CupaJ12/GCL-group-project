@@ -268,3 +268,8 @@ hr.rounded {
     color: white;
     box-shadow: 0 0 15px #a8bba2;
 }
+
+.required {
+    font-size: 15px;
+    margin: 10px;
+}

@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
+import CancelValidation from '../CancelValidation/CancelValidation';
 import './AddProperty.css';
 
 const AddNewPropertyForm = ({modalVisible, onClose}) => {
     const [address, setAddress] = useState('');
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [change, setChange] = useState(0);
     const [city, setCity] = useState('');
     const dispatch = useDispatch();
@@ -20,10 +22,14 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
         checkFormComplete();
     }, [change]);
 
-    const cancel = () => {
-        console.log('you clicked cancel');
-        setVisible(false);
-    };
+    useEffect(() => {
+        setCancelModalVisible(false);
+    }, [modalVisible]);
+
+    // const cancel = () => {
+    //     setCancelModalVisible(false);
+    //     onClose;
+    // };
 
     const checkFormComplete = () => {
         setSubmitDisabled(
@@ -33,6 +39,11 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
             || state.length < 2   
             || zipCode.length < 5 
         );
+    };
+
+    const onConfirm = () => {
+        onClose; 
+        setCancelModalVisible(false);
     };
 
     const onSubmit = () => {
@@ -58,9 +69,10 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
         <CSSTransition
             in={modalVisible}
             unmountOnExit
-            timeout={{ enter: 0, exit: 300 }}
+            timeout={{ enter: 300, exit: 300 }}
         >
-            <div className={`modal ${modalVisible ? 'visible' : ''}`} >
+            {/* <div className={`modal ${modalVisible ? 'visible' : ''}`} > */}
+            <div className="modal">
                 <div className="property-form-container">
                     
                     <form key="add-property-form" onSubmit={onSubmit}>
@@ -71,7 +83,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
 
                         <div className="property-name-container">
                             <div className="property-input-div">
-                                <label className="label" htmlFor="property-name">Property Name</label>
+                                <label className="label" htmlFor="property-name">Property Name *</label>
                                 <br />
                                 <input
                                     id="property-name"
@@ -86,7 +98,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
                             </div>
 
                             <div className="property-input-div">
-                                <label className="label" htmlFor="address">Address</label>
+                                <label className="label" htmlFor="address">Address *</label>
                                 <br />
                                 <input
                                     id="address"
@@ -101,7 +113,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
                             </div>
 
                             <div className="property-input-div">
-                                <label className="label" htmlFor="city">City</label>
+                                <label className="label" htmlFor="city">City *</label>
                                 <br />
                                 <input
                                     id="city"
@@ -116,7 +128,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
                             </div>
 
                             <div className="property-input-div">
-                                <label className="label" htmlFor="state">State</label>
+                                <label className="label" htmlFor="state">State *</label>
                                 <br />
                                 <input
                                     id="state"
@@ -131,7 +143,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
                             </div>
 
                             <div className="property-input-div">
-                                <label className="label" htmlFor="zip-code">Zip Code</label>
+                                <label className="label" htmlFor="zip-code">Zip Code *</label>
                                 <br />
                                 <input
                                     id="zip-code"
@@ -158,10 +170,11 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
                             <button 
                                 type="button"
                                 className="cancel-add-property-btn"
-                                onClick={onClose}
+                                onClick={() => setCancelModalVisible(true)}
                             >
                                 CANCEL
                             </button>
+                            <CancelValidation show={cancelModalVisible} onConfirm={onClose} onDeny={() => setCancelModalVisible(false)}/>
                         </div>
 
                     </form>

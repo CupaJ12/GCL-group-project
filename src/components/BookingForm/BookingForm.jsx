@@ -47,7 +47,12 @@ const BookingForm = () => {
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
     const [vendorModalVisible, setVendorModalVisible] = useState(false);
-   
+    const vendorList = useSelector((store) => store.vendorList);
+    
+    useEffect(() => {
+        dispatch({type: 'GET_VENDORS'});
+    }, []);
+    
     useEffect(() => {
         checkFormComplete();
         calculateGross();
@@ -74,11 +79,6 @@ const BookingForm = () => {
     useEffect(() => {
         calculateRentalCost();
     }, [costPerNight]);
-
-
-    const cancel = () => {
-            console.log('you clicked cancel');
-    };
 
     const calculateRentalCost = () => {
         if (checkIn != null && checkOut != null && checkOut > checkIn) {
@@ -109,15 +109,7 @@ const BookingForm = () => {
         }
     };
                
-    // const addProperty = () => {
-    //     return ( )
-    // };
 
-    const addVendor = () => {
-        return (
-        console.log('you clicked add a vendor')
-        )
-    };
 
     const onSubmit = () => {
         event.preventDefault();
@@ -174,6 +166,7 @@ const BookingForm = () => {
         <div className="booking-form-container">
             
             <form key="booking-form" onSubmit={onSubmit}>
+                <section className="required">* indicates required fields</section>
                 <div className="property-select-container">
                     <select 
                         disabled={feesFinalized} 
@@ -193,7 +186,7 @@ const BookingForm = () => {
 
                     <div className="tenant-container">
                         <div className="tenant-input-div">
-                            <label className="label" htmlFor="first-name">First Name</label>
+                            <label className="label" htmlFor="first-name">First Name *</label>
                             <input
                                 id="first-name"
                                 name="first-name"
@@ -208,7 +201,7 @@ const BookingForm = () => {
                         </div>
 
                         <div className="tenant-input-div">
-                            <label className="label" htmlFor="last-name">Last Name</label>
+                            <label className="label" htmlFor="last-name">Last Name *</label>
                             <input
                                 id="last-name"
                                 name="last-name"
@@ -256,7 +249,7 @@ const BookingForm = () => {
                         <div className="date-picker">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    label={'check-in'}
+                                    label={'check-in *'}
                                     value={checkIn}
                                     onChange={(newValue) => {setCheckIn(newValue); setChange(change + 1)}}
                                     showDaysOutsideCurrentMonth
@@ -268,7 +261,7 @@ const BookingForm = () => {
                         <div className="date-picker">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker  
-                                    label={'check-out'}
+                                    label={'check-out *'}
                                     value={checkOut}
                                     onChange={(newValue) => {setCheckOut(newValue); setChange(change + 1)}}
                                     showDaysOutsideCurrentMonth
@@ -287,7 +280,7 @@ const BookingForm = () => {
 
                     <div className="financial-container">
                         <div className="financial-input-div">
-                            <label className="label" htmlFor="cost-per-night">Cost Per Night</label>
+                            <label className="label" htmlFor="cost-per-night">Cost Per Night *</label>
 
                             <CurrencyInput
                                 key="currency-input-cost-per-night"
@@ -321,7 +314,7 @@ const BookingForm = () => {
                         </div>
 
                         <div className="financial-input-div">
-                            <label className="label" htmlFor="cleaning-fees">Cleaning Fees</label>
+                            <label className="label" htmlFor="cleaning-fees">Cleaning Fees *</label>
                             
                             <CurrencyInput
                                 key="currency-input-cleaning-fees"
@@ -338,7 +331,7 @@ const BookingForm = () => {
                         </div>
 
                         <div className="financial-input-div">
-                            <label className="label" htmlFor="lodging-tax">Lodging Tax</label>
+                            <label className="label" htmlFor="lodging-tax">Lodging Tax *</label>
 
                             <CurrencyInput
                                 key="currency-input-lodging-tax"
@@ -368,26 +361,36 @@ const BookingForm = () => {
                     <hr className="rounded"/>
                         
                     <div className="vendor-container">
-                        <div className="vendor-input-div">
-                            <label className="label" htmlFor="vendor">Vendor</label>
-                            <br />
-                            <select 
-                                disabled={feesFinalized} 
-                                className="vendor-dropdown"
-                                defaultValue={"Airbnb"} 
-                                onChange={(event) => setVendor(event.target.value)}  
-                            >
-                                <option value="Airbnb">Airbnb</option>
-                                <option value="Vrbo">Vrbo</option>
-                            </select>
-                            <button type="button" className="add-vendor-btn" onClick={() => setVendorModalVisible(true)}>+</button>
-                            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => setVendorModalVisible(false)}/>
-                        </div>
+                        {vendorList.length > 0 &&
+                            <div className="vendor-input-div">
+                                <label className="label" htmlFor="vendor">Vendor *</label>
+                                <br />
+                                <select 
+                                    disabled={feesFinalized} 
+                                    className="vendor-dropdown"
+                                    defaultValue={"Airbnb"} 
+                                    onChange={(event) => setVendor(event.target.value)}  
+                                >
+                                    {vendorList.map((vendor, index) => {
+                                        console.log('vendor name in map: ', vendor.name);
+                                        return (
+                                            <option value={vendor.name}>{vendor.name}</option>
+                                        )
+                                    })}
+
+                                    {/* <option value="Airbnb">Airbnb</option>
+                                    <option value="Vrbo">Vrbo</option> */}
+                                    
+                                </select>
+                                <button type="button" className="add-vendor-btn" onClick={() => setVendorModalVisible(true)}>+</button>
+                                <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => setVendorModalVisible(false)}/>
+                            </div>
+                        }
                         
                         {/* <div></div> */}
 
                         <div className="vendor-input-div">
-                            <label className="label" htmlFor="vendor-commissions">Vendor Commissions</label>
+                            <label className="label" htmlFor="vendor-commissions">Vendor Commissions *</label>
                             <CurrencyInput
                                 key="currency-input-vendor-commissions"
                                 placeholder="$0.00" 
@@ -402,7 +405,7 @@ const BookingForm = () => {
                         </div>
 
                         <div className="vendor-input-div">
-                            <label className="label" htmlFor="vendor-fees">Vendor Fees</label>
+                            <label className="label" htmlFor="vendor-fees">Vendor Fees *</label>
                             <CurrencyInput
                                 key="currency-input-vendor-fees"
                                 placeholder="$0.00" 

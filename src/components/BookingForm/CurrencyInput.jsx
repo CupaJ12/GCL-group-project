@@ -32,7 +32,7 @@ const CurrencyInput = ({ maskOptions, ...inputProps }) => {
 CurrencyMask.defaultProps = {
     inputMode: 'numeric',
     maskOptions: {},
-    }
+}
     
     CurrencyMask.propTypes = {
     inputmode: PropTypes.string,
