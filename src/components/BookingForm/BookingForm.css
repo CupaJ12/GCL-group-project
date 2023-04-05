@@ -273,3 +273,10 @@ hr.rounded {
     font-size: 15px;
     margin: 10px;
 }
+
+.comment-input-div {
+    width: 95%;
+    margin: auto;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}

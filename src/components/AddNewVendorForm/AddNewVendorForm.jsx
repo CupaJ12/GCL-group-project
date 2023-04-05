@@ -36,7 +36,7 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
             payload: {vendorName}
         });
         setVendorName('');
-        history.push('/bookingform');
+        history.goBack();
     };
 
     return ReactDOM.createPortal(

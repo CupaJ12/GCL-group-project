@@ -7,9 +7,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import MaskedInput from 'react-text-mask';
 import CurrencyInput from './CurrencyInput';
 import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
-import ModalChild from '../Modal/ModalChild';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
+import ModalChild from '../Modal/ModalChild';
 import './BookingForm.css';
 import './BookingFormResponsive.css';
 
@@ -25,6 +25,7 @@ const BookingForm = () => {
     const [checkOut, setCheckOut] = useState(null);
     const [change, setChange] = useState(0);  
     const [cleaningFees, setCleaningFees] = useState('');
+    const [comment, setComment] = useState('');
     const [costPerNight, setCostPerNight] = useState('');
     const [discount, setDiscount] = useState('');
     const dispatch = useDispatch();
@@ -72,10 +73,12 @@ const BookingForm = () => {
 
     useEffect(() => {
         calculateRentalCost();
+        // checkDatesNotValid();
     }, [checkIn]);
 
     useEffect(() => {
         calculateRentalCost();
+        // checkDatesNotValid();
     }, [checkOut]);
 
     useEffect(() => {
@@ -131,11 +134,24 @@ const BookingForm = () => {
                 discount,
                 lodging_tax: lodgingTax,
                 finalized: feesFinalized,
+                comment,
                 // property_id: ,
             }
         });
         window.location.reload(false);
     };
+
+    // const checkDatesNotValid = () => {
+    //     if (checkOut < checkIn && checkOut != null && checkIn != null) {
+    //         return true;
+    //     }
+    //     if (checkOut != null && checkIn != null) {
+    //         if (checkOut.diff(checkIn, 'days') == 0) {
+    //             return true;
+    //         }
+    //         return false;
+    //     }
+    // };
 
     const checkFormComplete = () => {
         setSubmitDisabled(
@@ -149,13 +165,15 @@ const BookingForm = () => {
             || lodgingTax.length == 0
             || vendor.length == 0
             || vendorCommissions.length == 0
-            || vendorFees.length == 0)
+            || vendorFees.length == 0
+        )
     };
 
     return (
         <div className="booking-form-container">  
             <form key="booking-form" onSubmit={onSubmit}>
                 <section className="required">* indicates required fields</section>
+                
                 <div className="property-select-container">
                     <select 
                         disabled={feesFinalized} 
@@ -167,7 +185,6 @@ const BookingForm = () => {
                                 <option value={property.name}>{property.name}</option>
                             )
                         })}
-                        {/* <option value="goldClaimLodge">Gold Claim Lodge</option> */}
                     </select>
                     <button type="button" className="add-property-btn" onClick={() => setPropertyModalVisible(true)}>+</button>
                     <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => setPropertyModalVisible(false)}/>
@@ -180,6 +197,7 @@ const BookingForm = () => {
                 <div className="tenant-container">
                     <div className="tenant-input-div">
                         <label className="label" htmlFor="first-name">First Name *</label>
+                        
                         <input
                             id="first-name"
                             name="first-name"
@@ -195,6 +213,7 @@ const BookingForm = () => {
 
                     <div className="tenant-input-div">
                         <label className="label" htmlFor="last-name">Last Name *</label>
+                        
                         <input
                             id="last-name"
                             name="last-name"
@@ -225,6 +244,7 @@ const BookingForm = () => {
 
                     <div className="tenant-input-div">
                         <label className="label" htmlFor="email">Email</label>
+                        
                         <input
                             id="email"
                             name="email"
@@ -262,9 +282,15 @@ const BookingForm = () => {
                             />
                         </LocalizationProvider>
                     </div>
+
                     {(checkOut < checkIn && checkOut != null && checkIn != null) &&
                         <h3 className="alert" role="alert">Check-out date must come after check-in date!</h3>
                     }
+
+                    {/* {checkDatesNotValid &&
+                        <h3 className="alert" role="alert">Dates not valid!</h3>
+                    } */}
+
                 </div> {/* end of tenant-input-date-div */}
 
                 <div className="section-header">
@@ -433,6 +459,26 @@ const BookingForm = () => {
                             </div>
                         </div>
                     }
+
+                    <div className="section-header">
+                        Comment
+                    </div>
+
+                    <div className="comment-input-div">
+                        <label className="label" htmlFor="comment">Comment</label>
+                            
+                        <input
+                            id="comment"
+                            name="comment"
+                            type="text"
+                            value={comment}
+                            placeholder="comment (optional)"
+                            required
+                            className="tenant-input"
+                            onChange={(event) => {setComment(event.target.value)}}
+                        />
+                    </div>
+
                 <div className="nav-btn-div">
                     <button 
                         type="submit"

@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
             lodging_tax,
             finalized
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);`;
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING id;`;
         pool.query(queryText, [
             req.body.customer_first_name, 
             req.body.customer_last_name,
@@ -41,7 +41,11 @@ router.post('/', (req, res) => {
             req.body.lodging_tax,
             req.body.finalized
         ])
+        .then((query) => {
+            //query to add comment with new booking id that was just created
+            pool.query('INSERT INTO "comment" (comment, user_id, booking_id) VALUES ($1, $2, $3);', [req.body.comment, req.user.id, query.rows[0].id])
         .then(() => res.sendStatus(201))
+        })
         .catch((err) => {
             res.sendStatus(500);
         });
