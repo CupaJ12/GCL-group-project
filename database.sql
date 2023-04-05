@@ -35,6 +35,7 @@ CREATE TABLE "booking" (
 	"check_in_date" DATE NOT NULL,
 	"check_out_date" DATE NOT NULL,
 	"tax_responsible" BOOLEAN,
+	"cleaning_fee" MONEY NOT NULL,
 	"pet_fee" MONEY NOT NULL,
 	"cost_per_night" MONEY NOT NULL,
 	"vendor_commission" MONEY NOT NULL,

@@ -8,10 +8,17 @@ import './EditFinancialModal.css';
 
 
 function EditFinancialModal(props) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [checkIn, setCheckIn] = useState('');
+    const [checkout, setCheckOut] = useState('');
+    const [costPerNight, setCostPerNight] = useState('');
+    const [cleaningFee, setCleaningFee] = useState('');
+    const [petFee, setPetFee] = useState('');
+    const [taxResponsibility, setTaxResponsibility] = useState('');
+    const [vendorCommission, setVendorCommission] = useState('');
+    const [vendorFee, setVendorFee] = useState('');
+    const [discount, setDiscount] = useState('');
+    const [lodgingTax, setLodingTax] = useState('');
+    const [finalized, setFinalized] = useState('');
 
     const dispatch = useDispatch();
 
@@ -25,24 +32,18 @@ function EditFinancialModal(props) {
     useEffect(() => {
         {
             props.booking.map((booking) => {
-                setFirstName(booking.firstName),
-                    setLastName(booking.lastName),
-                    setEmail(booking.email),
-                    setPhone(booking.phone)
+               
             })
         };
     }, []);
 
     // dispatch updated inputs to updateTenant saga
-    const saveTenant = () => {
+    const saveFinancial = () => {
         console.log('submit clicked');
         dispatch({
             type: 'UPDATE_TENANT',
             payload: {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                phone: phone
+                
             }
         });
     };
