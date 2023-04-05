@@ -20,6 +20,8 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingForm from '../BookingForm/BookingForm';
+import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
+import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 
 import './App.css';
 import EditBooking from '../EditBooking/EditBooking';
@@ -85,6 +87,22 @@ function App() {
           path="/editBooking"
           >
             <EditBooking />
+          </ProtectedRoute>
+
+          {/* Protected route for Add Property Form - bryan */}
+          <ProtectedRoute
+            exact
+            path="/addproperty"
+          >
+            <AddNewPropertyForm />
+          </ProtectedRoute>
+
+          {/* Protected route for Add Vendor Form - bryan */}
+          <ProtectedRoute
+            exact
+            path="/addvendor"
+          >
+            <AddNewVendorForm />
           </ProtectedRoute>
 
           <ProtectedRoute

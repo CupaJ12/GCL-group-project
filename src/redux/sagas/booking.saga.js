@@ -11,8 +11,20 @@ function* updateTenant(action) {
     }
 }
 
+
+// worker Saga: will be fired on "FETCH_USER" actions
+function* postBooking(action) {
+  console.log('in post booking saga with: ', action.payload);
+  try {
+      yield axios.post('/api/booking', action.payload);
+  } catch (error) {
+    console.log('error posting booking', error);
+  }
+}
+
 function* bookingSaga() {
-    yield takeEvery('UPDATE_TENANT', updateTenant);
+  yield takeEvery('POST_BOOKING', postBooking);
+  yield takeEvery('UPDATE_TENANT', updateTenant);
 }
 
 export default bookingSaga;
