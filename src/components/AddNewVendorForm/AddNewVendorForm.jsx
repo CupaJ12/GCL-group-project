@@ -9,6 +9,7 @@ import './AddVendorForm.css';
 const AddNewVendorForm = ({ modalVisible, onClose }) => {
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const dispatch = useDispatch();
+    const history = useHistory();
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const [vendorName, setVendorName] = useState('');
 
@@ -32,8 +33,10 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
         event.preventDefault();
         dispatch({
             type: 'POST_NEW_VENDOR',
-            payload: vendorName
+            payload: {vendorName}
         });
+        setVendorName('');
+        history.push('/bookingform');
     };
 
     return ReactDOM.createPortal(
