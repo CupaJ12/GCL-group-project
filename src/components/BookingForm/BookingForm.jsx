@@ -25,7 +25,7 @@ const BookingForm = () => {
     const [checkOut, setCheckOut] = useState(null);
     const [change, setChange] = useState(0);  
     const [cleaningFees, setCleaningFees] = useState('');
-    const [comment, setComment] = useState('');
+    const [comment, setComment] = useState(null);
     const [costPerNight, setCostPerNight] = useState('');
     const [discount, setDiscount] = useState('');
     const dispatch = useDispatch();
@@ -138,7 +138,7 @@ const BookingForm = () => {
                 property_id: propertyId,
             }
         });
-        // window.location.reload(false);
+        window.location.reload(false);
     };
 
     const checkFormComplete = () => {

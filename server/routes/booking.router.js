@@ -44,15 +44,18 @@ router.post('/', (req, res) => {
         .then((query) => {
             //query to add comment with new booking id that was just created
                 pool.query(`INSERT INTO "comment" (comment, user_id, booking_id) VALUES ($1, $2, $3);`, [req.body.comment, req.user.id, query.rows[0].id])
+
             .then(result => {
                 res.sendStatus(201);
             })
             .catch((err) => {
                 res.sendStatus(500);
+                console.log('error: ', err)
             });
         })
         .catch((err) => {
             res.sendStatus(500);
+            console.log('error: ', err)
         });
     } else {
         res.sendStatus(403);
