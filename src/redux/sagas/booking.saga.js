@@ -1,5 +1,16 @@
 import axios from 'axios';
-import { put, takeEvery} from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
+
+// receives action.payload form saveTenant in EditTenantModal and send it to booking router
+function* updateTenant(action) {
+    try {
+        console.log(action.payload);
+
+    } catch (err) {
+        console.log('error with updateTenant saga');
+    }
+}
+
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* postBooking(action) {
@@ -13,6 +24,7 @@ function* postBooking(action) {
 
 function* bookingSaga() {
   yield takeEvery('POST_BOOKING', postBooking);
+  yield takeEvery('UPDATE_TENANT', updateTenant);
 }
 
 export default bookingSaga;

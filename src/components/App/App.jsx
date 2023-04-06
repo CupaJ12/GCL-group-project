@@ -25,6 +25,8 @@ import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 
 import './App.css';
+import EditBooking from '../EditBooking/EditBooking';
+import ModalParent from '../ModalParent/ModalParent';
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +54,14 @@ function App() {
             <AboutPage />
           </Route>
 
+          {/* route for modal page */}
+          <Route 
+            exact
+            path="/modal"
+          >
+            <ModalParent />
+          </Route>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -72,6 +82,7 @@ function App() {
             <BookingForm />
           </ProtectedRoute>
 
+
           {/* Protected route for Booking Sheet - Jaffer */}
           <ProtectedRoute
             exact
@@ -80,7 +91,14 @@ function App() {
             <BookingSheet />
           </ProtectedRoute>
           
-          
+          {/* Protected route for EditBooking */}
+          <ProtectedRoute
+          exact
+          path="/editBooking"
+          >
+            <EditBooking />
+          </ProtectedRoute>
+
           {/* Protected route for Add Property Form - bryan */}
           <ProtectedRoute
             exact

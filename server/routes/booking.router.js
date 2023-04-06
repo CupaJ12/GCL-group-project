@@ -40,6 +40,7 @@ router.post('/', (req, res) => {
             check_in_date,
             check_out_date,
             tax_responsible,
+            cleaning_fee,
             pet_fee,
             cost_per_night,
             vendor_commission,
@@ -48,7 +49,7 @@ router.post('/', (req, res) => {
             lodging_tax,
             finalized,
             property_id
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id;`;
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING id;`;
         pool.query(queryText, [
             req.body.customer_first_name, 
             req.body.customer_last_name,
@@ -58,6 +59,7 @@ router.post('/', (req, res) => {
             req.body.check_in_date,
             req.body.check_out_date,
             req.body.tax_responsible,
+            req.body.cleaning_fee,
             req.body.pet_fee,
             req.body.cost_per_night,
             req.body.vendor_commission,
