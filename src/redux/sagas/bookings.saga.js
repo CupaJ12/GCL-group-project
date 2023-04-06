@@ -27,9 +27,23 @@ function* fetchDetails(action) {
     }
 };
 
+function* deleteBookingId(action) {
+    try {
+        const id = action.payload;
+        const response = yield axios.delete(`/api/allbookings/${id}`);
+        yield put({
+            type: 'DELETE_BOOKING',
+            payload: response.data
+        });
+    } catch (error) {
+        console.log(' request failed', error);
+    }
+};
+
 function* bookingsSaga() {
     yield takeEvery('FETCH_BOOKINGS', fetchBookings);
     yield takeEvery('FETCH_BY_DETAILS', fetchDetails);
+    yield takeEvery('DELETE_BOOKING_BY_ID', deleteBookingId);
 }
 
 export default bookingsSaga;
