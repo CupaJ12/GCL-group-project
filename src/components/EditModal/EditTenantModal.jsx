@@ -3,24 +3,18 @@ import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
 import MaskedInput from "react-text-mask";
+import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 import './EditTenantModal.css';
-
-
-
 function EditTenantModal(props) {
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-
     const dispatch = useDispatch();
-
     // fetched booking info
     const booking = props.booking;
-
     //phone input masking
-
-
     // set tenant info so it can show up in inputs
     useEffect(() => {
         {
@@ -33,6 +27,10 @@ function EditTenantModal(props) {
         };
     }, []);
 
+    useEffect(() => {
+        setCancelModalVisible(false);
+    }, [props.show]);
+    
     // dispatch updated inputs to updateTenant saga
     const saveTenant = () => {
         console.log('submit clicked');
@@ -46,7 +44,6 @@ function EditTenantModal(props) {
             }
         });
     };
-
     // ReactDOM.createPortal create the div outside of the parent so it won't break the parent's css
     return ReactDOM.createPortal(
         // CSSTransition is a built-in method that render div into or remove the div into the DOM
@@ -57,18 +54,22 @@ function EditTenantModal(props) {
             timeout={{ enter: 50, exit: 200 }}
         >
             <div className="modal">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <button className="close-modal-btn" onClick={props.onClose}>
+                <div className="property-form-container">
+                    {/* <div className="modal-header"> */}
+                        {/* <button className="close-modal-btn" onClick={props.onClose}>
                             X
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <form className="edit-tenant-form" onSubmit={saveTenant}>
-                            <div>
-                                <label htmlFor="first-name">
+                        </button> */}
+                    {/* </div> */}
+                    <form className="edit-tenant-form" onSubmit={saveTenant}>
+                        <div className="section-header">
+                            Edit Tenant
+                        </div>
+                        <div className="edit-tenant-container">
+                            <div className="modal-input-div">
+                                <label className="label" htmlFor="first-name">
                                     First Name:
                                     <input
+                                        className="tenant-input"
                                         type="text"
                                         name="first-name"
                                         value={firstName}
@@ -76,10 +77,11 @@ function EditTenantModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div>
-                                <label htmlFor="last-name">
+                            <div className="modal-input-div">
+                                <label className="label" htmlFor="last-name">
                                     Last Name:
                                     <input
+                                        className="tenant-input"
                                         type="text"
                                         name="last-name"
                                         value={lastName}
@@ -87,10 +89,11 @@ function EditTenantModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div>
-                                <label htmlFor="email">
+                            <div className="modal-input-div">
+                                <label className="label" htmlFor="email">
                                     Email:
                                     <input
+                                        className="tenant-input"
                                         type="text"
                                         name="email"
                                         value={email}
@@ -98,36 +101,42 @@ function EditTenantModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div>
-                                <label htmlFor="phone">
-                                    Phone:
-                                    {/* <input
-                                        type="tel"
-                                        name="phone"
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                    /> */}
-                                    <MaskedInput
-                                        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-                                        id="phone"
-                                        name="phone"
-                                        value={phone}
-                                        placeholder="phone (optional)"
-                                        // disabled={feesFinalized}
-                                        // className="tenant-input"
-                                        onChange={(e) => setPhone(e.target.value)}
-                                    />
-                                </label>
-
+                            <div className="modal-input-div">
+                                <label className="label" htmlFor="phone">Phone:</label>
+                                <MaskedInput
+                                    className="tenant-input"
+                                    mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                    id="phone"
+                                    name="phone"
+                                    value={phone}
+                                    placeholder="phone (optional)"
+                                    // disabled={feesFinalized}
+                                    // className="tenant-input"
+                                    onChange={(e) => setPhone(e.target.value)}
+                                />
                             </div>
-                            <button type="submit">Save</button>
-                        </form>
-                    </div>
+                        </div>
+                        <div className="nav-btn-div">
+                            <button
+                                type="submit"
+                                className="submit-btn"
+                            >
+                                SUBMIT
+                            </button>
+                            <button
+                                type="button"
+                                className="cancel-add-property-btn"
+                                onClick={() => setCancelModalVisible(true)}
+                            >
+                                CANCEL
+                            </button>
+                            <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)}/>
+                        </div>
+                    </form>
                 </div>
             </div>
         </CSSTransition>,
         document.getElementById('react-root')
     )
 }
-
 export default EditTenantModal;
