@@ -27,8 +27,8 @@ if (process.env.DATABASE_URL) {
 else {
     pool = new pg.Pool({
         host: 'localhost',
-        port: 5432,
-        database: 'prime_app',   // 	💥 Change this to the name of your database!
+        port: 5433,
+        database: 'gold_claim_lodge',
     });
 }
 

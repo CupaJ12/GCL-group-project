@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingsFolder from '../BookingsFolder/BookingsFolder';
+import BookingDetails from '../BookingsFolder/BookingDetails';
 
 import './App.css';
 
@@ -35,7 +36,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -69,11 +70,19 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          {/* Protected route for GET Booking - Liam */}
           <ProtectedRoute
             exact
             path="/allbookings"
           >
             <BookingsFolder />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/bookingdetails/:id"
+          >
+            <BookingDetails />
           </ProtectedRoute>
 
           <Route

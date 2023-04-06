@@ -110,3 +110,12 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+.bookings {
+  text-align: center;
+}
+
+.button {
+  text-align: center;
+  object-position: center;
+}
