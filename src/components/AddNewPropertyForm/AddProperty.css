@@ -1,0 +1,52 @@
+.property-input-div {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.property-form-container {
+    margin: auto;
+    margin-top: 50px;
+    background-color: white;
+    padding: 30px;
+    width: 50%;
+    border-radius: 30px;
+    transform: translateY(-200px);
+    transition: all 0.3s ease-in-out;
+}
+
+.cancel-add-property-btn {
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #a8bba2;
+    box-shadow: 0 0 4px black;
+    color: white;
+}
+
+.cancel-add-property-btn:hover {
+    background-color: #3c6a2f;
+    color: white;
+    box-shadow: 0 0 15px #a8bba2;
+}
+
+.modal.enter-done {
+    opacity: 1;
+    pointer-events: visible;
+    z-index: 1;
+}
+
+.modal.exit {
+    opacity: 0;
+}
+
+.modal.enter-done .property-form-container {
+    transform: translateY(0);
+}
+
+.modal.exit .property-form-container {
+    transform: translateY(-200px);
+}

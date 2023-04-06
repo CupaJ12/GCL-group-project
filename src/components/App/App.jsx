@@ -21,8 +21,13 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingsFolder from '../BookingsFolder/BookingsFolder';
 import BookingDetails from '../BookingsFolder/BookingDetails';
+import BookingForm from '../BookingForm/BookingForm';
+import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
+import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 
 import './App.css';
+import EditBooking from '../EditBooking/EditBooking';
+import ModalParent from '../ModalParent/ModalParent';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +55,14 @@ function App() {
             <AboutPage />
           </Route>
 
+          {/* route for modal page */}
+          <Route 
+            exact
+            path="/modal"
+          >
+            <ModalParent />
+          </Route>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -71,6 +84,30 @@ function App() {
           </ProtectedRoute>
 
           {/* Protected route for GET Booking - Liam */}
+          {/* Protected route for EditBooking */}
+          <ProtectedRoute
+          exact
+          path="/editBooking"
+          >
+            <EditBooking />
+          </ProtectedRoute>
+
+          {/* Protected route for Add Property Form - bryan */}
+          <ProtectedRoute
+            exact
+            path="/addproperty"
+          >
+            <AddNewPropertyForm />
+          </ProtectedRoute>
+
+          {/* Protected route for Add Vendor Form - bryan */}
+          <ProtectedRoute
+            exact
+            path="/addvendor"
+          >
+            <AddNewVendorForm />
+          </ProtectedRoute>
+
           <ProtectedRoute
             exact
             path="/allbookings"
@@ -83,6 +120,13 @@ function App() {
             path="/bookingdetails/:id"
           >
             <BookingDetails />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/bookingform"
+          >
+            <BookingForm />
           </ProtectedRoute>
 
           <Route

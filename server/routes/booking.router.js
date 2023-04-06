@@ -1,0 +1,67 @@
+const express = require('express');
+const pool = require('../modules/pool');
+const router = express.Router();
+
+router.post('/', (req, res) => {
+    console.log('in booking router post request with: ', req.body);
+    if (req.isAuthenticated()) {
+        const queryText = `INSERT INTO "booking" (
+            customer_first_name, 
+            customer_last_name,
+            customer_email,
+            customer_phone,
+            vendor,
+            check_in_date,
+            check_out_date,
+            tax_responsible,
+            cleaning_fee,
+            pet_fee,
+            cost_per_night,
+            vendor_commission,
+            vendor_fee,
+            discount,
+            lodging_tax,
+            finalized,
+            property_id
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING id;`;
+        pool.query(queryText, [
+            req.body.customer_first_name, 
+            req.body.customer_last_name,
+            req.body.customer_email,
+            req.body.customer_phone,
+            req.body.vendor,
+            req.body.check_in_date,
+            req.body.check_out_date,
+            req.body.tax_responsible,
+            req.body.cleaning_fee,
+            req.body.pet_fee,
+            req.body.cost_per_night,
+            req.body.vendor_commission,
+            req.body.vendor_fee,
+            req.body.discount,
+            req.body.lodging_tax,
+            req.body.finalized,
+            req.body.property_id,
+        ])
+        .then((query) => {
+            //query to add comment with new booking id that was just created
+                pool.query(`INSERT INTO "comment" (comment, user_id, booking_id) VALUES ($1, $2, $3);`, [req.body.comment, req.user.id, query.rows[0].id])
+
+            .then(result => {
+                res.sendStatus(201);
+            })
+            .catch((err) => {
+                res.sendStatus(500);
+                console.log('error: ', err)
+            });
+        })
+        .catch((err) => {
+            res.sendStatus(500);
+            console.log('error: ', err)
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+module.exports = router;
