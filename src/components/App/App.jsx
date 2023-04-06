@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingForm from '../BookingForm/BookingForm';
+import BookingSheet from '../BookingSheet/BookingSheet';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 
@@ -81,6 +82,15 @@ function App() {
             <BookingForm />
           </ProtectedRoute>
 
+
+          {/* Protected route for Booking Sheet - Jaffer */}
+          <ProtectedRoute
+            exact
+            path="/bookingsheet"
+          >
+            <BookingSheet />
+          </ProtectedRoute>
+          
           {/* Protected route for EditBooking */}
           <ProtectedRoute
           exact
