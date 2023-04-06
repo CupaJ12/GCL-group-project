@@ -11,19 +11,39 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
 
-      <Link to="/allbookings">
-        All Bookings
-      </Link>
+      <br>
+      </br>
+      <br>
+      </br>
+      <br>
+      </br>
+      <br>
+      </br>
+      
+      <div>
+
+        <Link className="submit-btn" to="/allbookings">
+          VIEW ALL BOOKINGS
+        </Link>
+
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br>
+
+        <Link className="submit-btn" to="/bookingform">
+          ADD BOOKING
+        </Link>
+      </div>
 
       <br>
       </br>
       <br>
       </br>
-
-      <Link to="/bookingform">
-        Add Booking
-      </Link>
-
       <br>
       </br>
       <br>

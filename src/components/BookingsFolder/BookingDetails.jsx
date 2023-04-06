@@ -17,19 +17,27 @@ function BookingDetails() {
     }, []);
 
     const backButton = () => {
-        // history.push('/allbookings');
-        // window.location.reload(true);
+        history.push('/allbookings');
+        window.location.reload(true);
     };
 
-    const deleteButton = () => {
+    const homeButton = () => {
         history.push('/');
+        window.location.reload(true);
+    }
+
+    const deleteButton = () => {
+        dispatch({
+            type: 'DELETE_BOOKING_BY_ID',
+            payload: bookings.id
+        });
+        // history.push(`/deletconfirmation`);
     }
 
     return (
-        <div>
+        <div className="booking-form-container">
             <section key={bookings.id}>
                 <div className="bookings">
-                    <fieldset>
                         <h3> Property Number: <i><u> {bookings.property_id} </u></i> </h3>
                         <h3> Is Booking Finalized?: <i><u> {bookings.finalized} </u></i> </h3>
                         <h3> Customer First Name: <i><u> {bookings.customer_first_name} </u></i> </h3>
@@ -47,13 +55,13 @@ function BookingDetails() {
                         <h3> Booking Discount: <i><u> {bookings.discount} </u></i> </h3>
                         <h3> Lodging Tax: <i><u> {bookings.lodging_tax} </u></i> </h3>
                         <h3> Is Booking Finalized?: <i><u> {bookings.finalized} </u></i> </h3>
-                    </fieldset>
                 </div>
             </section>
 
             <div>
-                <button className="button" onClick={() => backButton()}> Go back </button>
-                <button className="button" onClick={() => deleteButton()}> Delete </button>
+                <button className="submit-btn" onClick={() => deleteButton()}> DELETE </button>
+                <button className="submit-btn" onClick={() => backButton()}> CANCEL </button>
+                <button className="submit-btn" onClick={() => homeButton()}> HOME </button>
             </div>
         </div>
     )
