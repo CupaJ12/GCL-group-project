@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingForm from '../BookingForm/BookingForm';
 import BookingSheet from '../BookingSheet/BookingSheet';
+import FindBooking from '../FindBooking/FindBooking';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 
@@ -89,6 +90,14 @@ function App() {
             path="/bookingsheet"
           >
             <BookingSheet />
+          </ProtectedRoute>
+          
+          {/* Protected route for FindBooking */}
+          <ProtectedRoute
+          exact
+          path="/findBooking"
+          >
+            <FindBooking />
           </ProtectedRoute>
           
           {/* Protected route for EditBooking */}
