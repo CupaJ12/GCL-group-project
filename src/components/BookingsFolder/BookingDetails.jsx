@@ -14,11 +14,15 @@ function BookingDetails() {
             type: 'FETCH_BY_DETAILS',
             payload: id
         })
-    }, [])
+    }, []);
 
     const backButton = () => {
         // history.push('/allbookings');
         // window.location.reload(true);
+    };
+
+    const deleteButton = () => {
+        history.push('/');
     }
 
     return (
@@ -49,6 +53,7 @@ function BookingDetails() {
 
             <div>
                 <button className="button" onClick={() => backButton()}> Go back </button>
+                <button className="button" onClick={() => deleteButton()}> Delete </button>
             </div>
         </div>
     )

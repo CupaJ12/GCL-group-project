@@ -78,6 +78,8 @@ INSERT INTO "money" ("money") VALUES ('300');	-- with quotation marks
 INSERT INTO "money" ("money") VALUES (1000.50);	-- with decimal
 
 
--- testing
+-- testing a Booking
+INSERT INTO "booking" ("customer_first_name", "customer_last_name", "customer_address", "customer_email", "vendor", "check_in_date", "check_out_date", "tax_responsible", "pet_fee", "cost_per_night", "vendor_commission", "vendor_fee", "discount", "lodging_tax", "finalized", "property_id")
+VALUES ('Jerry', 'Bine', '6758 15th Street W', 'myemail@youandmeAlso.com', 'AirBnb', '05/25/2023', '05/29/2023', 'no', '100.00', '24.53', '23.43', '45.00', '5.00', '32.09', 'no', '1');
 
 --- testing 2

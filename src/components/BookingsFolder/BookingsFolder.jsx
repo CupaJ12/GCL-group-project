@@ -47,16 +47,16 @@ function BookingsFolder() {
                             <h3> Checkout Date: <i><u> {booking.check_out_date} </u></i> </h3>
                             <h3> Is Booking Finalized?: <i><u> {booking.finalized} </u></i> </h3>
                             {/* <h3> Customer Address: <i><u> {booking.customer_address} </u></i> </h3>
-                        <h3> Customer Email: <i><u> {booking.customer_email} </u></i> </h3>
-                        <h3> Vendor: <i><u> {booking.vendor} </u></i> </h3>
-                        <h3> Tax Responsibility: <i><u> {booking.tax_responsible} </u></i> </h3>
-                        <h3> Pet Fee: <i><u> {booking.pet_fee} </u></i> </h3>
-                        <h3> Cost Per Night: <i><u> {booking.cost_per_night} </u></i> </h3>
-                        <h3> Vendor Commission: <i><u> {booking.vendor_commission} </u></i> </h3>
-                        <h3> Vendor Fee: <i><u> {booking.vendor_fee} </u></i> </h3>
-                        <h3> Booking Discount: <i><u> {booking.discount} </u></i> </h3>
-                        <h3> Lodging Tax: <i><u> {booking.lodging_tax} </u></i> </h3>
-                        <h3> Is Booking Finalized?: <i><u> {booking.finalized} </u></i> </h3> */}
+                            <h3> Customer Email: <i><u> {booking.customer_email} </u></i> </h3>
+                            <h3> Vendor: <i><u> {booking.vendor} </u></i> </h3>
+                            <h3> Tax Responsibility: <i><u> {booking.tax_responsible} </u></i> </h3>
+                            <h3> Pet Fee: <i><u> {booking.pet_fee} </u></i> </h3>
+                            <h3> Cost Per Night: <i><u> {booking.cost_per_night} </u></i> </h3>
+                            <h3> Vendor Commission: <i><u> {booking.vendor_commission} </u></i> </h3>
+                            <h3> Vendor Fee: <i><u> {booking.vendor_fee} </u></i> </h3>
+                            <h3> Booking Discount: <i><u> {booking.discount} </u></i> </h3>
+                            <h3> Lodging Tax: <i><u> {booking.lodging_tax} </u></i> </h3>
+                            <h3> Is Booking Finalized?: <i><u> {booking.finalized} </u></i> </h3> */}
                             <br></br>
                             <button className="button" onClick={() => handleDetails(booking.id)}> View Details </button>
                         </fieldset>
