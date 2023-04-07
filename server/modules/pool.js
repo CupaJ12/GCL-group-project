@@ -27,7 +27,7 @@ if (process.env.DATABASE_URL) {
 else {
     pool = new pg.Pool({
         host: 'localhost',
-        port: 5432,
+        port: 5423,
         database: 'gold_claim_lodge',
     });
 }
