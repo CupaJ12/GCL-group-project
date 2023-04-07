@@ -4,6 +4,10 @@ import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
 import MaskedInput from "react-text-mask";
 import CancelValidation from '../CancelValidationModal/CancelValidationModal';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 import './EditTenantModal.css';
 function EditTenantModal(props) {
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
@@ -11,6 +15,11 @@ function EditTenantModal(props) {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [checkIn, setCheckIn] = useState('');
+    const [checkOut, setCheckOut] = useState('');
+    const [change, setChange] = useState(0);  
+
+
     const dispatch = useDispatch();
     // fetched booking info
     const booking = props.booking;
@@ -30,7 +39,7 @@ function EditTenantModal(props) {
     useEffect(() => {
         setCancelModalVisible(false);
     }, [props.show]);
-    
+
     // dispatch updated inputs to updateTenant saga
     const saveTenant = () => {
         console.log('submit clicked');
@@ -56,7 +65,7 @@ function EditTenantModal(props) {
             <div className="modal">
                 <div className="property-form-container">
                     {/* <div className="modal-header"> */}
-                        {/* <button className="close-modal-btn" onClick={props.onClose}>
+                    {/* <button className="close-modal-btn" onClick={props.onClose}>
                             X
                         </button> */}
                     {/* </div> */}
@@ -115,22 +124,47 @@ function EditTenantModal(props) {
                                     onChange={(e) => setPhone(e.target.value)}
                                 />
                             </div>
-                        </div>
-                        <div className="nav-btn-div">
-                            <button
-                                type="submit"
-                                className="submit-btn"
-                            >
-                                SUBMIT
-                            </button>
-                            <button
-                                type="button"
-                                className="cancel-add-property-btn"
-                                onClick={() => setCancelModalVisible(true)}
-                            >
-                                CANCEL
-                            </button>
-                            <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)}/>
+                            <div className="tenant-input-date-div">
+                                <div className="date-picker">
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker
+                                            label={'check-in *'}
+                                            value={checkIn}
+                                            onChange={(newValue) => { setCheckIn(newValue); setChange(change + 1) }}
+                                            showDaysOutsideCurrentMonth
+                                            // disabled={feesFinalized}
+                                        />
+                                    </LocalizationProvider>
+                                </div>
+
+                                <div className="date-picker">
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker
+                                            label={'check-out *'}
+                                            value={checkOut}
+                                            onChange={(newValue) => { setCheckOut(newValue); setChange(change + 1) }}
+                                            showDaysOutsideCurrentMonth
+                                            // disabled={feesFinalized}
+                                        />
+                                    </LocalizationProvider>
+                                </div>
+                            </div>
+                            <div className="nav-btn-div">
+                                <button
+                                    type="submit"
+                                    className="submit-btn"
+                                >
+                                    SUBMIT
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cancel-add-property-btn"
+                                    onClick={() => setCancelModalVisible(true)}
+                                >
+                                    CANCEL
+                                </button>
+                                <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
+                            </div>
                         </div>
                     </form>
                 </div>
