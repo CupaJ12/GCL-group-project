@@ -24,7 +24,7 @@ import BookingSheet from '../BookingSheet/BookingSheet';
 import FindBooking from '../FindBooking/FindBooking';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
-
+import TestBookingPage from '../BookingSheet/TestBookingPage';
 import './App.css';
 import EditBooking from '../EditBooking/EditBooking';
 import ModalParent from '../ModalParent/ModalParent';
@@ -86,11 +86,18 @@ function App() {
 
           {/* Protected route for Booking Sheet - Jaffer */}
           <ProtectedRoute
-            exact
-            path="/bookingsheet"
+            path="/bookingsheet/:id"
           >
             <BookingSheet />
           </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
+            path="/testbookingpage"
+          >
+            <TestBookingPage />
+          </ProtectedRoute>
+
           
           {/* Protected route for FindBooking */}
           <ProtectedRoute
