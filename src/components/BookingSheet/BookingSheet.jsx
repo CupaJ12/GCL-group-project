@@ -48,34 +48,7 @@ function BookingSheet() {
 	// declare variables: useState, etc:
 
 	// handle functions: onClick, etc:
-	const handleBack = () => {
-		console.log('clicked back');
-		// history.push('/ANYWHERE');
-	};
-
-	const handleDelete = () => {
-		console.log('clicked delete');
-		// dispatch({ type: 'DELETE_BOOKING', payload: booking.id });
-		// history.push('/ANYWHERE');
-	};
-
-	const handleTenantEdit = () => {
-		console.log('clicked tenant edit');
-	};
-
-	const handleFinancialEdit = () => {
-		console.log('clicked financial edit');
-	};
-
-	// !Comment handlers!
-	const handleCommentEdit = () => {
-		console.log('clicked comment edit');
-	};
-
-	const handleCommentDelete = () => {
-		console.log('clicked comment delete');
-	};
-
+	
 	// conditional rendering: if no booking, return loading
 
 	if (!booking) {
