@@ -1,31 +1,44 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
-    // the config includes credentials which
-    // allow the server session to recognize the user
-    // If a user is logged in, this will return their information
-    // from the server session (req.user)
     const response = yield axios.get('/api/user', config);
-
-    // now that the session has given us a user object
-    // with an id and username set the client-side user object to let
-    // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
+  }
+};
+
+function* fetchUnapprovedUsers() {
+  try {
+    const unapprovedUsers = yield axios.get('/api/user/unapproved');
+    yield put({ type: 'SET_UNAPPROVED_USERS', payload: unapprovedUsers.data});
+  } catch (error) {
+    console.log('error with getting unapproved users');
+  }
+};
+
+function* setUserApproved(action) {
+  const id = action.payload;
+  console.log('in approve user saga ', id);
+
+  try {
+    yield axios.put(`/api/user/${id}`);
+    yield put({ type: 'FETCH_UNAPPROVED_USERS'});
+  } catch (error) {
+    console.log('error posting booking', error);
   }
 }
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeEvery('FETCH_UNAPPROVED_USERS', fetchUnapprovedUsers);
+  yield takeEvery('SET_USER_APPROVED', setUserApproved);
 }
 
 export default userSaga;

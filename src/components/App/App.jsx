@@ -24,6 +24,7 @@ import BookingSheet from '../BookingSheet/BookingSheet';
 import FindBooking from '../FindBooking/FindBooking';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
+import AdminPanel from '../AdminPanel/AdminPanel';
 
 import './App.css';
 import EditBooking from '../EditBooking/EditBooking';
@@ -122,6 +123,14 @@ function App() {
             path="/addvendor"
           >
             <AddNewVendorForm />
+          </ProtectedRoute>
+
+           {/* Protected route for Admin Panel - bryan */}
+           <ProtectedRoute
+            exact
+            path="/adminpanel"
+          >
+            <AdminPanel />
           </ProtectedRoute>
 
           <ProtectedRoute

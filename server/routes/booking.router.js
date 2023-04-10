@@ -25,9 +25,6 @@ router.get('/:id', (req, res) => {
 	}
 });
 
-
-
-module.exports = router;
 router.post('/', (req, res) => {
     console.log('in booking router post request with: ', req.body);
     if (req.isAuthenticated()) {

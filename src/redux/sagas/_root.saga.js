@@ -20,8 +20,8 @@ export default function* rootSaga() {
 		registrationSaga(),
 		userSaga(),
 		bookingByIDSaga(),
-    bookingSaga(),
-    propertySaga(),
-    vendorSaga(),
+    	bookingSaga(),
+    	propertySaga(),
+    	vendorSaga(),
 	]);
-}
+};
