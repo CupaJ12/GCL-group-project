@@ -58,18 +58,18 @@ function EditFinancialModal(props) {
             timeout={{ enter: 50, exit: 200 }}
         >
             <div className="modal">
-                <div className="property-form-container">
+                <div className="financial-modal-content">
                     {/* <div className="modal-header">
                         <button className="close-modal-btn" onClick={props.onClose}>
                             X
                         </button>
                     </div> */}
-                    <form className="edit-tenant-form">
-                        <div className="section-header">
-                            Edit Financial
+                    <form className="edit-financial-form">
+                        <div className="financial-section-header">
+                            <h3>Edit Financial</h3>
                         </div>
-                        <div className="edit-tenant-container">
-                            <div className="modal-input-div">
+                        <div className="edit-financial-container">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Cost per night:
                                     <input
@@ -77,7 +77,7 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Cleaning Fee:
                                     <input
@@ -85,7 +85,7 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Pet Fee:
                                     <input
@@ -93,7 +93,7 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Lodging Tax:
                                     <input
@@ -101,7 +101,7 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Vendor:
                                     <input
@@ -109,7 +109,7 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Vendor Commission:
                                     <input
@@ -117,7 +117,7 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Vendor Fee:
                                     <input
@@ -125,7 +125,7 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="financial-modal-input-div">
                                 <label className="label">
                                     Discount:
                                     <input
@@ -133,22 +133,22 @@ function EditFinancialModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="nav-btn-div">
-                                <button
-                                    type="submit"
-                                    className="submit-btn"
-                                >
-                                    SUBMIT
-                                </button>
-                                <button
-                                    type="button"
-                                    className="cancel-add-property-btn"
-                                    onClick={() => setCancelModalVisible(true)}
-                                >
-                                    CANCEL
-                                </button>
-                                <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
-                            </div>
+                        </div>
+                        <div className="financial-nav-btn-div">
+                            <button
+                                type="submit"
+                                className="submit-btn"
+                            >
+                                SUBMIT
+                            </button>
+                            <button
+                                type="button"
+                                className="cancel-add-financial-btn"
+                                onClick={() => setCancelModalVisible(true)}
+                            >
+                                CANCEL
+                            </button>
+                            <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
                         </div>
                     </form>
                 </div>

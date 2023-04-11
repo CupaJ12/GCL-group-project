@@ -14,7 +14,9 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "admin" BOOLEAN
+    "admin" BOOLEAN,
+	"approved" BOOLEAN DEFAULT false,
+	"registration_date" DATE DEFAULT CURRENT_DATE
 );
 
 -- create property table

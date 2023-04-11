@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import EditTenantModal from "../EditTenantModal/EditTenantModal";
 import EditFinancialModal from "../EditFinancialModal/EditFinancialModal";
 
-
 function EditBooking() {
      const [showTenant, setShowTenant] = useState(false); 
      const [showFinancial, setShowFinancial] = useState(false);
