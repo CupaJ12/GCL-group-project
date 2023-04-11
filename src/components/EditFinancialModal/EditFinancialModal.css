@@ -93,11 +93,10 @@
     grid-template-columns: repeat(2, 1fr);
     column-gap: 15px;
     column-width: 15rem;
-    width: 95%;
-    margin: auto;
-    padding-top: 15px;
+    /* width: 95%; */
+    /* margin: auto; */
+    /* padding-top: 15px; */
     margin-bottom: 0px;
-    position: absolute;
 }
 
 .edit-financial-form {
