@@ -22,9 +22,22 @@ function* postBooking(action) {
   }
 }
 
+function* fetchBookings() {
+  console.log('in fetchBooking saga')
+    try {
+        const response = yield axios.get('/api/booking');
+        console.log('in fetchBooking saga with: ', response.data);
+        yield put({ type: 'SET_BOOKINGS_TEST', payload: response.data });
+    } catch (error) {
+        console.log('error fetching booking', error);
+    }
+}
+
+
 function* bookingSaga() {
   yield takeEvery('POST_BOOKING', postBooking);
   yield takeEvery('UPDATE_TENANT', updateTenant);
+  yield takeEvery('FETCH_BOOKINGS', fetchBookings);
 }
 
 export default bookingSaga;

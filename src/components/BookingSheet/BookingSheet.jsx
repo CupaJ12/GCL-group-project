@@ -19,50 +19,36 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function BookingSheet() {
 	// declare constants: reducers, etc:
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// booking is an unmade reducer
+	const { id } = useParams();
+	const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
 	const booking = useSelector((store) => store.bookingByID);
+
+	// const check_in_date = new Date(booking.check_in_date);
+	// const check_out_date = new Date(booking.check_out_date);
+	const [check_in_date, set_check_in_date] = useState(new Date());
+	const [check_out_date, set_check_out_date] = useState(new Date());
 
 	// declare functions: dispatch, history, useEffect etc:
 	useEffect(() => {
-		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: 1 });
+		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
 	}, []);
+
+	useEffect(() => {
+		set_check_in_date(new Date(booking.check_in_date));
+		set_check_out_date(new Date(booking.check_out_date));
+	}, [booking]);
 
 	// declare variables: useState, etc:
 
 	// handle functions: onClick, etc:
-	const handleBack = () => {
-		console.log('clicked back');
-		// history.push('/ANYWHERE');
-	};
-
-	const handleDelete = () => {
-		console.log('clicked delete');
-		// dispatch({ type: 'DELETE_BOOKING', payload: booking.id });
-		// history.push('/ANYWHERE');
-	};
-
-	const handleTenantEdit = () => {
-		console.log('clicked tenant edit');
-	};
-
-	const handleFinancialEdit = () => {
-		console.log('clicked financial edit');
-	};
-
-	// !Comment handlers!
-	const handleCommentEdit = () => {
-		console.log('clicked comment edit');
-	};
-
-	const handleCommentDelete = () => {
-		console.log('clicked comment delete');
-	};
-
+	
 	// conditional rendering: if no booking, return loading
 
 	if (!booking) {
@@ -70,11 +56,130 @@ function BookingSheet() {
 	}
 
 	return (
-		<div>
-			<h1> WIP</h1>
-			<h2>🤠</h2>
-			<h1>{booking.id}</h1>
-			<h2>{booking.customer_first_name + ' ' + booking.customer_last_name}</h2>
+		<div className='booking-form-container'>
+			<div className='property-select-container'>
+				<div className='section-header'>Property</div>
+				<h2>PROPERTY NAME HERE DO JOIN TABLE</h2>
+			</div>
+			<div className='section-header'>Tenant</div>
+			<div className='tenant-container'>
+				<div className='tenant-input-div'>
+					<section className='label'>First Name</section>
+					<section className='tenant-input'>
+						{booking.customer_first_name}
+					</section>
+				</div>
+
+				<div className='tenant-input-div'>
+					<section className='label'>Last Name</section>
+					<section className='tenant-input'>
+						{booking.customer_last_name}
+					</section>
+				</div>
+
+				<div className='tenant-input-div'>
+					<section className='label'>Phone</section>
+					<section className='tenant-input'>{booking.customer_phone}</section>
+				</div>
+
+				<div className='tenant-input-div'>
+					<section className='label'>Email</section>
+
+					<section className='tenant-input'>{booking.customer_email}</section>
+				</div>
+
+				<div className='tenant-input-div'>
+					<section className='label'>Check-in Date</section>
+
+					<section className='tenant-input'>
+						{check_in_date.toLocaleDateString('en-US', options)}
+					</section>
+				</div>
+
+				<div className='tenant-input-div'>
+					<section className='label'>Check-out Date</section>
+
+					<section className='tenant-input'>
+						{check_out_date.toLocaleDateString('en-US', options)}
+					</section>
+				</div>
+			</div>
+
+			<div className='section-header'>Financial</div>
+			<div className='financial-container'>
+				<div className='financial-input-div'>
+					<section className='label'>Cost Per Night</section>
+					<section className='financial-input'>
+						{booking.cost_per_night}
+					</section>
+				</div>
+
+				<div className='financial-input-div'>
+					<section className='label'>Pet Fees</section>
+					<section className='financial-input'>{booking.pet_fee}</section>
+				</div>
+
+				<div className='financial-input-div'>
+					<section className='label'>Cleaning Fees</section>
+					<section className='financial-input'>{booking.cleaning_fee}</section>
+				</div>
+
+				<div className='financial-input-div'>
+					<section className='label'>Lodging Tax</section>
+					<section className='financial-input'>{booking.lodging_tax}</section>
+				</div>
+			</div>
+			<div className='booking-amount'>
+				<section className='label'>Gross Booking Amount</section>
+				<section className='financial-input'>
+					<h4>GROSS🤮 BOOKING CALC HERE</h4>
+				</section>
+			</div>
+
+			<div className='vendor-container'>
+				<div className='vendor-input-div'>
+					<section className='label'>Vendor</section>
+					<section className='vendor-input'>{booking.vendor}</section>
+				</div>
+
+				<div className='vendor-input-div'>
+					<section className='label'>Vendor Commission</section>
+					<section className='vendor-input'>
+						{booking.vendor_commission}
+					</section>
+				</div>
+
+				<div className='vendor-input-div'>
+					<section className='label'>Vendor Fee</section>
+					<section className='vendor-input'>{booking.vendor_fee}</section>
+				</div>
+
+				<div className='vendor-input-div'>
+					<section className='label'>Discount</section>
+					<section className='vendor-input'>{booking.discount}</section>
+				</div>
+
+				<div className='vendor-input-div'>
+					<section className='label'>Tax Responsibility</section>
+					<section className='vendor-input'>
+						{booking.tax_responsibility ? 'Us' : 'Them'}
+					</section>
+				</div>
+
+				<div className='vendor-input-div'>
+					<section className='label'>Fees Finalized</section>
+					<section className='vendor-input'>
+						{booking.finalized ? 'Yes' : 'No'}
+					</section>
+				</div>
+			</div>
+
+			<div className='booking-amount'>
+				<section className='label'>Net Payout</section>
+				<section className='financial-input'>
+					<h4>Net Payout Calc here💰</h4>
+				</section>
+			</div>
 		</div>
 	);
 }

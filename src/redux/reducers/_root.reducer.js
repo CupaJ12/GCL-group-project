@@ -7,7 +7,11 @@ import booking from './booking.reducer';
 import { taxResponsibility, feesFinalized } from './toggle.reducer';
 import vendorList from './vendor.reducer';
 import propertyList from './property.reducer';
+
+import testBookingReducer from './getBookingsTest.reducer';
+
 import deleteBookingReducer from './delete.id.router';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -26,7 +30,11 @@ const rootReducer = combineReducers({
   feesFinalized, //contains finalized fees boolean value
   vendorList, //contains an array of vendor names
   propertyList, //contains an array of properties
+
+  testBookingReducer,
+
   deleteBookingReducer,
+
 });
 
 export default rootReducer;
