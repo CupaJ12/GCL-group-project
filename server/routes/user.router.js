@@ -67,21 +67,37 @@ router.post('/logout', (req, res) => {
 
 router.put('/:id', (req, res) => {
   console.log('in put request with id: ', req.params.id);
-  // if (req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     const id = req.params.id;
     const queryText = `UPDATE "user" SET "approved" = true WHERE id = $1`;
-    pool
-      .query(queryText, [id])
+    pool.query(queryText, [id])
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log('error with approving user', err);
         res.sendStatus(500);
       });
-  // } else {
-  //   res.sendStatus(403);
-  //   console.log('error with approving user: ', err);
-  // }
+  } else {
+    res.sendStatus(403);
+    console.log('error with approving user: ', err);
+  }
 });
+
+router.delete('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    const queryText = `DELETE FROM "user" WHERE "id" = $1;`;
+    pool.query(queryText, [id])
+      .then((result) => {
+        res.sendStatus(204);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+    } else {
+      res.sendStatus(403);
+      console.log('error with deleting user')
+    }
+  });
 
 
 

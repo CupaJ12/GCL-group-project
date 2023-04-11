@@ -25,20 +25,29 @@ function* fetchUnapprovedUsers() {
 
 function* setUserApproved(action) {
   const id = action.payload;
-  console.log('in approve user saga ', id);
-
   try {
     yield axios.put(`/api/user/${id}`);
     yield put({ type: 'FETCH_UNAPPROVED_USERS'});
   } catch (error) {
     console.log('error posting booking', error);
   }
-}
+};
+
+function* deleteUser(action) {
+  const id = action.payload;
+  try {
+    yield axios.delete(`/api/user/${id}`);
+    yield put({ type: 'FETCH_UNAPPROVED_USERS' });
+  } catch (error) {
+    console.log('error with deleting user: ', error);
+  }
+};
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeEvery('FETCH_UNAPPROVED_USERS', fetchUnapprovedUsers);
   yield takeEvery('SET_USER_APPROVED', setUserApproved);
+  yield takeEvery('DELETE_USER', deleteUser);
 }
 
 export default userSaga;
