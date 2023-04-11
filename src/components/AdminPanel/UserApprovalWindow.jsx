@@ -1,7 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import './AdminPanel.css';
+import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 
 const UserApprovalWindow = () => { 
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const dispatch = useDispatch();
     const unapprovedUsers = useSelector(store => store.unapprovedUsers);
     const [approvedUser, setApprovedUser] = useState('');
@@ -27,9 +30,10 @@ const UserApprovalWindow = () => {
             {unapprovedUsers.map((user, index) => {
                 return (
                     <div className="unapproved-user">
-                        {user.username}
-                        <button classname="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button>
-                        <button classname="deny-btn" onClick={() => deny(user.id)}>Deny</button>
+                        {user.username} <section className="registration-date">registered on </section>
+                        <button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button>
+                        <button className="deny-btn" onClick={() => setCancelModalVisible(true)}>Deny</button>
+                        <CancelValidation show={cancelModalVisible} onConfirm={() => deny(user.id)} onDeny={() => setCancelModalVisible(false)} />
                     </div>
                 )
             })}

@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import UserApprovalWindow from './UserApprovalWindow'
+import './AdminPanel.css';
 
 const AdminPanel = () => {
     const dispatch = useDispatch();
@@ -15,12 +16,17 @@ const AdminPanel = () => {
     }, [unapprovedUsers]);
 
     return (
-        <div className="unapproved-users-div">
-        {unapprovedUsers.length > 0 &&
+        <div className="unapproved-users-container">
+            {unapprovedUsers.length > 0 &&
             <>
-                <UserApprovalWindow />
+                <section className="section-header">Unapproved Users</section>
+                <div className="unapproved-users-div">
+                    <>
+                        <UserApprovalWindow />
+                    </>
+                </div>
             </>
-        }
+            }
         </div>
     );
 };
