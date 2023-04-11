@@ -53,7 +53,7 @@ function BookingsFolder() {
 
             <section>
                 {bookings.map(booking => (
-                    <div className="bookings" key={booking.id}>
+                    <div className="brookings" key={booking.id}>
                         <h1>___________________________________________</h1>
                         <h3> Property Number: <i><u> {booking.property_id} </u></i> </h3>
                         <h3> Is Booking Finalized?: <i><u> {booking.finalized} </u></i> </h3>
