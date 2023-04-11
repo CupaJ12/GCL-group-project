@@ -9,6 +9,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const bookingsRouter = require('./routes/bookings.router');
 const bookingRouter = require('./routes/booking.router');
 const propertyRouter = require('./routes/property.router');
 const vendorRouter = require('./routes/vendor.router');
@@ -26,6 +27,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/allbookings', bookingsRouter);
+
 app.use('/api/booking', bookingRouter);
 app.use('/api/property', propertyRouter);
 app.use('/api/vendor', vendorRouter);
