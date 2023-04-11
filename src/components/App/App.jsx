@@ -22,6 +22,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import BookingsFolder from '../BookingsFolder/BookingsFolder';
 import BookingDetails from '../BookingsFolder/BookingDetails';
 import BookingForm from '../BookingForm/BookingForm';
+import BookingSheet from '../BookingSheet/BookingSheet';
+import FindBooking from '../FindBooking/FindBooking';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 
@@ -83,7 +85,22 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          {/* Protected route for GET Booking - Liam */}
+          {/* Protected route for Booking Sheet - Jaffer */}
+          <ProtectedRoute
+            exact
+            path="/bookingsheet"
+          >
+            <BookingSheet />
+          </ProtectedRoute>
+          
+          {/* Protected route for FindBooking */}
+          <ProtectedRoute
+          exact
+          path="/findBooking"
+          >
+            <FindBooking />
+          </ProtectedRoute>
+          
           {/* Protected route for EditBooking */}
           <ProtectedRoute
           exact

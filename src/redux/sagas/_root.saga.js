@@ -3,6 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import bookingsSaga from './bookings.saga';
+import bookingByIDSaga from './BookingByID.saga';
 import bookingSaga from './booking.saga';
 import propertySaga from './property.saga';
 import vendorSaga from './vendor.saga';
@@ -20,8 +21,9 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     bookingsSaga(),
+		bookingByIDSaga(),
     bookingSaga(),
     propertySaga(),
     vendorSaga(),
-  ]);
+	]);
 }

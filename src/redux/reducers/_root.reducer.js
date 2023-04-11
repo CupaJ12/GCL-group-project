@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import bookingsReducer from './bookings.reducer';
+import bookingByID from './bookingByID.reducer';
 import booking from './booking.reducer';
 import { taxResponsibility, feesFinalized } from './toggle.reducer';
 import vendorList from './vendor.reducer';
@@ -19,6 +20,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   bookingsReducer,
   booking,
+  bookingByID, //will have a single booking selected by ID
+  booking, // tester for khue
   taxResponsibility, // contains boolean value for tax responsibility
   feesFinalized, //contains finalized fees boolean value
   vendorList, //contains an array of vendor names
