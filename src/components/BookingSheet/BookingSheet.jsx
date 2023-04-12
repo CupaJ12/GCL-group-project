@@ -20,6 +20,8 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import EditTenantModal from "../EditTenantModal/EditTenantModal";
+import EditFinancialModal from "../EditFinancialModal/EditFinancialModal";
 
 function BookingSheet() {
 	// declare constants: reducers, etc:
@@ -27,6 +29,8 @@ function BookingSheet() {
 	const history = useHistory();
 	const { id } = useParams();
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
+	const [showTenant, setShowTenant] = useState(false);
+	const [showFinancial, setShowFinancial] = useState(false);
 
 	const booking = useSelector((store) => store.bookingByID);
 
@@ -48,7 +52,7 @@ function BookingSheet() {
 	// declare variables: useState, etc:
 
 	// handle functions: onClick, etc:
-	
+
 	// conditional rendering: if no booking, return loading
 
 	if (!booking) {
@@ -61,7 +65,11 @@ function BookingSheet() {
 				<div className='section-header'>Property</div>
 				<h2>PROPERTY NAME HERE DO JOIN TABLE</h2>
 			</div>
-			<div className='section-header'>Tenant</div>
+			<div className='section-header'>Tenant
+				<button onClick={() => setShowTenant(true)}>
+					edit
+				</button>
+			</div>
 			<div className='tenant-container'>
 				<div className='tenant-input-div'>
 					<section className='label'>First Name</section>
@@ -105,7 +113,11 @@ function BookingSheet() {
 				</div>
 			</div>
 
-			<div className='section-header'>Financial</div>
+			<div className='section-header'>Financial
+				<button onClick={() => setShowFinancial(true)}>
+					Edit Financial
+				</button>
+			</div>
 			<div className='financial-container'>
 				<div className='financial-input-div'>
 					<section className='label'>Cost Per Night</section>
@@ -180,6 +192,16 @@ function BookingSheet() {
 					<h4>Net Payout Calc here💰</h4>
 				</section>
 			</div>
+			<EditTenantModal
+				onClose={() => setShowTenant(false)}
+				show={showTenant}
+				booking={booking}
+			/>
+			<EditFinancialModal
+				onClose={() => setShowFinancial(false)}
+				show={showFinancial}
+				booking={booking}
+			/>
 		</div>
 	);
 }
