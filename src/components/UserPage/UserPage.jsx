@@ -22,8 +22,8 @@ function UserPage() {
       
       <div>
 
-        <Link className="submit-btn" to="/allbookings">
-          VIEW ALL BOOKINGS
+        <Link className="submit-btn" to="/findBooking">
+          FIND BOOKINGS
         </Link>
 
         <br>

@@ -17,7 +17,7 @@ function EditTenantModal(props) {
     const [phone, setPhone] = useState('');
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
-    const [change, setChange] = useState(0);  
+    const [change, setChange] = useState(0);
 
 
     const dispatch = useDispatch();
@@ -25,31 +25,34 @@ function EditTenantModal(props) {
     const booking = props.booking;
     //phone input masking
     // set tenant info so it can show up in inputs
-    useEffect(() => {
-        {
-            props.booking.map((booking) => {
-                setFirstName(booking.firstName),
-                    setLastName(booking.lastName),
-                    setEmail(booking.email),
-                    setPhone(booking.phone)
-            })
-        };
-    }, []);
+   
 
     useEffect(() => {
         setCancelModalVisible(false);
     }, [props.show]);
 
+    useEffect(() => {
+        setFirstName(booking.customer_first_name);
+        setLastName(booking.customer_last_name);
+        setEmail(booking.customer_email);
+        setPhone(booking.customer_phone);
+        // setCheckIn(booking.check_in_date);
+        // setCheckOut(booking.check_out_date);
+        // setCheckIn(new Date(booking.check_in_date));
+		// setCheckOut(new Date(booking.check_out_date))
+    }, [booking]);
+
     // dispatch updated inputs to updateTenant saga
     const saveTenant = () => {
         console.log('submit clicked');
         dispatch({
-            type: 'UPDATE_TENANT',
+            type: 'EDIT_TENANT_INFO',
             payload: {
+                id: booking.id,
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                phone: phone
+                phone: phone,
             }
         });
     };
@@ -132,7 +135,7 @@ function EditTenantModal(props) {
                                             value={checkIn}
                                             onChange={(newValue) => { setCheckIn(newValue); setChange(change + 1) }}
                                             showDaysOutsideCurrentMonth
-                                            // disabled={feesFinalized}
+                                        // disabled={feesFinalized}
                                         />
                                     </LocalizationProvider>
                                 </div>
@@ -144,7 +147,7 @@ function EditTenantModal(props) {
                                             value={checkOut}
                                             onChange={(newValue) => { setCheckOut(newValue); setChange(change + 1) }}
                                             showDaysOutsideCurrentMonth
-                                            // disabled={feesFinalized}
+                                        // disabled={feesFinalized}
                                         />
                                     </LocalizationProvider>
                                 </div>
@@ -153,6 +156,7 @@ function EditTenantModal(props) {
                                 <button
                                     type="submit"
                                     className="submit-btn"
+                                    onClick={props.onClose}
                                 >
                                     SUBMIT
                                 </button>

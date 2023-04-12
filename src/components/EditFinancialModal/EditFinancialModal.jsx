@@ -29,13 +29,13 @@ function EditFinancialModal(props) {
 
 
     // set tenant info so it can show up in inputs
-    useEffect(() => {
-        {
-            props.booking.map((booking) => {
+    // useEffect(() => {
+    //     {
+    //         props.booking.map((booking) => {
 
-            })
-        };
-    }, []);
+    //         })
+    //     };
+    // }, []);
 
     // dispatch updated inputs to updateTenant saga
     const saveFinancial = () => {
