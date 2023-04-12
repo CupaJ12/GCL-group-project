@@ -46,6 +46,9 @@ function UserPage() {
       <h3 className="not-approved-header">
         Your account is currently awaiting approval
       </h3>
+      <div className="logout-div">
+          <LogOutButton className="logout-btn" />
+      </div>
     </div>
     )
   }
