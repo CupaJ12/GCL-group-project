@@ -53,6 +53,13 @@
     font-size: 15px;
 }
 
+.unapproved-username-column {
+    padding: 5px;
+    padding-left: 20px;
+    font-size: 15px;
+    word-break: break-all;
+}
+
 .registration-date {
     font-size: 15px;
     /* padding: 5px; */
