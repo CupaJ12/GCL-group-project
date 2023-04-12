@@ -476,7 +476,7 @@ const BookingForm = () => {
                     <button 
                         type="button"
                         className="cancel-btn"
-                        onClick={() => console.log('you clicked cancel')}
+                        onClick={() => history.push('/')}
                     >
                         CANCEL
                     </button>

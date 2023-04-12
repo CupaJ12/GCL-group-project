@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './AdminPanel.css';
 import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 
+
 const UserApprovalWindow = () => { 
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const dispatch = useDispatch();
@@ -27,16 +28,26 @@ const UserApprovalWindow = () => {
 
     return (
         <>
-            {unapprovedUsers.map((user, index) => {
-                return (
-                    <div className="unapproved-user">
-                        {user.username} <section className="registration-date">registered on </section>
-                        <button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button>
-                        <button className="deny-btn" onClick={() => setCancelModalVisible(true)}>Deny</button>
-                        <CancelValidation show={cancelModalVisible} onConfirm={() => deny(user.id)} onDeny={() => setCancelModalVisible(false)} />
-                    </div>
-                )
-            })}
+            {/* <div className="unapproved-user-headers">
+                <section>Username</section>
+                <section>Registered On</section>
+            </div> */}
+
+            <table>
+                <tbody>
+                    {unapprovedUsers.map((user, index) => {
+                        return (
+                            <tr>
+                                <td className="unapproved-user-column">{user.username}</td>
+                                <td className="unapproved-user-column">registration date here</td>
+                                <td className="unapproved-user-column"><button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button></td>
+                                <td className="unapproved-user-column"><button className="deny-btn" onClick={() => setCancelModalVisible(true)}>Deny</button></td> 
+                                <CancelValidation show={cancelModalVisible} onConfirm={() => deny(user.id)} onDeny={() => setCancelModalVisible(false)} />
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
         </>
     )
 };

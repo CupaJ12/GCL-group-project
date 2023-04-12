@@ -20,11 +20,7 @@ const AdminPanel = () => {
             {unapprovedUsers.length > 0 &&
             <>
                 <section className="section-header">Unapproved Users</section>
-                <div className="unapproved-users-div">
-                    <>
-                        <UserApprovalWindow />
-                    </>
-                </div>
+                <UserApprovalWindow />
             </>
             }
         </div>

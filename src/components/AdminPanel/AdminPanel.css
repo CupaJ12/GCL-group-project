@@ -8,23 +8,18 @@
     padding: 30px;
 }
 
-.unapproved-users-div {
+/* .unapproved-users-div {
     color: #3c6a2f;
-    /* display: grid; */
-    /* grid-template-columns: repeat(2, 1fr);
-    column-width: 15rem;
-    column-gap: 15px; */
     width: 100%;
-    /* text-align: center; */
     margin: auto;
     padding-top: 30px;
     margin-bottom: 20px;
     display: inline-block;
-}
+} */
 
 .approve-btn {
     margin-left: 15px;
-    font-size: 18px;
+    font-size: 15px;
     background-color: #a8bba2;
     color: white;
     border: none;
@@ -33,19 +28,13 @@
 }
 
 .approve-btn:hover {
-    margin-left: 15px;
-    font-size: 18px;
     background-color: #3c6a2f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
     transition: .5s;
 }
 
 .deny-btn {
     margin-left: 15px;
-    font-size: 18px;
+    font-size: 15px;
     background-color: #b5b2af;
     color: white;
     border: none;
@@ -54,23 +43,23 @@
 }
 
 .deny-btn:hover {
-    margin-left: 15px;
-    font-size: 18px;
     background-color: #313030;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
     transition: .5s;
 }
 
-.unapproved-user {
-    padding: 15px;
-    font-size: 20px;
+.unapproved-user-column {
+    padding: 5px;
+    padding-left: 20px;
+    font-size: 15px;
 }
 
 .registration-date {
     font-size: 15px;
-    padding: 5px;
-    padding-bottom: 15px;
+    /* padding: 5px; */
+    display: inline-block;
+}
+
+.unapproved-user-table {
+    margin-left: auto;
+    margin-right: auto;
 }

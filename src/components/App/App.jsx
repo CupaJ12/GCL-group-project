@@ -92,14 +92,6 @@ function App() {
             <BookingSheet />
           </ProtectedRoute>
           
-          <ProtectedRoute
-            exact
-            path="/testbookingpage"
-          >
-            <TestBookingPage />
-          </ProtectedRoute>
-
-          
           {/* Protected route for FindBooking */}
           <ProtectedRoute
           exact
