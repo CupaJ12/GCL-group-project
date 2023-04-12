@@ -19,13 +19,14 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import BookingsFolder from '../BookingsFolder/BookingsFolder';
+import BookingDetails from '../BookingsFolder/BookingDetails';
 import BookingForm from '../BookingForm/BookingForm';
 import BookingSheet from '../BookingSheet/BookingSheet';
 import FindBooking from '../FindBooking/FindBooking';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 import AdminPanel from '../AdminPanel/AdminPanel';
-
 import './App.css';
 import EditBooking from '../EditBooking/EditBooking';
 import ModalParent from '../ModalParent/ModalParent';
@@ -76,22 +77,28 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-            {/* Protected route for Booking Form - bryan */}
           <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
             exact
-            path="/bookingform"
+            path="/info"
           >
-            <BookingForm />
+            <InfoPage />
           </ProtectedRoute>
-
 
           {/* Protected route for Booking Sheet - Jaffer */}
           <ProtectedRoute
-            exact
-            path="/bookingsheet"
+            path="/bookingsheet/:id"
           >
             <BookingSheet />
           </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
+            path="/testbookingpage"
+          >
+            <TestBookingPage />
+          </ProtectedRoute>
+
           
           {/* Protected route for FindBooking */}
           <ProtectedRoute
@@ -134,15 +141,25 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/allbookings"
           >
-            <InfoPage />
+            <BookingsFolder />
           </ProtectedRoute>
 
-         
+          <ProtectedRoute
+            exact
+            path="/bookingdetails/:id"
+          >
+            <BookingDetails />
+          </ProtectedRoute>
 
+          <ProtectedRoute
+            exact
+            path="/bookingform"
+          >
+            <BookingForm />
+          </ProtectedRoute>
 
           <Route
             exact

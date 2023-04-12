@@ -87,4 +87,24 @@ router.post('/', (req, res) => {
     }
 });
 
+// get all from booking
+router.get('/', (req, res) => {
+    if (req.isAuthenticated()) {
+        const queryText = `SELECT * FROM "booking" ORDER BY "check_in_date" DESC;`;
+        pool
+		.query(queryText)
+		.then((result) => {
+			res.send(result.rows);
+			
+		})
+		.catch((error) => {
+			console.log('Error completing get query', error);
+			res.sendStatus(500);
+		});
+    } else {
+        res.sendStatus(403);
+    }
+})
+
+
 module.exports = router;
