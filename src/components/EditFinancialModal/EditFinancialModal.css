@@ -13,30 +13,18 @@
     pointer-events: none;
 }
 
-.modal-content {
-    width: 500px;
-    height: 300px;
+.financial-modal-content {
+    /* margin: auto; */
+    /* margin-top: 500px; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding: 20px;
+    width: 650px;
+    height: 500px;
     background-color: white;
     border-radius: 10px;
-    padding: 10px;
-    transform: translateY(-200px);
     transition: all 0.3s ease-in-out;
-}
-
-.modal-header {
-    text-align: right;
-}
-
-.close-modal-btn {
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    opacity: 0.5;
-    border: none;
-}
-
-.close-modal-btn:hover {
-    opacity: 1;
 }
 
 .modal.enter-done {
@@ -48,10 +36,72 @@
     opacity: 0;
 }
 
-.modal.enter-done .modal-content {
+.modal.enter-done .financial-modal-content {
     transform: translateY(0);
 }
 
-.modal.exit .modal-content {
+.modal.exit .financial-modal-content {
     transform: translateY(-200px);
+}
+
+.financial-modal-input-div {
+    width: 300px;
+}
+
+.edit-financial-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.financial-section-header {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #3c6a2f;
+    color: white;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    font-size: medium;
+    padding-top: .5px;
+    /* padding-bottom: 1px; */
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cancel-add-financial-btn {
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #a8bba2;
+    box-shadow: 0 0 4px black;
+    color: white;
+}
+
+.cancel-add-financial-btn:hover {
+    background-color: #3c6a2f;
+    color: white;
+    box-shadow: 0 0 15px #a8bba2;
+}
+
+.financial-nav-btn-div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
+    column-width: 15rem;
+    /* width: 95%; */
+    /* margin: auto; */
+    /* padding-top: 15px; */
+    margin-bottom: 0px;
+}
+
+.edit-financial-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }

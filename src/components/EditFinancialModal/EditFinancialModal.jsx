@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
-import MaskedInput from "react-text-mask";
+import CancelValidation from '../CancelValidationModal/CancelValidationModal';
+
 import './EditFinancialModal.css';
 
 
 
 function EditFinancialModal(props) {
-    const [checkIn, setCheckIn] = useState('');
-    const [checkout, setCheckOut] = useState('');
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [costPerNight, setCostPerNight] = useState('');
     const [cleaningFee, setCleaningFee] = useState('');
     const [petFee, setPetFee] = useState('');
@@ -29,13 +29,13 @@ function EditFinancialModal(props) {
 
 
     // set tenant info so it can show up in inputs
-    useEffect(() => {
-        {
-            props.booking.map((booking) => {
-               
-            })
-        };
-    }, []);
+    // useEffect(() => {
+    //     {
+    //         props.booking.map((booking) => {
+
+    //         })
+    //     };
+    // }, []);
 
     // dispatch updated inputs to updateTenant saga
     const saveFinancial = () => {
@@ -43,7 +43,7 @@ function EditFinancialModal(props) {
         dispatch({
             type: 'UPDATE_TENANT',
             payload: {
-                
+
             }
         });
     };
@@ -58,15 +58,99 @@ function EditFinancialModal(props) {
             timeout={{ enter: 50, exit: 200 }}
         >
             <div className="modal">
-                <div className="modal-content">
-                    <div className="modal-header">
+                <div className="financial-modal-content">
+                    {/* <div className="modal-header">
                         <button className="close-modal-btn" onClick={props.onClose}>
                             X
                         </button>
-                    </div>
-                    <div className="modal-body">
-                        <p>Edit Financial Modal</p>
-                    </div>
+                    </div> */}
+                    <form className="edit-financial-form">
+                        <div className="financial-section-header">
+                            <h3>Edit Financial</h3>
+                        </div>
+                        <div className="edit-financial-container">
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Cost per night:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Cleaning Fee:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Pet Fee:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Lodging Tax:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Vendor:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Vendor Commission:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Vendor Fee:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                            <div className="financial-modal-input-div">
+                                <label className="label">
+                                    Discount:
+                                    <input
+                                        className="financial-input"
+                                    />
+                                </label>
+                            </div>
+                        </div>
+                        <div className="financial-nav-btn-div">
+                            <button
+                                type="submit"
+                                className="submit-btn"
+                            >
+                                SUBMIT
+                            </button>
+                            <button
+                                type="button"
+                                className="cancel-add-financial-btn"
+                                onClick={() => setCancelModalVisible(true)}
+                            >
+                                CANCEL
+                            </button>
+                            <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
+                        </div>
+                    </form>
                 </div>
             </div >
         </CSSTransition >,

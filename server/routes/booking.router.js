@@ -106,5 +106,23 @@ router.get('/', (req, res) => {
     }
 })
 
+router.put('/tenant/:id', (req, res) => {
+    console.log('edit tenant route request made', req.body);
+    const id = req.params.id;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const queryText = `UPDATE "booking"
+        SET "customer_first_name" = $2, "customer_last_name" = $3, "customer_email" = $4, "customer_phone" = $5
+        WHERE "id" = $1;`;
+    pool
+        .query(queryText, [id, firstName, lastName, email, phone])
+        .then ((result) => res.sendStatus(201))
+        .catch((err) => {
+            console.log('edit tenant route failed:', err);
+        });
+})
+
 
 module.exports = router;

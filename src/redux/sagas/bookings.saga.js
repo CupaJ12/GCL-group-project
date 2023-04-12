@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 // booking Saga: will be fired on "FETCH_BOOKINGS" actions
 function* fetchBookings() {
@@ -30,20 +30,51 @@ function* fetchDetails(action) {
 function* deleteBookingId(action) {
     try {
         const id = action.payload;
-        const response = yield axios.delete(`/api/allbookings/${id}`);
-        yield put({
-            type: 'DELETE_BOOKING',
-            payload: response.data
-        });
+        yield axios.delete(`/api/allbookings/${id}`);
+        yield put({ type: 'FETCH_BOOKINGS' });
     } catch (error) {
         console.log(' request failed', error);
     }
 };
 
+function* fetchByID(action) {
+	try {
+		const response = yield axios.get(`/api/booking/${action.payload}`);
+		console.log('get by date:', response.data);
+		yield put({ type: 'SET_BOOKING_BY_ID', payload: response.data });
+		console.log("we hit the set_booking_by_id yield in the saga")
+	} catch (error) {
+		console.log('Error with fetch exercise log:', error);
+	}
+}
+
+function* updateTenant(action) {
+    const id = action.payload.id
+    console.log(action.payload);
+    try {
+        console.log('updateTenant saga hit', action.payload);
+        axios.put(`/api/booking/tenant/${id}`, action.payload);
+
+    } catch (err) {
+        console.log('error with updateTenant saga');
+    }
+}
+
+function* updateFinancial(action) {
+    try {
+        console.log('updateFinancial saga hit', action.payload);
+    } catch (err) {
+        console.log('error with updateFinancial saga');
+    }
+}
+
 function* bookingsSaga() {
     yield takeEvery('FETCH_BOOKINGS', fetchBookings);
     yield takeEvery('FETCH_BY_DETAILS', fetchDetails);
     yield takeEvery('DELETE_BOOKING_BY_ID', deleteBookingId);
+    yield takeLatest('FETCH_BOOKING_BY_ID', fetchByID);
+    yield takeEvery('EDIT_TENANT_INFO', updateTenant);
+    yield takeEvery('EDIT_FINANCIAL_INFO', updateFinancial);
 }
 
 export default bookingsSaga;
