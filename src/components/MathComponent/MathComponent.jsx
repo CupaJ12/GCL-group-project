@@ -54,10 +54,10 @@ const MathComponent = ({ booking, type }) => {
         };    
     };
     if (type === 'net') {
-        return netPayout;
+        return netPayout.toFixed(2);
     } else 
     if (type === 'gross') {
-        return grossBookingAmount;
+        return grossBookingAmount.toFixed(2);
     }
 };
 

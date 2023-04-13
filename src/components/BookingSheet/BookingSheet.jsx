@@ -148,9 +148,9 @@ function BookingSheet() {
 				<section className='label'>Gross Booking Amount</section>
 				<section className='financial-input'>
 					<h4>GROSS🤮 BOOKING CALC HERE</h4>
-					{booking.id > 0 &&
+					{/* {booking.id > 0 && */}
 						<MathComponent booking={booking} type='gross' />
-					}
+					{/* } */}
 				</section>
 			</div>
 
