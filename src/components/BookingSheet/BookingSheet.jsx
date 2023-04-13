@@ -22,7 +22,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EditTenantModal from "../EditTenantModal/EditTenantModal";
 import EditFinancialModal from "../EditFinancialModal/EditFinancialModal";
-import MathComponent from '../MathComponent/MathComponent';
 
 function BookingSheet() {
 	// declare constants: reducers, etc:
@@ -32,10 +31,8 @@ function BookingSheet() {
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
 	const [showTenant, setShowTenant] = useState(false);
 	const [showFinancial, setShowFinancial] = useState(false);
-	
-	const booking = useSelector((store) => store.bookingByID);
 
-	console.log('booking object: ', booking);
+	const booking = useSelector((store) => store.bookingByID);
 
 	// const check_in_date = new Date(booking.check_in_date);
 	// const check_out_date = new Date(booking.check_out_date);
@@ -148,9 +145,6 @@ function BookingSheet() {
 				<section className='label'>Gross Booking Amount</section>
 				<section className='financial-input'>
 					<h4>GROSS🤮 BOOKING CALC HERE</h4>
-					{/* {booking.id > 0 && */}
-						<MathComponent booking={booking} type='gross' />
-					{/* } */}
 				</section>
 			</div>
 
@@ -196,7 +190,6 @@ function BookingSheet() {
 				<section className='label'>Net Payout</section>
 				<section className='financial-input'>
 					<h4>Net Payout Calc here💰</h4>
-					<MathComponent booking={booking} type='net' />
 				</section>
 			</div>
 			<EditTenantModal
@@ -211,6 +204,6 @@ function BookingSheet() {
 			/>
 		</div>
 	);
-};
+}
 
 export default BookingSheet;
