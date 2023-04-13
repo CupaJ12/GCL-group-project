@@ -28,7 +28,6 @@ import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './App.css';
-import EditBooking from '../EditBooking/EditBooking';
 import ModalParent from '../ModalParent/ModalParent';
 
 function App() {
@@ -98,14 +97,6 @@ function App() {
           path="/findBooking"
           >
             <FindBooking />
-          </ProtectedRoute>
-          
-          {/* Protected route for EditBooking */}
-          <ProtectedRoute
-          exact
-          path="/editBooking"
-          >
-            <EditBooking />
           </ProtectedRoute>
 
           {/* Protected route for Add Property Form - bryan */}

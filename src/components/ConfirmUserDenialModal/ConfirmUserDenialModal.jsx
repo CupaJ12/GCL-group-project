@@ -15,7 +15,7 @@ const CancelValidation = ({ onConfirm, onDeny, show }) => {
             unmountOnExit
             timeout={{ enter: 0, exit: 300 }}
         >
-            <div className="modal">
+            <div className="validation-modal">
 
                 <div className="cancel-validation-container">
                     <h1>are you sure you wish to cancel?</h1>

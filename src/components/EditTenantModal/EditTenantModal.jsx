@@ -7,6 +7,7 @@ import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
 
 import './EditTenantModal.css';
 function EditTenantModal(props) {
@@ -18,29 +19,47 @@ function EditTenantModal(props) {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [change, setChange] = useState(0);
+    // const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    const [check_in_date, set_check_in_date] = useState(new Date());
+    const [check_out_date, set_check_out_date] = useState(new Date());
+
+    console.log('new date', new Date(props.booking.check_in_date).toLocaleDateString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+    }));
+
 
 
     const dispatch = useDispatch();
-    // fetched booking info
-    const booking = props.booking;
-    //phone input masking
-    // set tenant info so it can show up in inputs
-   
+
+    // const booking = props.booking;
 
     useEffect(() => {
         setCancelModalVisible(false);
     }, [props.show]);
 
     useEffect(() => {
-        setFirstName(booking.customer_first_name);
-        setLastName(booking.customer_last_name);
-        setEmail(booking.customer_email);
-        setPhone(booking.customer_phone);
-        // setCheckIn(booking.check_in_date);
-        // setCheckOut(booking.check_out_date);
-        // setCheckIn(new Date(booking.check_in_date));
-		// setCheckOut(new Date(booking.check_out_date))
-    }, [booking]);
+        setFirstName(props.booking.customer_first_name);
+        setLastName(props.booking.customer_last_name);
+        setEmail(props.booking.customer_email);
+        setPhone(props.booking.customer_phone);
+        setCheckIn(dayjs(new Date(props.booking.check_in_date).toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+        })));
+        setCheckOut(dayjs(new Date(props.booking.check_out_date).toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+        })));
+    }, [props.booking]);
+
+
+
+
+
 
     // dispatch updated inputs to updateTenant saga
     const saveTenant = () => {
@@ -67,11 +86,6 @@ function EditTenantModal(props) {
         >
             <div className="modal">
                 <div className="property-form-container">
-                    {/* <div className="modal-header"> */}
-                    {/* <button className="close-modal-btn" onClick={props.onClose}>
-                            X
-                        </button> */}
-                    {/* </div> */}
                     <form className="edit-tenant-form" onSubmit={saveTenant}>
                         <div className="section-header">
                             Edit Tenant
@@ -131,6 +145,7 @@ function EditTenantModal(props) {
                                 <div className="date-picker">
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DatePicker
+
                                             label={'check-in *'}
                                             value={checkIn}
                                             onChange={(newValue) => { setCheckIn(newValue); setChange(change + 1) }}

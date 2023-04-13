@@ -27,15 +27,7 @@ function EditFinancialModal(props) {
 
     //phone input masking
 
-
-    // set tenant info so it can show up in inputs
-    // useEffect(() => {
-    //     {
-    //         props.booking.map((booking) => {
-
-    //         })
-    //     };
-    // }, []);
+    console.log(booking.check_in_date);
 
     // dispatch updated inputs to updateTenant saga
     const saveFinancial = () => {
