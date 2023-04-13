@@ -113,6 +113,8 @@ router.put('/tenant/:id', (req, res) => {
     const lastName = req.body.lastName;
     const email = req.body.email;
     const phone = req.body.phone;
+    const checkIn = req.body.checkIn;
+    const checkOut = req.body.checkOut;
     const queryText = `UPDATE "booking"
         SET "customer_first_name" = $2, "customer_last_name" = $3, "customer_email" = $4, "customer_phone" = $5
         WHERE "id" = $1;`;

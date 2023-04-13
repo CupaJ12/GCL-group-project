@@ -41,13 +41,31 @@ function BookingSheet() {
 
 	// declare functions: dispatch, history, useEffect etc:
 	useEffect(() => {
-		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		if (!showTenant) {
+			dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		}
 	}, []);
 
 	useEffect(() => {
 		set_check_in_date(new Date(booking.check_in_date));
 		set_check_out_date(new Date(booking.check_out_date));
 	}, [booking]);
+
+	const saveTenantV2 = (firstName) => {
+        console.log(' saveTenantV2 submit clicked', firstName);
+        // dispatch({
+        //     type: 'EDIT_TENANT_INFO',
+        //     payload: {
+        //         id: props.booking.id,
+        //         firstName: firstName,
+        //         lastName: lastName,
+        //         email: email,
+        //         phone: phone,
+        //         // checkIn: checkIn,
+        //         // checkOut: checkOut
+        //     }
+        // });
+    };
 
 	// declare variables: useState, etc:
 
@@ -196,6 +214,7 @@ function BookingSheet() {
 				onClose={() => setShowTenant(false)}
 				show={showTenant}
 				booking={booking}
+				saveTenantV2={(firstName) => saveTenantV2(firstName)}
 			/>
 			<EditFinancialModal
 				onClose={() => setShowFinancial(false)}

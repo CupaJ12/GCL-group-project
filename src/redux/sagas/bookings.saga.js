@@ -48,13 +48,12 @@ function* fetchByID(action) {
 	}
 }
 
+// recieves action.payload from EditTenantModal and call PUT request
 function* updateTenant(action) {
     const id = action.payload.id
-    console.log(action.payload);
     try {
         console.log('updateTenant saga hit', action.payload);
         axios.put(`/api/booking/tenant/${id}`, action.payload);
-
     } catch (err) {
         console.log('error with updateTenant saga');
     }
