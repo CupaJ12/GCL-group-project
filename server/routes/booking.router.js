@@ -115,16 +115,17 @@ router.put('/tenant/:id', (req, res) => {
     const phone = req.body.phone;
     const checkIn = req.body.checkIn;
     const checkOut = req.body.checkOut;
+    console.log(firstName);
     const queryText = `UPDATE "booking"
-        SET "customer_first_name" = $2, "customer_last_name" = $3, "customer_email" = $4, "customer_phone" = $5
+        SET "customer_first_name" = $2, "customer_last_name" = $3, "customer_email" = $4, "customer_phone" = $5, "check_in_date" = $6, "check_out_date" = $7
         WHERE "id" = $1;`;
     pool
-        .query(queryText, [id, firstName, lastName, email, phone])
+        .query(queryText, [id, firstName, lastName, email, phone, checkIn, checkOut])
         .then ((result) => res.sendStatus(201))
         .catch((err) => {
             console.log('edit tenant route failed:', err);
         });
-})
+});
 
 
 module.exports = router;

@@ -8,18 +8,20 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
+import { useParams } from 'react-router-dom';
 import './EditTenantModal.css';
 
 function EditTenantModal(props) {
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
-    const [firstName, setFirstName] = useState('');
+    const [firstName, setFirstName] = useState(props.booking.customer_first_name);
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
-    const [change, setChange] = useState(0); 
+    const [change, setChange] = useState(0);
     const [canSubmit, setCanSubmit] = useState(false)
+    const { id } = useParams();
 
     const dispatch = useDispatch();
 
@@ -27,9 +29,6 @@ function EditTenantModal(props) {
         setCancelModalVisible(false);
     }, [props.show]);
 
-    // useEffect(() => {
-    //     setCanSubmit(true);
-    //   }, [firstName, lastName, email, phone, checkIn, checkOut]);
 
     useEffect(() => {
         setFirstName(props.booking.customer_first_name);
@@ -46,7 +45,7 @@ function EditTenantModal(props) {
             day: '2-digit',
             year: 'numeric',
         })));
-    },[props.booking]);
+    }, [props.booking]);
 
 
     // dispatch updated inputs to updateTenant saga
@@ -60,16 +59,16 @@ function EditTenantModal(props) {
                 lastName: lastName,
                 email: email,
                 phone: phone,
-                // checkIn: checkIn,
-                // checkOut: checkOut
+                checkIn: checkIn,
+                checkOut: checkOut
             }
+        });
+        dispatch({
+            type: 'FETCH_BOOKING_BY_ID',
+            payload: id
         });
     };
 
-    const handleSubmit = () => {
-        console.log('handleSubmit clicked', firstName);
-        props.saveTenantV2(firstName);
-    }
 
     // ReactDOM.createPortal create the div outside of the parent so it won't break the parent's css
     return ReactDOM.createPortal(
@@ -82,7 +81,7 @@ function EditTenantModal(props) {
         >
             <div className="modal">
                 <div className="property-form-container">
-                    <form className="edit-tenant-form" onSubmit={() => handleSubmit()} >
+                    <form className="edit-tenant-form" onSubmit={() => saveTenant()} >
                         <div className="section-header">
                             Edit Tenant
                         </div>
@@ -95,7 +94,7 @@ function EditTenantModal(props) {
                                         type="text"
                                         name="first-name"
                                         value={firstName}
-                                        onChange={(e) => {setFirstName(e.target.value); setCanSubmit(true) }}
+                                        onChange={(e) => { setFirstName(e.target.value); setCanSubmit(true) }}
                                     />
                                 </label>
                             </div>
@@ -107,7 +106,7 @@ function EditTenantModal(props) {
                                         type="text"
                                         name="last-name"
                                         value={lastName}
-                                        onChange={(e) => {setLastName(e.target.value); setCanSubmit(true) }}
+                                        onChange={(e) => { setLastName(e.target.value); setCanSubmit(true) }}
                                     />
                                 </label>
                             </div>
@@ -119,7 +118,7 @@ function EditTenantModal(props) {
                                         type="text"
                                         name="email"
                                         value={email}
-                                        onChange={(e) => {setEmail(e.target.value); setCanSubmit(true) }}
+                                        onChange={(e) => { setEmail(e.target.value); setCanSubmit(true) }}
                                     />
                                 </label>
                             </div>

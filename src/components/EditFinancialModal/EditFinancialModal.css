@@ -16,15 +16,17 @@
 .financial-modal-content {
     /* margin: auto; */
     /* margin-top: 500px; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     /* justify-content: center; */
+    position: absolute;
     padding: 20px;
     width: 650px;
     height: 500px;
     background-color: white;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
+    overflow: scroll;
 }
 
 .modal.enter-done {
@@ -46,6 +48,8 @@
 
 .financial-modal-input-div {
     width: 300px;
+    display: flex;
+    flex-direction: row;
 }
 
 .edit-financial-container {
@@ -53,7 +57,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 100px;
+    height: auto;
 }
 
 .financial-section-header {
@@ -61,11 +65,10 @@
     margin-bottom: 10px;
     background-color: #3c6a2f;
     color: white;
-    /* padding-left: 20px;
-    padding-right: 20px; */
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: medium;
     padding-top: .5px;
-    /* padding-bottom: 1px; */
     border-radius: 10px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
@@ -103,5 +106,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
 
+.financial-divider {
+    background-color: #3c6a2f;
+    height: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.financial-vendor-dropdown {
+    font-size: 18px;
+    border-radius: 10px;
+    border-color: #3c6a2f;
+    border-width: thin;
+    width: 75%;
+    height: 42px;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 15px;
 }
