@@ -5,7 +5,7 @@ function* getVendors() {
   try {
       const vendors = yield axios.get(`/api/vendor`);
       yield put({ type: 'SET_VENDORS', payload: vendors.data});
-      console.log('in vendor saga with db data: ', vendors.data)
+      console.log('in vendor saga with db data: ', vendors.data);
   } catch (error) {
     console.log('error getting vendors', error);
   }
