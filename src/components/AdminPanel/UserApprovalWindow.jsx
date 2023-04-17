@@ -43,7 +43,8 @@ const UserApprovalWindow = () => {
                                     {registrationDate.toLocaleDateString('en-US', options)}
                                 </p>
                                 <button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button>
-                                <button className="deny-btn" onClick={() => {setCancelModalVisible(true); setDeniedUser(user)}}>Deny</button>
+                                <br />
+                                <button className="delete-btn" onClick={() => {setCancelModalVisible(true); setDeniedUser(user)}}>Deny</button>
                             </div>
                         )
                     })}

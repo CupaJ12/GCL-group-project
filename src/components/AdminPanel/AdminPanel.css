@@ -10,7 +10,6 @@
 }
 
 .approve-btn {
-    margin-left: 15px;
     font-size: 15px;
     background-color: #a8bba2;
     color: white;
@@ -25,7 +24,7 @@
 }
 
 .deny-btn {
-    margin-left: 15px;
+    margin-top: 10px;
     font-size: 15px;
     background-color: #b5b2af;
     color: white;
@@ -101,7 +100,6 @@
 }
 
 .delete-btn {
-    margin-left: 15px;
     margin-top: 10px;
     font-size: 15px;
     background-color: #b5b2af;
