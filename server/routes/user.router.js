@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 //GET route for unapproved users
 router.get('/unapproved', (req, res) => {
   if (req.isAuthenticated()) {
-    const queryText = 'SELECT * FROM "user" WHERE "approved" = false;';
+    const queryText = 'SELECT * FROM "user" WHERE "approved" = false ORDER BY "registration_date";';
     pool.query(queryText)
     .then(result => {
       res.send(result.rows);
@@ -29,6 +29,24 @@ router.get('/unapproved', (req, res) => {
   } else {
     res.sendStatus(403);
     console.log('error with getting unapproved users: ', err);
+  }
+});
+
+//GET route for approved users
+router.get('/approved', (req, res) => {
+  if (req.isAuthenticated()) {
+    const queryText = 'SELECT * FROM "user" WHERE "approved" = true ORDER BY "username" ASC;';
+    pool.query(queryText)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+      console.log('error with getting approved users: ', err);
+    });
+  } else {
+    res.sendStatus(403);
+    console.log('error with getting approved users: ', err);
   }
 });
 
@@ -79,6 +97,24 @@ router.put('/:id', (req, res) => {
   } else {
     res.sendStatus(403);
     console.log('error with approving user: ', err);
+  }
+});
+
+router.put('/admin/:id', (req, res) => {
+  console.log('in admin status put request with id: ', req.params.id);
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    const admin = req.body.adminStatus;
+    const queryText = `UPDATE "user" SET "admin" = $1 WHERE id = $2;`;
+    pool.query(queryText, [admin, id])
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('error with changing user admin status: ', err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+    console.log('error with changing user admin status: ', err);
   }
 });
 
