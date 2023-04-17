@@ -50,6 +50,7 @@ function BookingSheet() {
 		set_check_out_date(new Date(booking.check_out_date));
 	}, [booking]);
 
+	console.log('bookingsheet', booking);
 	// declare variables: useState, etc:
 
 	// handle functions: onClick, etc:
@@ -175,7 +176,7 @@ function BookingSheet() {
 				<div className='vendor-input-div'>
 					<section className='label'>Tax Responsibility</section>
 					<section className='vendor-input'>
-						{booking.tax_responsibility ? 'Us' : 'Them'}
+						{booking.tax_responsible ? 'Us' : 'Them'}
 					</section>
 				</div>
 

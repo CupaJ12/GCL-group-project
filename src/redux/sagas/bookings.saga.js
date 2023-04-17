@@ -60,8 +60,10 @@ function* updateTenant(action) {
 }
 
 function* updateFinancial(action) {
+    const id = action.payload.id
     try {
         console.log('updateFinancial saga hit', action.payload);
+        axios.put(`/api/booking/financial/${id}`, action.payload);
     } catch (err) {
         console.log('error with updateFinancial saga');
     }

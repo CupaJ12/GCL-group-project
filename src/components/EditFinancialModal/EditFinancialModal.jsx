@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 import MathComponent from './EditFinancialMath'
 import CurrencyInput from "../BookingForm/CurrencyInput";
+import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from "./EditFinancialToggleSwitch";
 
 import './EditFinancialModal.css';
 
@@ -15,20 +16,25 @@ function EditFinancialModal(props) {
     const [costPerNight, setCostPerNight] = useState('');
     const [cleaningFee, setCleaningFee] = useState('');
     const [petFee, setPetFee] = useState('');
-    const [taxResponsibility, setTaxResponsibility] = useState('');
+    const [taxResponsibility, setTaxResponsibility] = useState(false);
     const [vendorCommission, setVendorCommission] = useState('');
     const [vendorFee, setVendorFee] = useState('');
     const [discount, setDiscount] = useState('');
     const [lodgingTax, setLodingTax] = useState('');
-    const [finalized, setFinalized] = useState('');
+    const [finalized, setFinalized] = useState(false);
     const [vendor, setVendor] = useState('');
     const vendorList = useSelector((store) => store.vendorList);
+    const [submitDisabled, setSubmitDisabled] = useState(true);
+    const [change, setChange] = useState(0);
+    // const feesFinalized = useSelector((store) => store.feesFinalized);
+
+    // const taxResponsibility = useSelector((store) => store.taxResponsibility);
+
 
     const dispatch = useDispatch();
 
     // fetched booking info
     const booking = props.booking;
-    console.log(booking);
 
     useEffect(() => {
         setCostPerNight(booking.cost_per_night);
@@ -45,22 +51,33 @@ function EditFinancialModal(props) {
 
     // new booking to be used as prop for MathComponent
     const booking2 = {
+        id: booking.id,
+        check_in_date: booking.check_in_date,
+        check_out_date: booking.check_out_date,
         cost_per_night: costPerNight,
         cleaning_fee: cleaningFee,
         pet_fee: petFee,
         lodging_tax: lodgingTax,
+        tax_responsible: taxResponsibility,
+        vendor_commission: vendorCommission,
+        vendor_fee: vendorFee,
+        discount,
+        change,
+        finalized,
+        vendor,
+
     }
 
     // dispatch updated inputs to updateTenant saga
     const saveFinancial = () => {
         console.log('submit clicked');
         dispatch({
-            type: 'UPDATE_TENANT',
-            payload: {
-
-            }
+            type: 'EDIT_FINANCIAL_INFO',
+            payload: booking2
         });
     };
+
+    console.log(taxResponsibility);
 
     // ReactDOM.createPortal create the div outside of the parent so it won't break the parent's css
     return ReactDOM.createPortal(
@@ -73,7 +90,7 @@ function EditFinancialModal(props) {
         >
             <div className="modal">
                 <div className="financial-modal-content">
-                    <form className="edit-financial-form">
+                    <form className="edit-financial-form" onSubmit={() => saveFinancial()}>
                         <div className="financial-section-header">
                             <h3>Edit Financial</h3>
                         </div>
@@ -88,7 +105,7 @@ function EditFinancialModal(props) {
                                         type="text"
                                         name="cost-per-night"
                                         value={costPerNight}
-                                        onChange={(e) => setCostPerNight(e.target.value)}
+                                        onChange={(e) => { setCostPerNight(e.target.value); setChange(change + 1) }}
                                     />
                                 </label>
                             </div>
@@ -102,7 +119,7 @@ function EditFinancialModal(props) {
                                         type="text"
                                         name="cleaning-fee"
                                         value={cleaningFee}
-                                        onChange={(e) => setCleaningFee(e.target.value)}
+                                        onChange={(e) => { setCleaningFee(e.target.value); setChange(change + 1) }}
                                     />
                                 </label>
                             </div>
@@ -116,7 +133,7 @@ function EditFinancialModal(props) {
                                         type="text"
                                         name="pet-fee"
                                         value={petFee}
-                                        onChange={(e) => setPetFee(e.target.value)}
+                                        onChange={(e) => { setPetFee(e.target.value); setChange(change + 1) }}
                                     />
                                 </label>
                             </div>
@@ -130,15 +147,18 @@ function EditFinancialModal(props) {
                                         type="text"
                                         name="lodging-tax"
                                         value={lodgingTax}
-                                        onChange={(e) => setLodingTax(e.target.value)}
+                                        onChange={(e) => { setLodingTax(e.target.value); setChange(change + 1) }}
                                     />
                                 </label>
                             </div>
                         </div>
-                        <div>
-                            <h3>
-                                Gross Amount: {<MathComponent booking={booking} booking2={booking2} type="gross" />}
-                            </h3>
+                        <div className="edit-financial-booking-amount">
+                            <h2 className="edit-financial-headers">Gross Amount: </h2>
+                            <div className="edit-financial-money-total">
+                                {<MathComponent
+                                    booking2={booking2}
+                                    type="gross" />}
+                            </div>
                         </div>
                         <div className="financial-divider" />
                         <div className="edit-financial-container">
@@ -169,7 +189,7 @@ function EditFinancialModal(props) {
                                         type="text"
                                         name="vendor-commission"
                                         value={vendorCommission}
-                                        onChange={(e) => setVendorCommission(e.target.value)}
+                                        onChange={(e) => { setVendorCommission(e.target.value); setChange(change + 1) }}
                                     />
                                 </label>
                             </div>
@@ -183,7 +203,7 @@ function EditFinancialModal(props) {
                                         type="text"
                                         name="vendor-fee"
                                         value={vendorFee}
-                                        onChange={(e) => setVendorFee(e.target.value)}
+                                        onChange={(e) => { setVendorFee(e.target.value); setChange(change + 1) }}
                                     />
                                 </label>
                             </div>
@@ -197,18 +217,35 @@ function EditFinancialModal(props) {
                                         type="text"
                                         name="discount"
                                         value={discount}
-                                        onChange={(e) => setDiscount(e.target.value)}
+                                        onChange={(e) => { setDiscount(e.target.value); setChange(change + 1) }}
                                     />
                                 </label>
                             </div>
                         </div>
-                        <div>
-                            <p>Payout:</p>
+                        <div className="edit-financial-toggle-switch">
+                            <TaxToggleSwitch
+                                taxResponsibility={taxResponsibility}
+                                setTaxResponsibility={() => { setTaxResponsibility(!taxResponsibility); setChange(change + 1) }}
+                                finalized={finalized}
+                            />
+                            <FeesFinalizedToggleSwitch
+                                finalized={finalized}
+                                setFinalized={() => setFinalized(!finalized)}
+                            />
+                        </div>
+                        <div className="edit-financial-booking-amount">
+                            <h2 className="edit-financial-headers">Net Payout: </h2>
+                            <div className="edit-financial-money-total">
+                                {<MathComponent
+                                    booking2={booking2}
+                                    type="net" />}
+                            </div>
                         </div>
                         <div className="financial-nav-btn-div">
                             <button
                                 type="submit"
                                 className="submit-btn"
+                                onClick={props.onClose}
                             >
                                 SUBMIT
                             </button>
