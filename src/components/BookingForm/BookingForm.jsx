@@ -85,7 +85,7 @@ const BookingForm = () => {
     }, [costPerNight]);
 
     const calculateRentalCost = () => {
-        console.log('check in and out: ', checkIn, checkOut)
+        console.log('check in and out: ', typeof checkIn, typeof checkOut)
         if (checkIn != null && checkOut != null && checkOut > checkIn) {
             let numberOfNights = checkOut.diff(checkIn, 'days');
             setRentalCost((Number(costPerNight.replace(/[^0-9.]/g, ''))) * numberOfNights);
@@ -476,7 +476,7 @@ const BookingForm = () => {
                     <button 
                         type="button"
                         className="cancel-btn"
-                        onClick={() => console.log('you clicked cancel')}
+                        onClick={() => history.push('/')}
                     >
                         CANCEL
                     </button>

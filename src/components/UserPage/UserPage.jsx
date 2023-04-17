@@ -1,59 +1,58 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import './UserPage.css';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+  const history = useHistory();
   const user = useSelector((store) => store.user);
-  return (
-    <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
 
-      <br>
-      </br>
-      <br>
-      </br>
-      <br>
-      </br>
-      <br>
-      </br>
+  if (user.approved) {
+    return (
       
-      <div>
+      <div className="container">
+        <p className="approved-header">
+          You're currently logged in as 
+          <br />
+          <b>{user.username}</b>
+        </p>
+        <div className="main-nav">
+          <button 
+            className="main-nav-add-btn"
+            onClick={() => history.push('/bookingform')}
+          >
+            Add Booking
+          </button>
+          <br />
+          <button 
+            className="main-nav-find-btn"
+            onClick={() => history.push('/findBooking')}
+          >
+            Find Booking
+          </button>
+        </div>
 
-        <Link className="submit-btn" to="/findBooking">
-          FIND BOOKINGS
-        </Link>
+        <div className="logout-div">
+          <LogOutButton className="logout-btn" />
+        </div>
 
-        <br>
-        </br>
-        <br>
-        </br>
-        <br>
-        </br>
-        <br>
-        </br>
-
-        <Link className="submit-btn" to="/bookingform">
-          ADD BOOKING
-        </Link>
       </div>
-
-      <br>
-      </br>
-      <br>
-      </br>
-      <br>
-      </br>
-      <br>
-      </br>
-
-      <LogOutButton className="btn" />
-
+    )
+  } else {
+    return (
+    <div className="main-unapproved-div">
+        You're logged in as {user.username} 
+      <h3 className="not-approved-header">
+        Your account is currently awaiting approval
+      </h3>
+      <div className="logout-div">
+          <LogOutButton className="logout-btn" />
+      </div>
     </div>
-  );
-}
+    )
+  }
+};
 
 // this allows us to use <App /> in index.js
 export default UserPage;

@@ -22,6 +22,11 @@ Container
   padding: 20px;
 }
 
+.logout-div {
+  text-align: center;
+  margin-top: 30px;
+}
+
 /* --------------------------------------------------------------------------------
 Button
 -------------------------------------------------------------------------------- */
@@ -74,6 +79,57 @@ Button
   background-color: transparent;
   border-color: #008183;
   color: #008183;
+}
+
+.main-nav-add-btn {
+  font-size: 38px;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 0 8px black;
+  border-radius: 10px;
+  padding: 20px;
+  border-color: #3c6a2f;
+  background-color: #3c6a2f;
+  color: white;
+  width: 300px;
+  margin-bottom: 80px;
+}
+
+.main-nav-add-btn:hover {
+  box-shadow: 0 0 0px black;
+  background-color: #a8bba2;
+  border-color: #a8bba2;
+  transition: .3s;
+}
+
+.main-nav-find-btn {
+  font-size: 38px;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 0 8px black;
+  border-radius: 10px;
+  padding: 20px;
+  border-color: #3c6a2f;
+  background-color: #3c6a2f;
+  color: white;
+  width: 300px;
+}
+
+.main-nav-find-btn:hover {
+  box-shadow: 0 0 0px black;
+  background-color: #a8bba2;
+  border-color: #a8bba2;
+  transition: .3s;
+}
+
+.logout-btn {
+  border: none;
+  background: none;
+  font-size: 18px;
+}
+
+.logout-btn:hover {
+  font-weight: bold;
 }
 
 /* --------------------------------------------------------------------------------

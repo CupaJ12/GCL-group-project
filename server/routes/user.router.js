@@ -14,6 +14,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+//GET route for unapproved users
+router.get('/unapproved', (req, res) => {
+  if (req.isAuthenticated()) {
+    const queryText = 'SELECT * FROM "user" WHERE "approved" = false;';
+    pool.query(queryText)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+      console.log('error with getting unapproved users: ', err);
+    });
+  } else {
+    res.sendStatus(403);
+    console.log('error with getting unapproved users: ', err);
+  }
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
@@ -46,5 +64,41 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
+
+router.put('/:id', (req, res) => {
+  console.log('in put request with id: ', req.params.id);
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    const queryText = `UPDATE "user" SET "approved" = true WHERE id = $1`;
+    pool.query(queryText, [id])
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('error with approving user', err);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+    console.log('error with approving user: ', err);
+  }
+});
+
+router.delete('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    const id = req.params.id;
+    const queryText = `DELETE FROM "user" WHERE "id" = $1;`;
+    pool.query(queryText, [id])
+      .then((result) => {
+        res.sendStatus(204);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+      })
+    } else {
+      res.sendStatus(403);
+      console.log('error with deleting user')
+    }
+  });
+
+
 
 module.exports = router;

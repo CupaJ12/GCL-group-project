@@ -1,0 +1,31 @@
+.main-nav {
+    margin: auto;
+    margin-top: 50px;
+    background-color: white;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 300px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.main-unapproved-div {
+    margin: auto;
+    margin-top: 50px;
+    background-color: white;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 300px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.approved-header {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 15px;
+}
