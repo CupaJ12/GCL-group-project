@@ -38,7 +38,6 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
         });
         setVendorName('');
         onClose();
-        return false;
     };
 
     return ReactDOM.createPortal(

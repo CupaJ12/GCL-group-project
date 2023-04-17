@@ -7,6 +7,7 @@ import { taxResponsibility, feesFinalized } from './toggle.reducer';
 import vendorList from './vendor.reducer';
 import propertyList from './property.reducer';
 import unapprovedUsers from './unapproved.user.reducer';
+import approvedUsers from './approved.user.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   vendorList, //contains an array of vendor names
   propertyList, //contains an array of properties
   unapprovedUsers, //contains all users that are currently unapproved
+  approvedUsers, //contains all users that are currently approved
 });
 
 export default rootReducer;

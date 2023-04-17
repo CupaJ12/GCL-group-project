@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import './AdminPanel.css';
-import ConfirmUserDenialModal from '../ConfirmUserDenialModal/ConfirmUserDenialModal';
+import DenyUserModal from './DenyUserModal';
 
 
 const UserApprovalWindow = () => { 
@@ -10,6 +10,7 @@ const UserApprovalWindow = () => {
     const dispatch = useDispatch();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const unapprovedUsers = useSelector(store => store.unapprovedUsers);
+    const [deniedUser, setDeniedUser] = useState({});
 
     useEffect(() => {
         dispatch({ type: 'FETCH_UNAPPROVED_USERS' });
@@ -23,35 +24,31 @@ const UserApprovalWindow = () => {
         dispatch({ type: 'SET_USER_APPROVED', payload: userid });
     };
 
-    const deny = (userid) => {
+    const denyUser = (userid) => {
         dispatch({ type: 'DELETE_USER', payload: userid });
     };
 
     return (
-        <>
-            {/* <div className="unapproved-user-headers">
-                <section>Username</section>
-                <section>Registered On</section>
-            </div> */}
-
-            <table>
-                <tbody>
+        <div className="unapproved-user-container">
+            <DenyUserModal onConfirm={() => {denyUser(deniedUser.id); setCancelModalVisible(false)}} onDeny={() => setCancelModalVisible(false)} show={cancelModalVisible}/>       
                     {unapprovedUsers.map((user, index) => {
                         const registrationDate = new Date(user.registration_date);
 
                         return (
-                            <tr>
-                                <td className="unapproved-username-column">{user.username}</td>
-                                <td className="unapproved-user-column">registered on: <br /> {registrationDate.toLocaleDateString('en-US', options)}</td>
-                                <td className="unapproved-user-column"><button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button></td>
-                                <td className="unapproved-user-column"><button className="deny-btn" onClick={() => setCancelModalVisible(true)}>Deny</button></td> 
-                                <ConfirmUserDenialModal show={cancelModalVisible} onConfirm={() => deny(user.id)} onDeny={() => setCancelModalVisible(false)} />
-                            </tr>
+                            <div className="unapproved-user-div">
+                                <p className="user-name">{user.username}</p>
+                                <p>
+                                    <b>registered on:</b>
+                                    <br /> 
+                                    {registrationDate.toLocaleDateString('en-US', options)}
+                                </p>
+                                <button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button>
+                                <br />
+                                <button className="delete-btn" onClick={() => {setCancelModalVisible(true); setDeniedUser(user)}}>Deny</button>
+                            </div>
                         )
                     })}
-                </tbody>
-            </table>
-        </>
+        </div>
     )
 };
 
