@@ -9,9 +9,11 @@ import CurrencyInput from './CurrencyInput';
 import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
+import CancelValidation from '../CancelValidationModal/CancelValidationModal';
+import BookingConfirmationModal from './BookingConfirmationModal';
 import ModalChild from '../Modal/ModalChild';
 import './BookingForm.css';
-import './BookingFormResponsive.css';
+// import './BookingFormResponsive.css';
 
 // npm install @mui/x-date-pickers
 // npm install @mui/material @emotion/react @emotion/styled
@@ -21,6 +23,8 @@ import './BookingFormResponsive.css';
 // npm i prop-types
 
 const BookingForm = () => {
+    const [bookingConfirmationModalVisible, setBookingConfirmationModalVisible] = useState(false);
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [checkIn, setCheckIn] = useState(null);
     const [checkOut, setCheckOut] = useState(null);
     const [change, setChange] = useState(0);  
@@ -38,15 +42,17 @@ const BookingForm = () => {
     const [lastName, setLastName] = useState('');
     const [lodgingTax, setLodgingTax] = useState('');
     const [netPayout, setNetPayout] = useState(0);
+    const [newItem, setNewItem] = useState(0);
     const [petFees, setPetFees] = useState('');
     const [phone, setPhone] = useState('');
+    const [propertyAdded, SetPropertyAdded] = useState(false);
     const [propertyId, setPropertyId] = useState(1);
     const propertyList = useSelector((store) => store.propertyList);
     const [propertyModalVisible, setPropertyModalVisible] = useState(false);
     const [rentalCost, setRentalCost] = useState(0);
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const taxResponsibility = useSelector((store) => store.taxResponsibility);
-    const [vendor, setVendor] = useState('AirBNB');
+    const [vendor, setVendor] = useState('Airbnb');
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
     const [vendorModalVisible, setVendorModalVisible] = useState(false);
@@ -56,6 +62,11 @@ const BookingForm = () => {
         dispatch({type: 'GET_VENDORS'});
         dispatch({type: 'GET_PROPERTIES'});
     }, []);
+
+    useEffect(() => {
+        dispatch({type: 'GET_VENDORS'});
+        dispatch({type: 'GET_PROPERTIES'});
+    }, [newItem]);
     
     useEffect(() => {
         checkFormComplete();
@@ -114,7 +125,7 @@ const BookingForm = () => {
         }
     };              
 
-    const onSubmit = () => {
+    const onSubmit = (event) => {
         event.preventDefault();
         dispatch({
             type: 'POST_BOOKING',
@@ -139,7 +150,7 @@ const BookingForm = () => {
                 property_id: propertyId,
             }
         });
-        window.location.reload(false);
+        setBookingConfirmationModalVisible(true);
     };
 
     const checkFormComplete = () => {
@@ -158,9 +169,21 @@ const BookingForm = () => {
     };
 
     return (
+
         <div className="booking-form-container">  
+            <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => {setPropertyModalVisible(false); setNewItem(newItem + 1)}}/>
+            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => {setVendorModalVisible(false); setNewItem(newItem + 1)}}/>
+            <CancelValidation show={cancelModalVisible} onConfirm={() => {history.push('/'); setCancelModalVisible(false)}} onDeny={() => setCancelModalVisible(false)}/>
+            <BookingConfirmationModal show={bookingConfirmationModalVisible} onConfirm={() => {setBookingConfirmationModalVisible(false); history.push('/bookingform')}} />
             <form key="booking-form" onSubmit={onSubmit}>
                 <section className="required">* indicates required fields</section>
+                {feesFinalized &&
+                    <section className="fees-finalized-disclaimer">
+                        Fees are finalized and the inputs are locked. 
+                        <br />
+                        To update input values, please set the "Fees Finalized" toggle to "no"
+                    </section>
+                }
                 
                 <div className="property-select-container">
                     <select 
@@ -176,7 +199,6 @@ const BookingForm = () => {
                         })}
                     </select>
                     <button type="button" className="add-property-btn" onClick={() => setPropertyModalVisible(true)}>+</button>
-                    <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => setPropertyModalVisible(false)}/>
                 </div>
 
                 <div className="section-header">
@@ -276,8 +298,6 @@ const BookingForm = () => {
                         <h3 className="alert" role="alert">Check-out date must come after check-in date!</h3>
                     }
 
-                    {/* try to find way to check if dates are the same */}
-
                 </div> {/* end of tenant-input-date-div */}
 
                 <div className="section-header">
@@ -359,7 +379,7 @@ const BookingForm = () => {
                     <div className="booking-amount">
                         <h2 className="financial-headers">Gross Booking Amount</h2>
                         <div className="money-total">
-                            ${grossBookingAmount.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers */}
+                            ${grossBookingAmount.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
                         </div>
                     </div>
                 }
@@ -384,7 +404,6 @@ const BookingForm = () => {
                                 })}          
                             </select>
                             <button type="button" className="add-vendor-btn" onClick={() => setVendorModalVisible(true)}>+</button>
-                            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => setVendorModalVisible(false)}/>
                         </div>
                     }
 
@@ -476,7 +495,7 @@ const BookingForm = () => {
                     <button 
                         type="button"
                         className="cancel-btn"
-                        onClick={() => history.push('/')}
+                        onClick={() => setCancelModalVisible(true)}
                     >
                         CANCEL
                     </button>

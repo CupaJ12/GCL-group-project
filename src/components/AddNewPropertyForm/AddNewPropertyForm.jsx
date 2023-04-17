@@ -41,7 +41,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
         );
     };
 
-    const onSubmit = () => {
+    const onSubmit = (event) => {
         event.preventDefault();
         let propertyAddress = {
             address,
@@ -62,7 +62,7 @@ const AddNewPropertyForm = ({modalVisible, onClose}) => {
         setCity('');
         setState('');
         setZipCode('');
-        history.push('/bookingform');
+        onClose();
     };
 
     return ReactDOM.createPortal(
