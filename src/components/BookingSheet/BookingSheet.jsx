@@ -63,7 +63,7 @@ function BookingSheet() {
 		<div className='booking-form-container'>
 			<div className='property-select-container'>
 				<div className='section-header'>Property</div>
-				<h2>PROPERTY NAME HERE DO JOIN TABLE</h2>
+				<h2>{booking.property_name}</h2>
 			</div>
 			<div className='section-header'>Tenant
 				<button onClick={() => setShowTenant(true)}>
