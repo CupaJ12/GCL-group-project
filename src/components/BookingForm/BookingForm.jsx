@@ -9,9 +9,10 @@ import CurrencyInput from './CurrencyInput';
 import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
+import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 import ModalChild from '../Modal/ModalChild';
 import './BookingForm.css';
-import './BookingFormResponsive.css';
+// import './BookingFormResponsive.css';
 
 // npm install @mui/x-date-pickers
 // npm install @mui/material @emotion/react @emotion/styled
@@ -21,6 +22,7 @@ import './BookingFormResponsive.css';
 // npm i prop-types
 
 const BookingForm = () => {
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [checkIn, setCheckIn] = useState(null);
     const [checkOut, setCheckOut] = useState(null);
     const [change, setChange] = useState(0);  
@@ -167,6 +169,7 @@ const BookingForm = () => {
         <div className="booking-form-container">  
             <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => {setPropertyModalVisible(false); setNewItem(newItem + 1)}}/>
             <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => {setVendorModalVisible(false); setNewItem(newItem + 1)}}/>
+            <CancelValidation show={cancelModalVisible} onConfirm={() => {history.push('/'); setCancelModalVisible(false)}} onDeny={() => setCancelModalVisible(false)}/>
             <form key="booking-form" onSubmit={onSubmit}>
                 <section className="required">* indicates required fields</section>
                 {feesFinalized &&
@@ -373,7 +376,7 @@ const BookingForm = () => {
                     <div className="booking-amount">
                         <h2 className="financial-headers">Gross Booking Amount</h2>
                         <div className="money-total">
-                            ${grossBookingAmount.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers */}
+                            ${grossBookingAmount.toFixed(2)} {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
                         </div>
                     </div>
                 }
@@ -489,7 +492,7 @@ const BookingForm = () => {
                     <button 
                         type="button"
                         className="cancel-btn"
-                        onClick={() => history.push('/')}
+                        onClick={() => setCancelModalVisible(true)}
                     >
                         CANCEL
                     </button>

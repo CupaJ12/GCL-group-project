@@ -9,6 +9,7 @@ body {
     padding: 30px;
     width: 50%;
     border-radius: 30px;
+    min-width: 530px;
 }
 
 .property-dropdown {
