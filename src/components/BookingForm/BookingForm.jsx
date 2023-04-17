@@ -40,13 +40,15 @@ const BookingForm = () => {
     const [netPayout, setNetPayout] = useState(0);
     const [petFees, setPetFees] = useState('');
     const [phone, setPhone] = useState('');
+    const [propertyAdded, SetPropertyAdded] = useState(false);
     const [propertyId, setPropertyId] = useState(1);
     const propertyList = useSelector((store) => store.propertyList);
     const [propertyModalVisible, setPropertyModalVisible] = useState(false);
     const [rentalCost, setRentalCost] = useState(0);
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const taxResponsibility = useSelector((store) => store.taxResponsibility);
-    const [vendor, setVendor] = useState('AirBNB');
+    const [vendor, setVendor] = useState('Airbnb');
+    const [vendorAdded, setVendorAdded] = useState(false);
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
     const [vendorModalVisible, setVendorModalVisible] = useState(false);
@@ -56,6 +58,14 @@ const BookingForm = () => {
         dispatch({type: 'GET_VENDORS'});
         dispatch({type: 'GET_PROPERTIES'});
     }, []);
+
+    useEffect(() => {
+        dispatch({type: 'GET_VENDORS'});
+    }, [vendorAdded]);
+
+    useEffect(() => {
+        dispatch({type: 'GET_PROPERTIES'});
+    }, [propertyAdded]);
     
     useEffect(() => {
         checkFormComplete();
@@ -114,7 +124,7 @@ const BookingForm = () => {
         }
     };              
 
-    const onSubmit = () => {
+    const onSubmit = (event) => {
         event.preventDefault();
         dispatch({
             type: 'POST_BOOKING',
@@ -158,7 +168,9 @@ const BookingForm = () => {
     };
 
     return (
-        <div className="booking-form-container">  
+        <div className="booking-form-container">
+            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => {setVendorModalVisible(false); setVendorAdded(!vendorAdded)}}/>  
+            <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => {setPropertyModalVisible(false); SetPropertyAdded(!propertyAdded)}}/>
             <form key="booking-form" onSubmit={onSubmit}>
                 <section className="required">* indicates required fields</section>
                 
@@ -176,7 +188,6 @@ const BookingForm = () => {
                         })}
                     </select>
                     <button type="button" className="add-property-btn" onClick={() => setPropertyModalVisible(true)}>+</button>
-                    <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => setPropertyModalVisible(false)}/>
                 </div>
 
                 <div className="section-header">
@@ -275,8 +286,6 @@ const BookingForm = () => {
                     {(checkOut < checkIn && checkOut != null && checkIn != null) &&
                         <h3 className="alert" role="alert">Check-out date must come after check-in date!</h3>
                     }
-
-                    {/* try to find way to check if dates are the same */}
 
                 </div> {/* end of tenant-input-date-div */}
 
@@ -384,7 +393,6 @@ const BookingForm = () => {
                                 })}          
                             </select>
                             <button type="button" className="add-vendor-btn" onClick={() => setVendorModalVisible(true)}>+</button>
-                            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => setVendorModalVisible(false)}/>
                         </div>
                     }
 
