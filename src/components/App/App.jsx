@@ -82,14 +82,14 @@ function App() {
             exact
             path="/info"
           >
-            <InfoPage />
+            {user.approved ? <InfoPage /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           {/* Protected route for Booking Sheet - Jaffer */}
           <ProtectedRoute
             path="/bookingsheet/:id"
           >
-            <BookingSheet />
+            {user.approved ? <BookingSheet /> : <Redirect to="/user" />}
           </ProtectedRoute>
           
           {/* Protected route for FindBooking */}
@@ -97,7 +97,7 @@ function App() {
           exact
           path="/findBooking"
           >
-            <FindBooking />
+            {user.approved ? <FindBooking /> : <Redirect to="/user" />}
           </ProtectedRoute>
           
           {/* Protected route for EditBooking */}
@@ -105,7 +105,7 @@ function App() {
           exact
           path="/editBooking"
           >
-            <EditBooking />
+            {user.approved ? <EditBooking /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           {/* Protected route for Add Property Form - bryan */}
@@ -113,7 +113,7 @@ function App() {
             exact
             path="/addproperty"
           >
-            <AddNewPropertyForm />
+            {user.approved ? <AddNewPropertyForm /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           {/* Protected route for Add Vendor Form - bryan */}
@@ -121,7 +121,7 @@ function App() {
             exact
             path="/addvendor"
           >
-            <AddNewVendorForm />
+            {user.approved ? <AddNewVendorForm /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
            {/* Protected route for Admin Panel - bryan */}
@@ -129,28 +129,28 @@ function App() {
             exact
             path="/adminpanel"
           >
-            <AdminPanel />
+            {(user.approved && user.admin) ? <AdminPanel /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/allbookings"
           >
-            <BookingsFolder />
+            {user.approved ? <BookingsFolder /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/bookingdetails/:id"
           >
-            <BookingDetails />
+            {user.approved ? <BookingDetails /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/bookingform"
           >
-            <BookingForm />
+            {user.approved ? <BookingForm /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <Route
@@ -204,6 +204,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
