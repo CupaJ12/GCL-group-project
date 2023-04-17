@@ -28,30 +28,24 @@ const UserApprovalWindow = () => {
     };
 
     return (
-        <>
-            {/* <div className="unapproved-user-headers">
-                <section>Username</section>
-                <section>Registered On</section>
-            </div> */}
-
-            <table>
-                <tbody>
+        <div className="unapproved-user-container">       
                     {unapprovedUsers.map((user, index) => {
                         const registrationDate = new Date(user.registration_date);
 
                         return (
-                            <tr>
-                                <td className="unapproved-username-column">{user.username}</td>
-                                <td className="unapproved-user-column">registered on: <br /> {registrationDate.toLocaleDateString('en-US', options)}</td>
-                                <td className="unapproved-user-column"><button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button></td>
-                                <td className="unapproved-user-column"><button className="deny-btn" onClick={() => setCancelModalVisible(true)}>Deny</button></td> 
-                                <ConfirmUserDenialModal show={cancelModalVisible} onConfirm={() => deny(user.id)} onDeny={() => setCancelModalVisible(false)} />
-                            </tr>
+                            <div className="unapproved-user-div">
+                                <p className="user-name">{user.username}</p>
+                                <p>
+                                    <b>registered on:</b>
+                                    <br /> 
+                                    {registrationDate.toLocaleDateString('en-US', options)}
+                                </p>
+                                <button className="approve-btn" onClick={() => {approve(user.id), setApprovedUser(user.username)}}>Approve</button>
+                                <button className="deny-btn" onClick={() => setCancelModalVisible(true)}>Deny</button>
+                            </div>
                         )
                     })}
-                </tbody>
-            </table>
-        </>
+        </div>
     )
 };
 
