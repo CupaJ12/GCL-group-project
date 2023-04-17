@@ -98,3 +98,19 @@
     background-color: #3c6a2f;
     color: white;
 }
+
+.delete-btn {
+    margin-left: 15px;
+    margin-top: 10px;
+    font-size: 15px;
+    background-color: #b5b2af;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #313030;
+    transition: .5s;
+}

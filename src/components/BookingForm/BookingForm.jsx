@@ -46,7 +46,7 @@ const BookingForm = () => {
     const [rentalCost, setRentalCost] = useState(0);
     const [submitDisabled, setSubmitDisabled] = useState(true);
     const taxResponsibility = useSelector((store) => store.taxResponsibility);
-    const [vendor, setVendor] = useState('AirBNB');
+    const [vendor, setVendor] = useState('Airbnb');
     const [vendorCommissions, setVendorCommissions] = useState('');
     const [vendorFees, setVendorFees] = useState('');
     const [vendorModalVisible, setVendorModalVisible] = useState(false);

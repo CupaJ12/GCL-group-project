@@ -26,14 +26,12 @@ const AdminPanel = () => {
             {unapprovedUsers.length > 0 &&
                 <div className="admin-div-content">
                     <section onClick={() => setShowApprovalWindow(!showApprovalWindow)} className="section-header">({unapprovedUsers.length}) Unapproved Users</section>
-                    {/* <UserApprovalWindow /> */}
                     {showApprovalWindow && <UserApprovalWindow />}
                 </div>
             }
             {approvedUsers.length > 0 &&
             <div className="admin-div-content">
                 <section onClick={() => setShowUsersWindow(!showUsersWindow)} className="section-header">({approvedUsers.length}) Approved Users</section>
-                {/* <UserStatus /> */}
                 {showUsersWindow && <UserStatus />}
             </div>
             }
