@@ -102,26 +102,10 @@ function App() {
           
           {/* Protected route for EditBooking */}
           <ProtectedRoute
-          exact
-          path="/editBooking"
-          >
-            {user.approved ? <EditBooking /> : <Redirect to="/user" />}
-          </ProtectedRoute>
-
-          {/* Protected route for Add Property Form - bryan */}
-          <ProtectedRoute
             exact
-            path="/addproperty"
+            path="/editBooking"
           >
-            {user.approved ? <AddNewPropertyForm /> : <Redirect to="/user" />}
-          </ProtectedRoute>
-
-          {/* Protected route for Add Vendor Form - bryan */}
-          <ProtectedRoute
-            exact
-            path="/addvendor"
-          >
-            {user.approved ? <AddNewVendorForm /> : <Redirect to="/user" />}
+            {(user.approved && user.admin) ? <EditBooking /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
            {/* Protected route for Admin Panel - bryan */}
@@ -150,7 +134,7 @@ function App() {
             exact
             path="/bookingform"
           >
-            {user.approved ? <BookingForm /> : <Redirect to="/user" />}
+            {(user.approved && user.admin) ? <BookingForm /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <Route

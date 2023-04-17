@@ -8,9 +8,31 @@ function UserPage() {
   const history = useHistory();
   const user = useSelector((store) => store.user);
 
-  if (user.approved) {
+  if(user.approved && !user.admin) {
     return (
-      
+      <div className="container">
+        <p className="approved-header">
+          You're currently logged in as 
+          <br />
+          <b>{user.username}</b>
+        </p>
+        <div className="main-nav">
+          <button 
+            className="main-nav-find-btn"
+            onClick={() => history.push('/findBooking')}
+          >
+            Find Booking
+          </button>
+        </div>
+
+        <div className="logout-div">
+          <LogOutButton className="logout-btn" />
+        </div>
+      </div>
+    )
+  } else
+  if (user.approved && user.admin) {
+    return (
       <div className="container">
         <p className="approved-header">
           You're currently logged in as 
