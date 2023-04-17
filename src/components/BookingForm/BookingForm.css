@@ -280,3 +280,11 @@ hr.rounded {
     padding-top: 30px;
     margin-bottom: 20px;
 }
+
+.fees-finalized-disclaimer {
+    color: red;
+    text-align: center;
+    font-size: 15px;
+    margin: 30px;
+    font-weight: bold;
+}

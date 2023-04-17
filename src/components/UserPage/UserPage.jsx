@@ -56,6 +56,8 @@ function UserPage() {
         </div>
 
         <div className="logout-div">
+          <button className="admin-panel-nav-btn" onClick={() => history.push('/adminpanel')}>Admin Panel</button>
+          <br />
           <LogOutButton className="logout-btn" />
         </div>
 

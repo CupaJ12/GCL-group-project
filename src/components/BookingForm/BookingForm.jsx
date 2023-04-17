@@ -38,6 +38,7 @@ const BookingForm = () => {
     const [lastName, setLastName] = useState('');
     const [lodgingTax, setLodgingTax] = useState('');
     const [netPayout, setNetPayout] = useState(0);
+    const [newItem, setNewItem] = useState(0);
     const [petFees, setPetFees] = useState('');
     const [phone, setPhone] = useState('');
     const [propertyId, setPropertyId] = useState(1);
@@ -56,6 +57,11 @@ const BookingForm = () => {
         dispatch({type: 'GET_VENDORS'});
         dispatch({type: 'GET_PROPERTIES'});
     }, []);
+
+    useEffect(() => {
+        dispatch({type: 'GET_VENDORS'});
+        dispatch({type: 'GET_PROPERTIES'});
+    }, [newItem]);
     
     useEffect(() => {
         checkFormComplete();
@@ -114,7 +120,7 @@ const BookingForm = () => {
         }
     };              
 
-    const onSubmit = () => {
+    const onSubmit = (event) => {
         event.preventDefault();
         dispatch({
             type: 'POST_BOOKING',
@@ -159,8 +165,17 @@ const BookingForm = () => {
 
     return (
         <div className="booking-form-container">  
+            <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => {setPropertyModalVisible(false); setNewItem(newItem + 1)}}/>
+            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => {setVendorModalVisible(false); setNewItem(newItem + 1)}}/>
             <form key="booking-form" onSubmit={onSubmit}>
                 <section className="required">* indicates required fields</section>
+                {feesFinalized &&
+                    <section className="fees-finalized-disclaimer">
+                        Fees are finalized and the inputs are locked. 
+                        <br />
+                        To update input values, please set the "Fees Finalized" toggle to "no"
+                    </section>
+                }
                 
                 <div className="property-select-container">
                     <select 
@@ -176,7 +191,6 @@ const BookingForm = () => {
                         })}
                     </select>
                     <button type="button" className="add-property-btn" onClick={() => setPropertyModalVisible(true)}>+</button>
-                    <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => setPropertyModalVisible(false)}/>
                 </div>
 
                 <div className="section-header">
@@ -384,7 +398,6 @@ const BookingForm = () => {
                                 })}          
                             </select>
                             <button type="button" className="add-vendor-btn" onClick={() => setVendorModalVisible(true)}>+</button>
-                            <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => setVendorModalVisible(false)}/>
                         </div>
                     }
 

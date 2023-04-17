@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 //GET route for unapproved users
 router.get('/unapproved', (req, res) => {
   if (req.isAuthenticated()) {
-    const queryText = 'SELECT * FROM "user" WHERE "approved" = false;';
+    const queryText = 'SELECT * FROM "user" WHERE "approved" = false ORDER BY "registration_date";';
     pool.query(queryText)
     .then(result => {
       res.send(result.rows);
