@@ -45,6 +45,7 @@ const BookingForm = () => {
     const [newItem, setNewItem] = useState(0);
     const [petFees, setPetFees] = useState('');
     const [phone, setPhone] = useState('');
+    const [propertyAdded, SetPropertyAdded] = useState(false);
     const [propertyId, setPropertyId] = useState(1);
     const propertyList = useSelector((store) => store.propertyList);
     const [propertyModalVisible, setPropertyModalVisible] = useState(false);
@@ -168,6 +169,7 @@ const BookingForm = () => {
     };
 
     return (
+
         <div className="booking-form-container">  
             <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => {setPropertyModalVisible(false); setNewItem(newItem + 1)}}/>
             <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => {setVendorModalVisible(false); setNewItem(newItem + 1)}}/>
@@ -295,8 +297,6 @@ const BookingForm = () => {
                     {(checkOut < checkIn && checkOut != null && checkIn != null) &&
                         <h3 className="alert" role="alert">Check-out date must come after check-in date!</h3>
                     }
-
-                    {/* try to find way to check if dates are the same */}
 
                 </div> {/* end of tenant-input-date-div */}
 
