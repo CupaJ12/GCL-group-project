@@ -1,24 +1,15 @@
-.unapproved-users-container {
+.admin-container {
     margin: auto;
     margin-top: 50px;
     background-color: white;
     width: 30%;
     max-width: 50%;
+    min-width: 500px;
     border-radius: 30px;
     padding: 30px;
 }
 
-/* .unapproved-users-div {
-    color: #3c6a2f;
-    width: 100%;
-    margin: auto;
-    padding-top: 30px;
-    margin-bottom: 20px;
-    display: inline-block;
-} */
-
 .approve-btn {
-    margin-left: 15px;
     font-size: 15px;
     background-color: #a8bba2;
     color: white;
@@ -33,7 +24,7 @@
 }
 
 .deny-btn {
-    margin-left: 15px;
+    margin-top: 10px;
     font-size: 15px;
     background-color: #b5b2af;
     color: white;
@@ -47,26 +38,103 @@
     transition: .5s;
 }
 
-.unapproved-user-column {
-    padding: 5px;
-    padding-left: 20px;
-    font-size: 15px;
-}
-
-.unapproved-username-column {
-    padding: 5px;
-    padding-left: 20px;
-    font-size: 15px;
-    word-break: break-all;
-}
-
 .registration-date {
     font-size: 15px;
-    /* padding: 5px; */
     display: inline-block;
 }
 
-.unapproved-user-table {
-    margin-left: auto;
-    margin-right: auto;
+
+.admin-div-content {
+    margin-bottom: 30px;
+}
+
+.unapproved-user-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-width: 15rem;
+    column-gap: 15px;
+    width: 95%;
+    margin: auto;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.unapproved-user-div {
+    text-align: center;
+    width: 80%;
+    padding-top: px;
+    padding-bottom: 15px;
+    border-radius: 30px;;
+    box-shadow: 0px 0px 4px black;
+    margin: 15px;
+    color: #3c6a2f;
+}
+
+.approved-user-div {
+    text-align: center;
+    width: 80%;
+    padding-top: px;
+    padding-bottom: 15px;
+    border-radius: 30px;;
+    box-shadow: 0px 0px 4px black;
+    margin: 15px;
+    color: #3c6a2f;
+}
+
+.user-name {
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.approved-self-div {
+    text-align: center;
+    width: 80%;
+    padding-top: px;
+    padding-bottom: 15px;
+    border-radius: 30px;;
+    box-shadow: 0px 0px 4px black;
+    margin: 15px;
+    background-color: #3c6a2f;
+    color: white;
+}
+
+.delete-btn {
+    margin-top: 10px;
+    font-size: 15px;
+    background-color: #b5b2af;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #313030;
+    transition: .5s;
+}
+
+.admin-nav-div {
+    text-align: center;
+    min-width: 500px;
+}
+
+.admin-section-header {
+    width: 95%;
+    margin: auto;
+    background-color: #3c6a2f;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.admin-section-header:hover {
+    background-color: #4d8c3c;
+    transition: .3s;
 }

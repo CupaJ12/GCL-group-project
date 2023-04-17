@@ -9,6 +9,7 @@ body {
     padding: 30px;
     width: 50%;
     border-radius: 30px;
+    min-width: 530px;
 }
 
 .property-dropdown {
@@ -279,4 +280,12 @@ hr.rounded {
     margin: auto;
     padding-top: 30px;
     margin-bottom: 20px;
+}
+
+.fees-finalized-disclaimer {
+    color: red;
+    text-align: center;
+    font-size: 15px;
+    margin: 30px;
+    font-weight: bold;
 }
