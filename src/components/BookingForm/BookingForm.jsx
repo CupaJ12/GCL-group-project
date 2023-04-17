@@ -10,6 +10,7 @@ import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 import CancelValidation from '../CancelValidationModal/CancelValidationModal';
+import BookingConfirmationModal from './BookingConfirmationModal';
 import ModalChild from '../Modal/ModalChild';
 import './BookingForm.css';
 // import './BookingFormResponsive.css';
@@ -22,6 +23,7 @@ import './BookingForm.css';
 // npm i prop-types
 
 const BookingForm = () => {
+    const [bookingConfirmationModalVisible, setBookingConfirmationModalVisible] = useState(false);
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [checkIn, setCheckIn] = useState(null);
     const [checkOut, setCheckOut] = useState(null);
@@ -147,7 +149,7 @@ const BookingForm = () => {
                 property_id: propertyId,
             }
         });
-        window.location.reload(false);
+        setBookingConfirmationModalVisible(true);
     };
 
     const checkFormComplete = () => {
@@ -170,6 +172,7 @@ const BookingForm = () => {
             <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => {setPropertyModalVisible(false); setNewItem(newItem + 1)}}/>
             <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => {setVendorModalVisible(false); setNewItem(newItem + 1)}}/>
             <CancelValidation show={cancelModalVisible} onConfirm={() => {history.push('/'); setCancelModalVisible(false)}} onDeny={() => setCancelModalVisible(false)}/>
+            <BookingConfirmationModal show={bookingConfirmationModalVisible} onConfirm={() => {setBookingConfirmationModalVisible(false); history.push('/bookingform')}} />
             <form key="booking-form" onSubmit={onSubmit}>
                 <section className="required">* indicates required fields</section>
                 {feesFinalized &&
