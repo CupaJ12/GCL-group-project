@@ -184,22 +184,21 @@ function BookingSheet() {
 					<br />
 					<br />
 					<hr className="divider"/>
-					<div className="comment-input-div">
-                        <label className="label" htmlFor="comment">Add A Comment</label>
-                            
-                        <input
-                            id="comment"
-                            name="comment"
-                            type="text"
-                            value={comment}
-                            placeholder="new comment"
-                            className="tenant-input"
-                            onChange={(event) => {setComment(event.target.value)}}
-                        />
-						<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
-                    </div>          
 				</div>
 			}
+			<div className="comment-input-div">
+				<label className="label" htmlFor="comment">Add A Comment</label>
+			</div>          
+			<input
+				id="comment"
+				name="comment"
+				type="text"
+				value={comment}
+				placeholder="new comment"
+				className="tenant-input"
+				onChange={(event) => {setComment(event.target.value)}}
+			/>
+			<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
 
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
