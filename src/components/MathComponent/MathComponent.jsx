@@ -56,7 +56,7 @@ const MathComponent = ({ booking, type }) => {
         return grossBookingAmount.toFixed(2);
     } else
     if (type === 'lengthOfStay') {
-        return lengthOfStay
+        return lengthOfStay.toFixed()
     }
 };
 
