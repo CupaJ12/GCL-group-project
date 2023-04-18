@@ -223,15 +223,19 @@ function EditFinancialModal(props) {
                             </div>
                         </div>
                         <div className="edit-financial-toggle-switch">
-                            <TaxToggleSwitch
-                                taxResponsibility={taxResponsibility}
-                                setTaxResponsibility={() => { setTaxResponsibility(!taxResponsibility); setChange(change + 1) }}
-                                finalized={finalized}
-                            />
-                            <FeesFinalizedToggleSwitch
-                                finalized={finalized}
-                                setFinalized={() => setFinalized(!finalized)}
-                            />
+                            <div className="toggle-div">
+                                <TaxToggleSwitch
+                                    taxResponsibility={taxResponsibility}
+                                    setTaxResponsibility={() => { setTaxResponsibility(!taxResponsibility); setChange(change + 1) }}
+                                    finalized={finalized}
+                                />
+                            </div>
+                            <div className="toggle-div">
+                                <FeesFinalizedToggleSwitch
+                                    finalized={finalized}
+                                    setFinalized={() => setFinalized(!finalized)}
+                                />
+                            </div>
                         </div>
                         <div className="edit-financial-booking-amount">
                             <h2 className="edit-financial-headers">Net Payout: </h2>

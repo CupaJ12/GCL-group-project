@@ -31,6 +31,8 @@ function BookingSheet() {
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
 	const [showTenant, setShowTenant] = useState(false);
 	const [showFinancial, setShowFinancial] = useState(false);
+	const [change, setChange] = useState(0);
+
 
 	const booking = useSelector((store) => store.bookingByID);
 
@@ -41,9 +43,14 @@ function BookingSheet() {
 
 	// declare functions: dispatch, history, useEffect etc:
 	useEffect(() => {
-			dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
-			dispatch({type: 'GET_VENDORS'});
+		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		dispatch({ type: 'GET_VENDORS' });
 	}, []);
+
+	useEffect(() => {
+		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		dispatch({ type: 'GET_VENDORS' });
+	}, [change]);
 
 	useEffect(() => {
 		set_check_in_date(new Date(booking.check_in_date));
@@ -196,6 +203,7 @@ function BookingSheet() {
 			</div>
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
+				setChange={() => setChange(change + 1)}
 				show={showTenant}
 				booking={booking}
 			/>

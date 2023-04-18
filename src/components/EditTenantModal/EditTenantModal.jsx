@@ -19,7 +19,7 @@ function EditTenantModal(props) {
     const [phone, setPhone] = useState('');
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
-    const [change, setChange] = useState(0);
+    // const [change, setChange] = useState(0);
     const [canSubmit, setCanSubmit] = useState(false)
     const { id } = useParams();
 
@@ -63,10 +63,7 @@ function EditTenantModal(props) {
                 checkOut: checkOut
             }
         });
-        dispatch({
-            type: 'FETCH_BOOKING_BY_ID',
-            payload: id
-        });
+       props.setChange();
     };
 
 
@@ -80,13 +77,13 @@ function EditTenantModal(props) {
             timeout={{ enter: 50, exit: 200 }}
         >
             <div className="modal">
-                <div className="property-form-container">
+                <div className="tenant-modal-content">
                     <form className="edit-tenant-form" onSubmit={() => saveTenant()} >
-                        <div className="section-header">
+                        <div className="tenant-section-header">
                             Edit Tenant
                         </div>
                         <div className="edit-tenant-container">
-                            <div className="modal-input-div">
+                            <div className="tenant-modal-input-div">
                                 <label className="label" htmlFor="first-name">
                                     First Name:
                                     <input
@@ -98,7 +95,7 @@ function EditTenantModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="tenant-modal-input-div">
                                 <label className="label" htmlFor="last-name">
                                     Last Name:
                                     <input
@@ -110,7 +107,7 @@ function EditTenantModal(props) {
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="tenant-modal-input-div">
                                 <label className="label" htmlFor="email">
                                     Email:
                                     <input
@@ -142,7 +139,7 @@ function EditTenantModal(props) {
                                         <DatePicker
                                             label={'check-in *'}
                                             value={checkIn}
-                                            onChange={(newValue) => { setCheckIn(newValue); setChange(change + 1); setCanSubmit(true) }}
+                                            onChange={(newValue) => { setCheckIn(newValue); setCanSubmit(true) }}
                                             showDaysOutsideCurrentMonth
                                         // disabled={feesFinalized}
                                         />
@@ -154,14 +151,14 @@ function EditTenantModal(props) {
                                         <DatePicker
                                             label={'check-out *'}
                                             value={checkOut}
-                                            onChange={(newValue) => { setCheckOut(newValue); setChange(change + 1); setCanSubmit(true) }}
+                                            onChange={(newValue) => { setCheckOut(newValue); setCanSubmit(true) }}
                                             showDaysOutsideCurrentMonth
                                         // disabled={feesFinalized}
                                         />
                                     </LocalizationProvider>
                                 </div>
                             </div>
-                            <div className="nav-btn-div">
+                            <div className="tenant-nav-btn-div">
                                 <button
                                     type="submit"
                                     className="submit-btn"
@@ -172,7 +169,7 @@ function EditTenantModal(props) {
                                 </button>
                                 <button
                                     type="button"
-                                    className="cancel-add-property-btn"
+                                    className="cancel-add-tenant-btn"
                                     onClick={() => setCancelModalVisible(true)}
                                 >
                                     CANCEL

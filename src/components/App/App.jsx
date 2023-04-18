@@ -25,6 +25,7 @@ import BookingForm from '../BookingForm/BookingForm';
 import BookingSheet from '../BookingSheet/BookingSheet';
 import FindBooking from '../FindBooking/FindBooking';
 import AdminPanel from '../AdminPanel/AdminPanel';
+import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import './App.css';
 import ModalParent from '../ModalParent/ModalParent';
 
