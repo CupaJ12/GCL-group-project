@@ -33,11 +33,42 @@ function* fetchBookings() {
     }
 }
 
+function* fetchComments(action) {
+  const id = action.payload;
+  try {
+    const comments = yield axios.get(`/api/booking/comments/${id}`);
+    yield put({ type: 'SET_COMMENTS', payload: comments.data});
+  } catch (error) {
+    console.log('error fetching comments');
+  }
+};
+
+function* postComment(action) {
+  try {
+    yield axios.post('/api/booking/comments', action.payload);
+    yield put({ type: 'FETCH_COMMENTS', payload: action.payload.booking_id })
+  } catch (error) {
+    console.log('error posting comment: ', error);
+  }
+};
+
+function* deleteComment(action) {
+  const id = action.payload.id;
+  try {
+    yield axios.delete(`/api/booking/comments/${id}`);
+    yield put({ type: 'FETCH_COMMENTS', payload: action.payload.booking_id });
+  } catch (error) {
+    console.log('error with deleting comment: ', error);
+  }
+};
 
 function* bookingSaga() {
   yield takeEvery('POST_BOOKING', postBooking);
   yield takeEvery('UPDATE_TENANT', updateTenant);
   yield takeEvery('FETCH_BOOKINGS', fetchBookings);
+  yield takeEvery('FETCH_COMMENTS', fetchComments);
+  yield takeEvery('POST_COMMENT', postComment);
+  yield takeEvery('DELETE_COMMENT', deleteComment);
 }
 
 export default bookingSaga;
