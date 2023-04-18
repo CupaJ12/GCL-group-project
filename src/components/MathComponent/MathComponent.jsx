@@ -39,7 +39,7 @@ const MathComponent = ({ booking, type }) => {
             setNetPayout(grossBookingAmount - feesOwed);
         }
         else if (booking.tax_responsible && rentalCost > 0) {
-            let grossBookingAmount = rentalCost + rentalCost + (Number(booking.pet_fee.replace(/[^0-9.]/g, ''))) + (Number(booking.cleaning_fee.replace(/[^0-9.]/g, '')));
+            let grossBookingAmount = rentalCost + (Number(booking.pet_fee.replace(/[^0-9.]/g, ''))) + (Number(booking.cleaning_fee.replace(/[^0-9.]/g, '')));
             let feesOwed = (Number(booking.vendor_commission.replace(/[^0-9.]/g, ''))) + (Number(booking.vendor_fee.replace(/[^0-9.]/g, ''))) + (Number(booking.discount.replace(/[^0-9.]/g, ''))) + (Number(booking.lodging_tax.replace(/[^0-9.]/g, '')));
             setGrossBookingAmount(grossBookingAmount);
             setNetPayout(grossBookingAmount - feesOwed);

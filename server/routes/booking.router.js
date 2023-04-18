@@ -9,8 +9,10 @@ router.get('/:id', (req, res) => {
 		console.log('get booking by ID:', req.params.id);
 		const id = req.params.id;
 		const queryText = `
-	  SELECT * FROM "booking"
-	  WHERE "id" = $1;`;
+        SELECT "booking".*, "property"."name" AS "property_name"
+        FROM "booking"
+        JOIN "property" ON "booking"."property_id" = "property"."id"
+        Where "booking"."id" = $1;`;
 		pool
 			.query(queryText, [id])
 			.then((result) => {
