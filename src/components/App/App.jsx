@@ -97,14 +97,6 @@ function App() {
           </ProtectedRoute>
 
           {/* Protected route for Add Vendor Form - bryan */}
-          
-          {/* Protected route for EditBooking */}
-          <ProtectedRoute
-            exact
-            path="/editBooking"
-          >
-            {(user.approved && user.admin) ? <EditBooking /> : <Redirect to="/user" />}
-          </ProtectedRoute>
 
            {/* Protected route for Admin Panel - bryan */}
            <ProtectedRoute

@@ -43,13 +43,12 @@ function BookingsFolder() {
                     <>
                         {
                             bookings.map(booking => (
-                                <div className="brookings" key={booking.id}>
-                                    <h3> Property Number: <i><u> {booking.property_id} </u></i> </h3>
-                                    <h3> Is Booking Finalized: <i><u> {booking.finalized ? 'YES' : 'NO'} </u></i> </h3>
-                                    <h3> Customer First Name: <i><u> {booking.customer_first_name} </u></i> </h3>
-                                    <h3> Customer Last Name: <i><u> {booking.customer_last_name} </u></i> </h3>
-                                    <h3> Checkin Date: <i><u> {booking.check_in_date} </u></i> </h3>
-                                    <h3> Checkout Date: <i><u> {booking.check_out_date} </u></i> </h3>
+                                <div className="bookings" key={booking.id}>
+                                    <h4> Property Name: <i><u> {booking.property_name} </u></i> </h4>
+                                    <h4> Is Booking Finalized: <i><u> {booking.finalized ? 'YES' : 'NO'} </u></i> </h4>
+                                    <h4> Customer Name: <i><u> {booking.customer_first_name} {booking.customer_last_name} </u></i> </h4>
+                                    <h4> Checkin Date: </h4> <h3> <i><u> {new Date(booking.check_in_date).toLocaleDateString('en-US', dateProper)} </u></i> </h3>
+                                    <h4> Checkout Date: </h4> <h3> <i><u> {new Date(booking.check_out_date).toLocaleDateString('en-US', dateProper)} </u></i> </h3>
                                     <br></br>
                                     <button className="submit-btn" onClick={() => handleDetails(booking.id)}> VIEW DETAILS </button>
                                 </div>
