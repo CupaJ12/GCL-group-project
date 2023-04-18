@@ -73,9 +73,9 @@ function BookingSheet() {
 					<b>{booking.customer_first_name} {booking.customer_last_name}</b>
 					<br />
 					{booking.customer_phone}
-					<br />
+					{booking.customer_phone.length > 0 && <br />}
 					{booking.customer_email}
-					<br />
+					{booking.customer_email.length > 0 && <br />}
 					<div className="booking-sheet-dates">
 						<b>check in:</b> {check_in_date.toLocaleDateString('en-US', options)}
 						<br />
