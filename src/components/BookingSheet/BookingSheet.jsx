@@ -1,18 +1,4 @@
 //component for displaying a single booking.
-
-// TODO:
-// 1. make a GET request to the server to get the booking data (WIP)
-// 1A. make a saga to get the booking data (✅)
-// 1B. make a reducer to store the booking data (✅)
-
-// 2. display the booking data on the DOM
-// 3. make a DELETE request to the server to delete the booking
-// 4. make a PUT request to the server to edit the booking
-// 5. make a GET request to the server to get the comments for the booking
-// 6. make a POST request to the server to add a comment to the booking
-// 7. make a DELETE request to the server to delete a comment from the booking
-// 8. make a PUT request to the server to edit a comment from the booking
-
 import React from 'react';
 import './BookingSheet.css';
 import { useDispatch } from 'react-redux';
@@ -20,26 +6,29 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import EditTenantModal from "../EditTenantModal/EditTenantModal";
-import EditFinancialModal from "../EditFinancialModal/EditFinancialModal";
+import EditTenantModal from '../EditTenantModal/EditTenantModal';
+import EditFinancialModal from '../EditFinancialModal/EditFinancialModal';
+import MathComponent from '../MathComponent/MathComponent';
 
 function BookingSheet() {
 	// declare constants: reducers, etc:
 	const dispatch = useDispatch();
 	const history = useHistory();
+	// below passes the id from the url to the useParams hook
 	const { id } = useParams();
+	// below is a date formatter for the check in and check out dates
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
+	// below is a state variable for the edit tenant modal
 	const [showTenant, setShowTenant] = useState(false);
+	// below is a state variable for the edit financial modal
 	const [showFinancial, setShowFinancial] = useState(false);
-
+	// booking is the booking object from the database retrieved from the reducer
 	const booking = useSelector((store) => store.bookingByID);
-
-	// const check_in_date = new Date(booking.check_in_date);
-	// const check_out_date = new Date(booking.check_out_date);
+	// below are state variables for the check in and check out dates
 	const [check_in_date, set_check_in_date] = useState(new Date());
 	const [check_out_date, set_check_out_date] = useState(new Date());
 
-	// declare functions: dispatch, history, useEffect etc:
+	// declare  useEffect:
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
 	}, []);
@@ -48,15 +37,11 @@ function BookingSheet() {
 		set_check_in_date(new Date(booking.check_in_date));
 		set_check_out_date(new Date(booking.check_out_date));
 	}, [booking]);
+	// the above [booking] dependency array is necessary to update the check in and check out dates when the booking object is updated
 
-	// declare variables: useState, etc:
-
-	// handle functions: onClick, etc:
-
-	// conditional rendering: if no booking, return loading
-
+	// conditional rendering: if no booking, return error message
 	if (!booking) {
-		return <h1>loading...🤔</h1>;
+		return <h1>Error: Check Server/Database🤔</h1>;
 	}
 
 	return (
@@ -65,10 +50,9 @@ function BookingSheet() {
 				<div className='section-header'>Property</div>
 				<h2>{booking.property_name}</h2>
 			</div>
-			<div className='section-header'>Tenant
-				<button onClick={() => setShowTenant(true)}>
-					edit
-				</button>
+			<div className='section-header'>
+				Tenant
+				<button onClick={() => setShowTenant(true)}>edit</button>
 			</div>
 			<div className='tenant-container'>
 				<div className='tenant-input-div'>
@@ -113,10 +97,9 @@ function BookingSheet() {
 				</div>
 			</div>
 
-			<div className='section-header'>Financial
-				<button onClick={() => setShowFinancial(true)}>
-					Edit Financial
-				</button>
+			<div className='section-header'>
+				Financial
+				<button onClick={() => setShowFinancial(true)}>Edit Financial</button>
 			</div>
 			<div className='financial-container'>
 				<div className='financial-input-div'>
@@ -144,7 +127,7 @@ function BookingSheet() {
 			<div className='booking-amount'>
 				<section className='label'>Gross Booking Amount</section>
 				<section className='financial-input'>
-					<h4>GROSS🤮 BOOKING CALC HERE</h4>
+					$<MathComponent booking={booking} type='gross' />
 				</section>
 			</div>
 
@@ -189,7 +172,7 @@ function BookingSheet() {
 			<div className='booking-amount'>
 				<section className='label'>Net Payout</section>
 				<section className='financial-input'>
-					<h4>Net Payout Calc here💰</h4>
+					$<MathComponent booking={booking} type='net' />
 				</section>
 			</div>
 			<EditTenantModal
