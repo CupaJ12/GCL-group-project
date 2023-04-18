@@ -196,6 +196,16 @@ router.put('/financial/:id', (req, res) => {
         .catch((err) => {
             console.log('edit financial route failed:', err);
         });       
-})
+});
+
+router.delete('/comments/:id', (req, res) => {
+    const id = req.params.id;
+    const queryText = `DELETE FROM "comment" WHERE "id" = $1;`;
+    pool.query(queryText, [id])
+    .then((result) => res.sendStatus(201))
+    .catch((err) => {
+        console.log('server error deleting comment: ', err);
+    });
+});
 
 module.exports = router;

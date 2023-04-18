@@ -52,12 +52,23 @@ function* postComment(action) {
   }
 };
 
+function* deleteComment(action) {
+  const id = action.payload.id;
+  try {
+    yield axios.delete(`/api/booking/comments/${id}`);
+    yield put({ type: 'FETCH_COMMENTS', payload: action.payload.booking_id });
+  } catch (error) {
+    console.log('error with deleting comment: ', error);
+  }
+};
+
 function* bookingSaga() {
   yield takeEvery('POST_BOOKING', postBooking);
   yield takeEvery('UPDATE_TENANT', updateTenant);
   yield takeEvery('FETCH_BOOKINGS', fetchBookings);
   yield takeEvery('FETCH_COMMENTS', fetchComments);
   yield takeEvery('POST_COMMENT', postComment);
+  yield takeEvery('DELETE_COMMENT', deleteComment);
 }
 
 export default bookingSaga;

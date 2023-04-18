@@ -54,6 +54,16 @@ function BookingSheet() {
 		setComment('');
 	};
 
+	const handleDelete = (commentId) => {
+		dispatch({ 
+			type: 'DELETE_COMMENT', 
+			payload: {
+				id: commentId, 
+				booking_id: id
+			} 
+		});
+	}
+
 	// conditional rendering: if no booking, return error message
 	if (!booking) {
 		return <h1>Error: Check Server/Database🤔</h1>;
@@ -165,7 +175,10 @@ function BookingSheet() {
 				<div className="comments-div">
 					{comments.map((comment, index) => {
 						return (
-							<div key={`${comment.id}-${index}`} className="comment"><b>{comment.username}:</b> "{comment.comment}"</div>
+							<div key={`${comment.id}-${index}`} className="comment">
+								<b>{comment.username}:</b> "{comment.comment}"
+								{user.admin && <button onClick={() => handleDelete(comment.id)} className="delete-comment-btn">X</button>}
+							</div>
 						)
 					})}
 					<br />

@@ -93,13 +93,26 @@
     padding: 10px;
     margin: 5px;
     cursor: pointer;
-    border-color: #3c6a2f;
-    background-color: #3c6a2f;
+    background-color: #a8bba2;
     color: white;
 }
       
 .comment-submit-btn:hover {
-    background-color: #a8bba2;
+    background-color: #3c6a2f;
     border-color: #a8bba2;
+    transition: .3s;
+}
+
+.delete-comment-btn {
+    color: white;
+    border: none;
+    font-size: 15px;
+    border-radius: 5px;
+    background-color: #a8bba2;
+    margin-left: 10px;
+}
+
+.delete-comment-btn:hover {
+    background-color: #3c6a2f;
     transition: .3s;
 }
