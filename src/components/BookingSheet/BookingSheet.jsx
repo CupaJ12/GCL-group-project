@@ -22,6 +22,9 @@ function BookingSheet() {
 	const [showTenant, setShowTenant] = useState(false);
 	// below is a state variable for the edit financial modal
 	const [showFinancial, setShowFinancial] = useState(false);
+	const [change, setChange] = useState(0);
+
+
 	// booking is the booking object from the database retrieved from the reducer
 	const booking = useSelector((store) => store.bookingByID);
 	// below are state variables for the check in and check out dates
@@ -31,7 +34,13 @@ function BookingSheet() {
 	// declare  useEffect:
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		dispatch({ type: 'GET_VENDORS' });
 	}, []);
+
+	useEffect(() => {
+		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		dispatch({ type: 'GET_VENDORS' });
+	}, [change]);
 
 	useEffect(() => {
 		set_check_in_date(new Date(booking.check_in_date));
@@ -157,7 +166,7 @@ function BookingSheet() {
 				<div className='vendor-input-div'>
 					<section className='label'>Tax Responsibility</section>
 					<section className='vendor-input'>
-						{booking.tax_responsibility ? 'Us' : 'Them'}
+						{booking.tax_responsible ? 'Us' : 'Them'}
 					</section>
 				</div>
 
@@ -177,6 +186,7 @@ function BookingSheet() {
 			</div>
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
+				setChange={() => setChange(change + 1)}
 				show={showTenant}
 				booking={booking}
 			/>

@@ -1,4 +1,4 @@
-.modal {
+/* .modal {
     position: fixed;
     left: 0;
     top: 0;
@@ -19,7 +19,6 @@
     padding: 30px;
     width: 50%;
     border-radius: 30px;
-    /* transform: translateY(-200px); */
     transition: all 0.3s ease-in-out;
 }
 .modal-input-div {
@@ -53,4 +52,126 @@
 }
 .modal.exit .modal-content {
     transform: translateY(-200px);
+} */
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
 }
+
+.tenant-modal-content {
+    position: absolute;
+    padding: 40px;
+    margin: auto;
+    width: 50%;
+    height: 500px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    overflow: scroll;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.modal.enter-done {
+    opacity: 1;
+    pointer-events: visible;
+}
+
+.modal.exit {
+    opacity: 0;
+}
+
+.modal.enter-done .financial-modal-content {
+    transform: translateY(0);
+}
+
+.modal.exit .financial-modal-content {
+    transform: translateY(-200px);
+}
+
+.tenant-modal-input-div {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-tenant-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: auto;
+}
+
+.tenant-section-header {
+    width: auto;
+    margin-bottom: 10px;
+    background-color: #3c6a2f;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: medium;
+    padding-top: .5px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cancel-add-tenant-btn {
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #a8bba2;
+    box-shadow: 0 0 4px black;
+    color: white;
+}
+
+.cancel-add-tenant-btn:hover {
+    background-color: #3c6a2f;
+    color: white;
+    box-shadow: 0 0 15px #a8bba2;
+}
+
+.tenant-nav-btn-div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 15px;
+    column-width: 15rem;
+    /* width: 95%; */
+    /* margin: auto; */
+    /* padding-top: 15px; */
+    margin-bottom: 0px;
+}
+
+.edit-tenant-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-style: solid;
+    border-color: #3c6a2f;
+    padding: 10px;;
+}
+
+
+
+
+
+
+
+
+
+
+
