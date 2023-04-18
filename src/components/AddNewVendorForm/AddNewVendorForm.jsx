@@ -30,14 +30,14 @@ const AddNewVendorForm = ({ modalVisible, onClose }) => {
         }
     };
 
-    const onSubmit = () => {
+    const onSubmit = (event) => {
         event.preventDefault();
         dispatch({
             type: 'POST_NEW_VENDOR',
             payload: {vendorName}
         });
         setVendorName('');
-        history.goBack();
+        onClose();
     };
 
     return ReactDOM.createPortal(

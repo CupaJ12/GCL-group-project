@@ -24,8 +24,6 @@ import BookingDetails from '../BookingsFolder/BookingDetails';
 import BookingForm from '../BookingForm/BookingForm';
 import BookingSheet from '../BookingSheet/BookingSheet';
 import FindBooking from '../FindBooking/FindBooking';
-import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
-import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import './App.css';
 import ModalParent from '../ModalParent/ModalParent';
@@ -42,14 +40,10 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}
         <Switch>
-          {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
 
-          {/* Visiting localhost:3000/about will show the about page. */}
           <Route
-            // shows AboutPage at all times (logged in or not)
             exact
             path="/about"
           >
@@ -64,12 +58,7 @@ function App() {
             <ModalParent />
           </Route>
 
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
@@ -77,18 +66,17 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >
-            <InfoPage />
+            {user.approved ? <InfoPage /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           {/* Protected route for Booking Sheet - Jaffer */}
           <ProtectedRoute
             path="/bookingsheet/:id"
           >
-            <BookingSheet />
+            {user.approved ? <BookingSheet /> : <Redirect to="/user" />}
           </ProtectedRoute>
           
           {/* Protected route for FindBooking */}
@@ -96,24 +84,15 @@ function App() {
           exact
           path="/findBooking"
           >
-            <FindBooking />
+            {user.approved ? <FindBooking /> : <Redirect to="/user" />}
           </ProtectedRoute>
-        
-
-          {/* Protected route for Add Property Form - bryan */}
+          
+          {/* Protected route for EditBooking */}
           <ProtectedRoute
             exact
-            path="/addproperty"
+            path="/editBooking"
           >
-            <AddNewPropertyForm />
-          </ProtectedRoute>
-
-          {/* Protected route for Add Vendor Form - bryan */}
-          <ProtectedRoute
-            exact
-            path="/addvendor"
-          >
-            <AddNewVendorForm />
+            {(user.approved && user.admin) ? <EditBooking /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
            {/* Protected route for Admin Panel - bryan */}
@@ -121,28 +100,28 @@ function App() {
             exact
             path="/adminpanel"
           >
-            <AdminPanel />
+            {(user.approved && user.admin) ? <AdminPanel /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/allbookings"
           >
-            <BookingsFolder />
+            {user.approved ? <BookingsFolder /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/bookingdetails/:id"
           >
-            <BookingDetails />
+            {user.approved ? <BookingDetails /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/bookingform"
           >
-            <BookingForm />
+            {(user.approved && user.admin) ? <BookingForm /> : <Redirect to="/user" />}
           </ProtectedRoute>
 
           <Route
@@ -150,11 +129,8 @@ function App() {
             path="/login"
           >
             {user.id ?
-              // If the user is already logged in, 
-              // redirect to the /user page
               <Redirect to="/user" />
               :
-              // Otherwise, show the login page
               <LoginPage />
             }
           </Route>
@@ -164,11 +140,8 @@ function App() {
             path="/registration"
           >
             {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
               <Redirect to="/user" />
               :
-              // Otherwise, show the registration page
               <RegisterPage />
             }
           </Route>
@@ -178,16 +151,12 @@ function App() {
             path="/home"
           >
             {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
               <Redirect to="/user" />
               :
-              // Otherwise, show the Landing page
               <LandingPage />
             }
           </Route>
 
-          {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
@@ -196,6 +165,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
