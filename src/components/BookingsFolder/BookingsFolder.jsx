@@ -7,8 +7,7 @@ function BookingsFolder() {
     const bookings = useSelector((store) => store.bookingsReducer);
     const history = useHistory();
     const dispatch = useDispatch();
-
-    const [search, setSearch] = useState();
+    const dateProper = { year: 'numeric', month: 'long', day: 'numeric' };
 
     useEffect(() => {
         dispatch({
@@ -34,20 +33,10 @@ function BookingsFolder() {
 
     return (
         <div className="booking-form-container">
-            {/* Plan is to finish this GET bookings by search query as a group */}
-            {/* insert on div line when ready to start working on it onSubmit={handleSearch} */}
-            {/* insert on button line when ready to start working on it 'onChange={(event) => setSearch(event.target.value)} */}
-            {/* <div>
-                <input className="tenant-input"></input>
-                <button className="submit-btn">
-                    Search
-                </button>
-            </div> */}
 
             <h1 className="title" >
                 <u> 10 most recent bookings by date: </u>
             </h1>
-
 
             <section>
                 {bookings.length > 0 &&
@@ -56,22 +45,11 @@ function BookingsFolder() {
                             bookings.map(booking => (
                                 <div className="brookings" key={booking.id}>
                                     <h3> Property Number: <i><u> {booking.property_id} </u></i> </h3>
-                                    <h3> Is Booking Finalized?: <i><u> {booking.finalized} </u></i> </h3>
+                                    <h3> Is Booking Finalized: <i><u> {booking.finalized ? 'YES' : 'NO'} </u></i> </h3>
                                     <h3> Customer First Name: <i><u> {booking.customer_first_name} </u></i> </h3>
                                     <h3> Customer Last Name: <i><u> {booking.customer_last_name} </u></i> </h3>
                                     <h3> Checkin Date: <i><u> {booking.check_in_date} </u></i> </h3>
                                     <h3> Checkout Date: <i><u> {booking.check_out_date} </u></i> </h3>
-                                    {/* <h3> Customer Address: <i><u> {booking.customer_address} </u></i> </h3>
-                            <h3> Customer Email: <i><u> {booking.customer_email} </u></i> </h3>
-                            <h3> Vendor: <i><u> {booking.vendor} </u></i> </h3>
-                            <h3> Tax Responsibility: <i><u> {booking.tax_responsible} </u></i> </h3>
-                            <h3> Pet Fee: <i><u> {booking.pet_fee} </u></i> </h3>
-                            <h3> Cost Per Night: <i><u> {booking.cost_per_night} </u></i> </h3>
-                            <h3> Vendor Commission: <i><u> {booking.vendor_commission} </u></i> </h3>
-                            <h3> Vendor Fee: <i><u> {booking.vendor_fee} </u></i> </h3>
-                            <h3> Booking Discount: <i><u> {booking.discount} </u></i> </h3>
-                            <h3> Lodging Tax: <i><u> {booking.lodging_tax} </u></i> </h3>
-                            <h3> Is Booking Finalized?: <i><u> {booking.finalized} </u></i> </h3> */}
                                     <br></br>
                                     <button className="submit-btn" onClick={() => handleDetails(booking.id)}> VIEW DETAILS </button>
                                 </div>
