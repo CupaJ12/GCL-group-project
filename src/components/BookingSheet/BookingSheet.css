@@ -1,0 +1,75 @@
+.booking-sheet-container {
+    width: 95%;
+    margin: auto;
+    padding-top: 30px;
+    margin-bottom: 30px;
+}
+
+.booking-sheet-tenant-div {
+    color: #3c6a2f;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-bottom: 13px;
+}
+
+.booking-sheet-financial-div {
+    color: #3c6a2f;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-bottom: 13px;
+}
+
+.booking-sheet-dates {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.booking-sheet-edit-btn {
+    float: right;
+    margin-right: 20px;
+    border: none;
+    background: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.booking-sheet-section-header {
+    width: 95%;
+    margin: auto;
+    background-color: #3c6a2f;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.property-header {
+    margin: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #3c6a2f;
+}
+
+.booking-sheet-financial-label {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.booking-sheet-financial {
+    float: right;
+    margin-right: 40px;
+}
+
+.divider {
+    background-color: #a8bba2;
+    border: none;
+    width: 80%;
+    border-radius: 27px 27px 27px 27px;
+    height: 2px;
+}
