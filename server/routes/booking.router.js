@@ -108,6 +108,7 @@ router.get('/', (req, res) => {
     }
 })
 
+// update tenants
 router.put('/tenant/:id', (req, res) => {
     console.log('edit tenant route request made', req.body);
     const id = req.params.id;
@@ -115,16 +116,43 @@ router.put('/tenant/:id', (req, res) => {
     const lastName = req.body.lastName;
     const email = req.body.email;
     const phone = req.body.phone;
+    const checkIn = req.body.checkIn;
+    const checkOut = req.body.checkOut;
+    console.log(firstName);
     const queryText = `UPDATE "booking"
-        SET "customer_first_name" = $2, "customer_last_name" = $3, "customer_email" = $4, "customer_phone" = $5
+        SET "customer_first_name" = $2, "customer_last_name" = $3, "customer_email" = $4, "customer_phone" = $5, "check_in_date" = $6, "check_out_date" = $7
         WHERE "id" = $1;`;
     pool
-        .query(queryText, [id, firstName, lastName, email, phone])
+        .query(queryText, [id, firstName, lastName, email, phone, checkIn, checkOut])
         .then ((result) => res.sendStatus(201))
         .catch((err) => {
             console.log('edit tenant route failed:', err);
         });
-})
+});
 
+//update financial
+router.put('/financial/:id', (req, res) => {
+    console.log('edit financial route request made', req.body);
+    const id = req.params.id;
+    const costPerNight = req.body.cost_per_night;
+    const cleaningFee = req.body.cleaning_fee;
+    const petFee = req.body.pet_fee;
+    const lodgingTax = req.body.lodging_tax;
+    const taxResponsible = req.body.tax_responsible;
+    const vendorFee = req.body.vendor_fee;
+    const discount = req.body.discount;
+    const finalized = req.body.finalized;
+    const vendorCommission = req.body.vendor_commission;
+    const vendor = req.body.vendor;
+    const queryText = `UPDATE "booking"
+        SET "cost_per_night" = $2, "cleaning_fee" = $3, "pet_fee" = $4, "lodging_tax" = $5, "tax_responsible" = $6, "vendor_fee" = $7, "discount" = $8, "finalized" = $9, "vendor_commission" = $10, "vendor" = $11
+        WHERE "id" = $1 `
+    pool    
+        .query(queryText, [id, costPerNight, cleaningFee, petFee, lodgingTax, taxResponsible, vendorFee, discount, finalized, vendorCommission, vendor])
+        .then((result) => res.sendStatus(201))
+        .catch((err) => {
+            console.log('edit financial route failed:', err);
+        });       
+})
 
 module.exports = router;

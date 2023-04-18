@@ -22,6 +22,9 @@ function BookingSheet() {
 	const [showTenant, setShowTenant] = useState(false);
 	// below is a state variable for the edit financial modal
 	const [showFinancial, setShowFinancial] = useState(false);
+	const [change, setChange] = useState(0);
+
+
 	// booking is the booking object from the database retrieved from the reducer
 	const booking = useSelector((store) => store.bookingByID);
 	// below are state variables for the check in and check out dates
@@ -33,7 +36,13 @@ function BookingSheet() {
 	// declare  useEffect:
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		dispatch({ type: 'GET_VENDORS' });
 	}, []);
+
+	useEffect(() => {
+		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
+		dispatch({ type: 'GET_VENDORS' });
+	}, [change]);
 
 	useEffect(() => {
 		set_check_in_date(new Date(booking.check_in_date));
@@ -48,27 +57,30 @@ function BookingSheet() {
 
 	return (
 		<div className="booking-form-container">
+
 			<div className="property-select-container">
 				<div className="section-header">Property</div>
 				<section className="property-header">{booking.property_name}</section>
 			</div>
+
 			<div className="booking-sheet-section-header">
 				Tenant
 				<button className="booking-sheet-edit-btn" onClick={() => setShowTenant(true)}>edit</button>
 			</div>
+
 			<div className="booking-sheet-container">
 				<div className="booking-sheet-tenant-div">
-						<b>{booking.customer_first_name} {booking.customer_last_name}</b>
+					<b>{booking.customer_first_name} {booking.customer_last_name}</b>
+					<br />
+					{booking.customer_phone}
+					<br />
+					{booking.customer_email}
+					<br />
+					<div className="booking-sheet-dates">
+						<b>check in:</b> {check_in_date.toLocaleDateString('en-US', options)}
 						<br />
-						{booking.customer_phone}
-						<br />
-						{booking.customer_email}
-						<br />
-						<div className="booking-sheet-dates">
-							<b>check in:</b> {check_in_date.toLocaleDateString('en-US', options)}
-							<br />
-							<b>check out:</b> {check_out_date.toLocaleDateString('en-US', options)}
-						</div>
+						<b>check out:</b> {check_out_date.toLocaleDateString('en-US', options)}
+					</div>
 				</div>
 			</div>
 
@@ -76,6 +88,7 @@ function BookingSheet() {
 				Financial
 				<button className="booking-sheet-edit-btn" onClick={() => setShowFinancial(true)}>edit</button>
 			</div>
+
 			<div className="booking-sheet-container">
 				<div className="booking-sheet-financial-div">
 					<section className="booking-sheet-financial-label">Length Of Stay:</section>
@@ -101,6 +114,7 @@ function BookingSheet() {
 					$<MathComponent booking={booking} type='gross' /> {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
 				</div>
 			</div>
+
 			<hr className="divider"/>
 
 			<div className="booking-sheet-container">
@@ -117,14 +131,8 @@ function BookingSheet() {
 					<section className="booking-sheet-financial-label">Discount:</section>
 					<section className="booking-sheet-financial">{booking.discount}</section>
 				</div>
-			</div>
+			</div>		
 
-			<div className="booking-amount">
-				<h2 className="financial-headers">Gross Booking Amount</h2>
-				<div className="money-total">
-					$<MathComponent booking={booking} type='net' /> {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
-				</div>
-			</div>
 			<hr className="divider"/>
 
 			<div className="booking-sheet-container">
@@ -139,6 +147,7 @@ function BookingSheet() {
 
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
+				setChange={() => setChange(change + 1)}
 				show={showTenant}
 				booking={booking}
 			/>
@@ -148,7 +157,7 @@ function BookingSheet() {
 				booking={booking}
 			/>
 		</div>
-	);
-}
+	)
+};
 
 export default BookingSheet;

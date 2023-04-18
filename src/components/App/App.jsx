@@ -25,8 +25,8 @@ import BookingForm from '../BookingForm/BookingForm';
 import BookingSheet from '../BookingSheet/BookingSheet';
 import FindBooking from '../FindBooking/FindBooking';
 import AdminPanel from '../AdminPanel/AdminPanel';
+import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import './App.css';
-import EditBooking from '../EditBooking/EditBooking';
 import ModalParent from '../ModalParent/ModalParent';
 
 function App() {
@@ -87,15 +87,15 @@ function App() {
           >
             {user.approved ? <FindBooking /> : <Redirect to="/user" />}
           </ProtectedRoute>
-          
-          {/* Protected route for EditBooking */}
+
+          {/* Protected route for Add Property Form - bryan */}
           <ProtectedRoute
             exact
-            path="/editBooking"
+            path="/addproperty"
           >
-            {(user.approved && user.admin) ? <EditBooking /> : <Redirect to="/user" />}
+            <AddNewPropertyForm />
           </ProtectedRoute>
-
+      
            {/* Protected route for Admin Panel - bryan */}
            <ProtectedRoute
             exact
