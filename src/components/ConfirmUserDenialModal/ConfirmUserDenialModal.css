@@ -10,3 +10,36 @@
     border-radius: 20px;
     text-align: center;
 }
+
+.validation-modal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.319);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
+}
+
+
+.validation-modal.enter-done {
+    opacity: 1;
+    pointer-events: visible;
+}
+
+.validation-modal.exit {
+    opacity: 0;
+}
+
+.validation-modal.enter-done .cancel-validation-container {
+    transform: translateY(0);
+}
+
+.validation-modal.exit .cancel-validation-container {
+    transform: translateY(-200px);
+}
