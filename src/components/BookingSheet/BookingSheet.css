@@ -73,3 +73,35 @@
     border-radius: 27px 27px 27px 27px;
     height: 2px;
 }
+
+.comments-div {
+    margin-top: 22px;
+}
+
+.comment {
+    color: #3c6a2f;
+    margin-left: 30px;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+.comment-submit-btn {
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 5px black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-color: #3c6a2f;
+    background-color: #3c6a2f;
+    color: white;
+}
+      
+.comment-submit-btn:hover {
+    box-shadow: 0 0 0px black;
+    background-color: #a8bba2;
+    border-color: #a8bba2;
+    transition: .3s;
+}

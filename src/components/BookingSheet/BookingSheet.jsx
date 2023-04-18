@@ -11,44 +11,48 @@ import EditFinancialModal from '../EditFinancialModal/EditFinancialModal';
 import MathComponent from '../MathComponent/MathComponent';
 
 function BookingSheet() {
-	// declare constants: reducers, etc:
+	const [comment, setComment] = useState('');
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// below passes the id from the url to the useParams hook
 	const { id } = useParams();
-	// below is a date formatter for the check in and check out dates
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
-	// below is a state variable for the edit tenant modal
 	const [showTenant, setShowTenant] = useState(false);
-	// below is a state variable for the edit financial modal
 	const [showFinancial, setShowFinancial] = useState(false);
 	const [change, setChange] = useState(0);
-
-
-	// booking is the booking object from the database retrieved from the reducer
 	const booking = useSelector((store) => store.bookingByID);
-	// below are state variables for the check in and check out dates
 	const [check_in_date, set_check_in_date] = useState(new Date());
 	const [check_out_date, set_check_out_date] = useState(new Date());
+	const comments = useSelector((store) => store.comments);
+	const user = useSelector((store) => store.user);
 
-	console.log('booking: ', booking);
 
-	// declare  useEffect:
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
 		dispatch({ type: 'GET_VENDORS' });
+		dispatch({ type: 'FETCH_COMMENTS', payload: Number(id)});
 	}, []);
 
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
-		dispatch({ type: 'GET_VENDORS' });
+		dispatch({ type: 'GET_VENDORS', payload: Number(id) });
 	}, [change]);
 
 	useEffect(() => {
 		set_check_in_date(new Date(booking.check_in_date));
 		set_check_out_date(new Date(booking.check_out_date));
 	}, [booking]);
-	// the above [booking] dependency array is necessary to update the check in and check out dates when the booking object is updated
+
+	const handleSubmit = () => {
+		dispatch({ 
+			type: 'POST_COMMENT', 
+			payload: {
+				comment, 
+				booking_id: id, 
+				user_id: user.id
+			}
+		});
+		setComment('');
+	};
 
 	// conditional rendering: if no booking, return error message
 	if (!booking) {
@@ -153,6 +157,36 @@ function BookingSheet() {
 					<section className="booking-sheet-financial">{booking.finalized ? 'Yes' : 'No'}</section>
 				</div>
 			</div>
+
+			<div className="booking-sheet-section-header">
+				Comments
+			</div>
+			{comments.length > 0 &&
+				<div className="comments-div">
+					{comments.map((comment, index) => {
+						return (
+							<div key={`${comment.id}-${index}`} className="comment"><b>{comment.username}:</b> "{comment.comment}"</div>
+						)
+					})}
+					<br />
+					<br />
+					<hr className="divider"/>
+					<div className="comment-input-div">
+                        <label className="label" htmlFor="comment">Add A Comment</label>
+                            
+                        <input
+                            id="comment"
+                            name="comment"
+                            type="text"
+                            value={comment}
+                            placeholder="new comment"
+                            className="tenant-input"
+                            onChange={(event) => {setComment(event.target.value)}}
+                        />
+						<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
+                    </div>          
+				</div>
+			}
 
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
