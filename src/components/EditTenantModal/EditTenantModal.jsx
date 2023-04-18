@@ -7,40 +7,46 @@ import CancelValidation from '../CancelValidationModal/CancelValidationModal';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import dayjs from "dayjs";
+import { useParams } from 'react-router-dom';
 import './EditTenantModal.css';
+
 function EditTenantModal(props) {
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
-    const [firstName, setFirstName] = useState('');
+    const [firstName, setFirstName] = useState(props.booking.customer_first_name);
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
-    const [change, setChange] = useState(0);
-
+    // const [change, setChange] = useState(0);
+    const [canSubmit, setCanSubmit] = useState(false)
+    const { id } = useParams();
 
     const dispatch = useDispatch();
-    // fetched booking info
-    const booking = props.booking;
-    //phone input masking
-    // set tenant info so it can show up in inputs
-   
 
     useEffect(() => {
         setCancelModalVisible(false);
     }, [props.show]);
 
+
     useEffect(() => {
-        setFirstName(booking.customer_first_name);
-        setLastName(booking.customer_last_name);
-        setEmail(booking.customer_email);
-        setPhone(booking.customer_phone);
-        // setCheckIn(booking.check_in_date);
-        // setCheckOut(booking.check_out_date);
-        // setCheckIn(new Date(booking.check_in_date));
-		// setCheckOut(new Date(booking.check_out_date))
-    }, [booking]);
+        setFirstName(props.booking.customer_first_name);
+        setLastName(props.booking.customer_last_name);
+        setEmail(props.booking.customer_email);
+        setPhone(props.booking.customer_phone);
+        setCheckIn(dayjs(new Date(props.booking.check_in_date).toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+        })));
+        setCheckOut(dayjs(new Date(props.booking.check_out_date).toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+        })));
+    }, [props.booking]);
+
 
     // dispatch updated inputs to updateTenant saga
     const saveTenant = () => {
@@ -48,14 +54,19 @@ function EditTenantModal(props) {
         dispatch({
             type: 'EDIT_TENANT_INFO',
             payload: {
-                id: booking.id,
+                id: props.booking.id,
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 phone: phone,
+                checkIn: checkIn,
+                checkOut: checkOut
             }
         });
+       props.setChange();
     };
+
+
     // ReactDOM.createPortal create the div outside of the parent so it won't break the parent's css
     return ReactDOM.createPortal(
         // CSSTransition is a built-in method that render div into or remove the div into the DOM
@@ -66,18 +77,13 @@ function EditTenantModal(props) {
             timeout={{ enter: 50, exit: 200 }}
         >
             <div className="modal">
-                <div className="property-form-container">
-                    {/* <div className="modal-header"> */}
-                    {/* <button className="close-modal-btn" onClick={props.onClose}>
-                            X
-                        </button> */}
-                    {/* </div> */}
-                    <form className="edit-tenant-form" onSubmit={saveTenant}>
-                        <div className="section-header">
+                <div className="tenant-modal-content">
+                    <form className="edit-tenant-form" onSubmit={() => saveTenant()} >
+                        <div className="tenant-section-header">
                             Edit Tenant
                         </div>
                         <div className="edit-tenant-container">
-                            <div className="modal-input-div">
+                            <div className="tenant-modal-input-div">
                                 <label className="label" htmlFor="first-name">
                                     First Name:
                                     <input
@@ -85,11 +91,11 @@ function EditTenantModal(props) {
                                         type="text"
                                         name="first-name"
                                         value={firstName}
-                                        onChange={(e) => setFirstName(e.target.value)}
+                                        onChange={(e) => { setFirstName(e.target.value); setCanSubmit(true) }}
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="tenant-modal-input-div">
                                 <label className="label" htmlFor="last-name">
                                     Last Name:
                                     <input
@@ -97,11 +103,11 @@ function EditTenantModal(props) {
                                         type="text"
                                         name="last-name"
                                         value={lastName}
-                                        onChange={(e) => setLastName(e.target.value)}
+                                        onChange={(e) => { setLastName(e.target.value); setCanSubmit(true) }}
                                     />
                                 </label>
                             </div>
-                            <div className="modal-input-div">
+                            <div className="tenant-modal-input-div">
                                 <label className="label" htmlFor="email">
                                     Email:
                                     <input
@@ -109,7 +115,7 @@ function EditTenantModal(props) {
                                         type="text"
                                         name="email"
                                         value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) => { setEmail(e.target.value); setCanSubmit(true) }}
                                     />
                                 </label>
                             </div>
@@ -133,7 +139,7 @@ function EditTenantModal(props) {
                                         <DatePicker
                                             label={'check-in *'}
                                             value={checkIn}
-                                            onChange={(newValue) => { setCheckIn(newValue); setChange(change + 1) }}
+                                            onChange={(newValue) => { setCheckIn(newValue); setCanSubmit(true) }}
                                             showDaysOutsideCurrentMonth
                                         // disabled={feesFinalized}
                                         />
@@ -145,24 +151,25 @@ function EditTenantModal(props) {
                                         <DatePicker
                                             label={'check-out *'}
                                             value={checkOut}
-                                            onChange={(newValue) => { setCheckOut(newValue); setChange(change + 1) }}
+                                            onChange={(newValue) => { setCheckOut(newValue); setCanSubmit(true) }}
                                             showDaysOutsideCurrentMonth
                                         // disabled={feesFinalized}
                                         />
                                     </LocalizationProvider>
                                 </div>
                             </div>
-                            <div className="nav-btn-div">
+                            <div className="tenant-nav-btn-div">
                                 <button
                                     type="submit"
                                     className="submit-btn"
+                                    disabled={!canSubmit}
                                     onClick={props.onClose}
                                 >
                                     SUBMIT
                                 </button>
                                 <button
                                     type="button"
-                                    className="cancel-add-property-btn"
+                                    className="cancel-add-tenant-btn"
                                     onClick={() => setCancelModalVisible(true)}
                                 >
                                     CANCEL
