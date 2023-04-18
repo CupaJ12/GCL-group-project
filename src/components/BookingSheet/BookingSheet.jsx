@@ -73,9 +73,11 @@ function BookingSheet() {
 					<b>{booking.customer_first_name} {booking.customer_last_name}</b>
 					<br />
 					{booking.customer_phone}
-					{booking.customer_phone.length > 0 && <br />}
+					<br />
+					{/* {booking.customer_phone.length > 0 && <br />} */}
 					{booking.customer_email}
-					{booking.customer_email.length > 0 && <br />}
+					<br />
+					{/* {booking.customer_email.length > 0 && <br />} */}
 					<div className="booking-sheet-dates">
 						<b>check in:</b> {check_in_date.toLocaleDateString('en-US', options)}
 						<br />
@@ -130,6 +132,13 @@ function BookingSheet() {
 					<br />
 					<section className="booking-sheet-financial-label">Discount:</section>
 					<section className="booking-sheet-financial">{booking.discount}</section>
+				</div>
+			</div>
+
+			<div className="booking-amount">
+				<h2 className="financial-headers">Net Payout</h2>
+				<div className="money-total">
+					$<MathComponent booking={booking} type='net' /> {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
 				</div>
 			</div>		
 
