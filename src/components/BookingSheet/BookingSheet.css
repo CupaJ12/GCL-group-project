@@ -89,7 +89,6 @@
     font-size: 15px;
     font-weight: bold;
     border: none;
-    box-shadow: 0 0 5px black;
     border-radius: 10px;
     padding: 10px;
     margin: 5px;
@@ -100,7 +99,6 @@
 }
       
 .comment-submit-btn:hover {
-    box-shadow: 0 0 0px black;
     background-color: #a8bba2;
     border-color: #a8bba2;
     transition: .3s;
