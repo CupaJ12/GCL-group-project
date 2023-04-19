@@ -5,7 +5,9 @@ const router = express.Router();
 router.get('/', (req, res) => {
   // GET route code here
   const queryText =
-    `SELECT * FROM "booking"
+    `SELECT "booking".*, "property"."name" AS "property_name"
+    FROM "booking"
+    JOIN "property" ON "booking"."property_id" = "property"."id"
     ORDER BY "check_in_date" DESC
     LIMIT 10`;
   pool.query(queryText)

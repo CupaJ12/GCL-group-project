@@ -202,7 +202,17 @@ input {
 }
 
 .bookings {
+  object-position: center;
   text-align: center;
+  margin-top: 35px;
+  display: block;
+  border-color: black;
+  border-style: ridge;
+  border-radius: 50px;
+  height: auto;
+  width: auto;
+  position: relative;
+  background-color: #a8bba2;
 }
 
 .button {
