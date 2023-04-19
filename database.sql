@@ -45,6 +45,7 @@ CREATE TABLE "booking" (
 	"discount" MONEY NOT NULL,
 	"lodging_tax" MONEY NOT NULL,
 	"finalized" BOOLEAN,
+	"date_entry" TIMESTAMP DEFAULT NOW(),
 	"property_id" INT REFERENCES "property"
 );
 
