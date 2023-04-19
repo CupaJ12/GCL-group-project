@@ -1,9 +1,11 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
 import '../CancelValidationModal/CancelValidationModal.css';
 
 const BookingConfirmationModal = ({ onConfirm, show }) => {
+    const history = useHistory();
 
     // ReactDOM.createPortal create the div outside of the parent so it won't break the parent's css
     return ReactDOM.createPortal(
@@ -16,10 +18,11 @@ const BookingConfirmationModal = ({ onConfirm, show }) => {
         >
             <div className="modal">
 
-                <div className="cancel-validation-container">
+                <div className="booking-confirmation-container">
                     <h1>New booking created!</h1>
                     
-                    <div className="cancel-validation-btn"><button className="submit-btn" onClick={onConfirm}>Exit</button></div>
+                    <div className="cancel-validation-btn"><button className="add-another-booking-btn" onClick={onConfirm}>Add Another Booking</button></div>
+                    <div className="cancel-validation-btn"><button className="home-btn" onClick={() => history.push('/')}>Home</button></div>
                 </div>
             </div>
         </CSSTransition>,

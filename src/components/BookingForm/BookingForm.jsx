@@ -497,7 +497,7 @@ const BookingForm = () => {
                         className="cancel-btn"
                         onClick={() => setCancelModalVisible(true)}
                     >
-                        CANCEL
+                        HOME
                     </button>
                 </div>
             </form>
