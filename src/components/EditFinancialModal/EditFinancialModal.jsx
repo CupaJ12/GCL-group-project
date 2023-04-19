@@ -92,7 +92,7 @@ function EditFinancialModal(props) {
                 <div className="financial-modal-content">
                     <form className="edit-financial-form" onSubmit={() => saveFinancial()}>
                         <div className="financial-section-header">
-                            <h3>Edit Financial</h3>
+                            Edit Financial
                         </div>
                         <div className="edit-financial-container">
                             <div className="financial-modal-input-div">

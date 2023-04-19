@@ -57,14 +57,25 @@
 }
 
 .financial-section-header {
-    width: auto;
+    /* width: auto;
     margin-bottom: 10px;
     background-color: #3c6a2f;
     color: white;
     padding-left: 20px;
     padding-right: 20px;
     font-size: medium;
-    padding-top: .5px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif; */
+
+    width: auto;
+    margin-bottom: 10px;
+    background-color: #3c6a2f;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border-radius: 10px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
@@ -107,7 +118,9 @@
 
 .financial-divider {
     background-color: #3c6a2f;
-    height: 20px;
+    height: 3px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
     border-radius: 10px;
     margin-bottom: 10px;
 }
