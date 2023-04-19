@@ -11,42 +11,58 @@ import EditFinancialModal from '../EditFinancialModal/EditFinancialModal';
 import MathComponent from '../MathComponent/MathComponent';
 
 function BookingSheet() {
-	// declare constants: reducers, etc:
+	const [comment, setComment] = useState('');
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// below passes the id from the url to the useParams hook
 	const { id } = useParams();
-	// below is a date formatter for the check in and check out dates
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
-	// below is a state variable for the edit tenant modal
 	const [showTenant, setShowTenant] = useState(false);
-	// below is a state variable for the edit financial modal
 	const [showFinancial, setShowFinancial] = useState(false);
 	const [change, setChange] = useState(0);
-
-
-	// booking is the booking object from the database retrieved from the reducer
 	const booking = useSelector((store) => store.bookingByID);
-	// below are state variables for the check in and check out dates
 	const [check_in_date, set_check_in_date] = useState(new Date());
 	const [check_out_date, set_check_out_date] = useState(new Date());
+	const comments = useSelector((store) => store.comments);
+	const user = useSelector((store) => store.user);
 
-	// declare  useEffect:
+
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
 		dispatch({ type: 'GET_VENDORS' });
+		dispatch({ type: 'FETCH_COMMENTS', payload: Number(id)});
 	}, []);
 
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
-		dispatch({ type: 'GET_VENDORS' });
+		dispatch({ type: 'GET_VENDORS', payload: Number(id) });
 	}, [change]);
 
 	useEffect(() => {
 		set_check_in_date(new Date(booking.check_in_date));
 		set_check_out_date(new Date(booking.check_out_date));
 	}, [booking]);
-	// the above [booking] dependency array is necessary to update the check in and check out dates when the booking object is updated
+
+	const handleSubmit = () => {
+		dispatch({ 
+			type: 'POST_COMMENT', 
+			payload: {
+				comment, 
+				booking_id: id, 
+				user_id: user.id
+			}
+		});
+		setComment('');
+	};
+
+	const handleDelete = (commentId) => {
+		dispatch({ 
+			type: 'DELETE_COMMENT', 
+			payload: {
+				id: commentId, 
+				booking_id: id
+			} 
+		});
+	}
 
 	// conditional rendering: if no booking, return error message
 	if (!booking) {
@@ -54,136 +70,136 @@ function BookingSheet() {
 	}
 
 	return (
-		<div className='booking-form-container'>
-			<div className='property-select-container'>
-				<div className='section-header'>Property</div>
-				<h2>{booking.property_name}</h2>
+		<div className="booking-form-container">
+
+			<div className="property-select-container">
+				<div className="section-header">Property</div>
+				<section className="property-header">{booking.property_name}</section>
 			</div>
-			<div className='section-header'>
+
+			<div className="booking-sheet-section-header">
 				Tenant
-				<button onClick={() => setShowTenant(true)}>edit</button>
+				<button className="booking-sheet-edit-btn" onClick={() => setShowTenant(true)}>edit</button>
 			</div>
-			<div className='tenant-container'>
-				<div className='tenant-input-div'>
-					<section className='label'>First Name</section>
-					<section className='tenant-input'>
-						{booking.customer_first_name}
-					</section>
-				</div>
 
-				<div className='tenant-input-div'>
-					<section className='label'>Last Name</section>
-					<section className='tenant-input'>
-						{booking.customer_last_name}
-					</section>
-				</div>
-
-				<div className='tenant-input-div'>
-					<section className='label'>Phone</section>
-					<section className='tenant-input'>{booking.customer_phone}</section>
-				</div>
-
-				<div className='tenant-input-div'>
-					<section className='label'>Email</section>
-
-					<section className='tenant-input'>{booking.customer_email}</section>
-				</div>
-
-				<div className='tenant-input-div'>
-					<section className='label'>Check-in Date</section>
-
-					<section className='tenant-input'>
-						{check_in_date.toLocaleDateString('en-US', options)}
-					</section>
-				</div>
-
-				<div className='tenant-input-div'>
-					<section className='label'>Check-out Date</section>
-
-					<section className='tenant-input'>
-						{check_out_date.toLocaleDateString('en-US', options)}
-					</section>
+			<div className="booking-sheet-container">
+				<div className="booking-sheet-tenant-div">
+					<b>{booking.customer_first_name} {booking.customer_last_name}</b>
+					<br />
+					{booking.customer_phone}
+					<br />
+					{/* {booking.customer_phone.length > 0 && <br />} */}
+					{booking.customer_email}
+					<br />
+					{/* {booking.customer_email.length > 0 && <br />} */}
+					<div className="booking-sheet-dates">
+						<b>check in:</b> {check_in_date.toLocaleDateString('en-US', options)}
+						<br />
+						<b>check out:</b> {check_out_date.toLocaleDateString('en-US', options)}
+					</div>
 				</div>
 			</div>
 
-			<div className='section-header'>
+			<div className="booking-sheet-section-header">
 				Financial
-				<button onClick={() => setShowFinancial(true)}>Edit Financial</button>
-			</div>
-			<div className='financial-container'>
-				<div className='financial-input-div'>
-					<section className='label'>Cost Per Night</section>
-					<section className='financial-input'>
-						{booking.cost_per_night}
-					</section>
-				</div>
-
-				<div className='financial-input-div'>
-					<section className='label'>Pet Fees</section>
-					<section className='financial-input'>{booking.pet_fee}</section>
-				</div>
-
-				<div className='financial-input-div'>
-					<section className='label'>Cleaning Fees</section>
-					<section className='financial-input'>{booking.cleaning_fee}</section>
-				</div>
-
-				<div className='financial-input-div'>
-					<section className='label'>Lodging Tax</section>
-					<section className='financial-input'>{booking.lodging_tax}</section>
-				</div>
-			</div>
-			<div className='booking-amount'>
-				<section className='label'>Gross Booking Amount</section>
-				<section className='financial-input'>
-					$<MathComponent booking={booking} type='gross' />
-				</section>
+				<button className="booking-sheet-edit-btn" onClick={() => setShowFinancial(true)}>edit</button>
 			</div>
 
-			<div className='vendor-container'>
-				<div className='vendor-input-div'>
-					<section className='label'>Vendor</section>
-					<section className='vendor-input'>{booking.vendor}</section>
-				</div>
-
-				<div className='vendor-input-div'>
-					<section className='label'>Vendor Commission</section>
-					<section className='vendor-input'>
-						{booking.vendor_commission}
-					</section>
-				</div>
-
-				<div className='vendor-input-div'>
-					<section className='label'>Vendor Fee</section>
-					<section className='vendor-input'>{booking.vendor_fee}</section>
-				</div>
-
-				<div className='vendor-input-div'>
-					<section className='label'>Discount</section>
-					<section className='vendor-input'>{booking.discount}</section>
-				</div>
-
-				<div className='vendor-input-div'>
-					<section className='label'>Tax Responsibility</section>
-					<section className='vendor-input'>
-						{booking.tax_responsible ? 'Us' : 'Them'}
-					</section>
-				</div>
-
-				<div className='vendor-input-div'>
-					<section className='label'>Fees Finalized</section>
-					<section className='vendor-input'>
-						{booking.finalized ? 'Yes' : 'No'}
-					</section>
+			<div className="booking-sheet-container">
+				<div className="booking-sheet-financial-div">
+					<section className="booking-sheet-financial-label">Length Of Stay:</section>
+					<section className="booking-sheet-financial"><MathComponent booking={booking} type='lengthOfStay' /> nights</section>
+					<br />
+					<section className="booking-sheet-financial-label">Rate:</section>
+					<section className="booking-sheet-financial">{booking.cost_per_night}/night</section>
+					<br />
+					<section className="booking-sheet-financial-label">Pet Fee:</section>
+					<section className="booking-sheet-financial">{booking.pet_fee}</section>
+					<br />
+					<section className="booking-sheet-financial-label">Cleaning Fee:</section>
+					<section className="booking-sheet-financial">{booking.cleaning_fee}</section>
+					<br />
+					<section className="booking-sheet-financial-label">Lodging Tax:</section>
+					<section className="booking-sheet-financial">{booking.lodging_tax}</section>
 				</div>
 			</div>
 
-			<div className='booking-amount'>
-				<section className='label'>Net Payout</section>
-				<section className='financial-input'>
-					$<MathComponent booking={booking} type='net' />
-				</section>
+			<div className="booking-amount">
+				<h2 className="financial-headers">Gross Booking Amount</h2>
+				<div className="money-total">
+					$<MathComponent booking={booking} type='gross' /> {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
+				</div>
 			</div>
+
+			<hr className="divider"/>
+
+			<div className="booking-sheet-container">
+				<div className="booking-sheet-financial-div">
+					<section className="booking-sheet-financial-label">Vendor:</section>
+					<section className="booking-sheet-financial">{booking.vendor}</section>
+					<br />
+					<section className="booking-sheet-financial-label">Vendor Commission:</section>
+					<section className="booking-sheet-financial">{booking.vendor_commission}</section>
+					<br />
+					<section className="booking-sheet-financial-label">Vendor Fee:</section>
+					<section className="booking-sheet-financial">{booking.vendor_fee}</section>
+					<br />
+					<section className="booking-sheet-financial-label">Discount:</section>
+					<section className="booking-sheet-financial">{booking.discount}</section>
+				</div>
+			</div>
+
+			<div className="booking-amount">
+				<h2 className="financial-headers">Net Payout</h2>
+				<div className="money-total">
+					$<MathComponent booking={booking} type='net' /> {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
+				</div>
+			</div>		
+
+			<hr className="divider"/>
+
+			<div className="booking-sheet-container">
+				<div className="booking-sheet-financial-div">
+					<section className="booking-sheet-financial-label">Tax Responsibility:</section>
+					<section className="booking-sheet-financial">{booking.tax_responsible ? 'Us' : 'Them'}</section>
+					<br />
+					<section className="booking-sheet-financial-label">Fees Finalized:</section>
+					<section className="booking-sheet-financial">{booking.finalized ? 'Yes' : 'No'}</section>
+				</div>
+			</div>
+
+			<div className="booking-sheet-section-header">
+				Comments
+			</div>
+			{comments.length > 0 &&
+				<div className="comments-div">
+					{comments.map((comment, index) => {
+						return (
+							<div key={`${comment.id}-${index}`} className="comment">
+								<b>{comment.username}:</b> "{comment.comment}"
+								{user.admin && <button onClick={() => handleDelete(comment.id)} className="delete-comment-btn">X</button>}
+							</div>
+						)
+					})}
+					<br />
+					<br />
+					<hr className="divider"/>
+				</div>
+			}
+			<div className="comment-input-div">
+				<label className="label" htmlFor="comment">Add A Comment</label>
+			</div>          
+			<input
+				id="comment"
+				name="comment"
+				type="text"
+				value={comment}
+				placeholder="new comment"
+				className="tenant-input"
+				onChange={(event) => {setComment(event.target.value)}}
+			/>
+			<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
+
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
 				setChange={() => setChange(change + 1)}
@@ -196,7 +212,7 @@ function BookingSheet() {
 				booking={booking}
 			/>
 		</div>
-	);
-}
+	)
+};
 
 export default BookingSheet;

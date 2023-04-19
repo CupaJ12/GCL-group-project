@@ -95,9 +95,7 @@ function App() {
           >
             <AddNewPropertyForm />
           </ProtectedRoute>
-
-          {/* Protected route for Add Vendor Form - bryan */}
-
+          
            {/* Protected route for Admin Panel - bryan */}
            <ProtectedRoute
             exact
