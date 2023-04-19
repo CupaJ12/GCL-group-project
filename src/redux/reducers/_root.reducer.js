@@ -8,6 +8,7 @@ import vendorList from './vendor.reducer';
 import propertyList from './property.reducer';
 import unapprovedUsers from './unapproved.user.reducer';
 import approvedUsers from './approved.user.reducer';
+import comments from './comments.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   propertyList, //contains an array of properties
   unapprovedUsers, //contains all users that are currently unapproved
   approvedUsers, //contains all users that are currently approved
+  comments, //contains all comments at specified booking id
 });
 
 export default rootReducer;

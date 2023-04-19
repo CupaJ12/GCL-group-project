@@ -6,6 +6,7 @@ const MathComponent = ({ booking, type }) => {
     const [grossBookingAmount, setGrossBookingAmount] = useState(0);
     const [netPayout, setNetPayout] = useState(0);
     const [rentalCost, setRentalCost] = useState(0);
+    const [lengthOfStay, setLengthOfStay] = useState(0);
     const checkIn = new Date(booking.check_in_date); // converts check in date from string to date
     const checkOut = new Date(booking.check_out_date); // converts check out date from string to date
 
@@ -25,6 +26,7 @@ const MathComponent = ({ booking, type }) => {
 
             // .getTime() converts to date to milliseconds since jan 1 1970 at midnight, divide 1000 to get number of seconds, divide by 60 to get minutes, then 60 to get hours, then 24 to get days    
             let numberOfNights = (((((checkOut.getTime() - checkIn.getTime()) / 1000) / 60 ) /60 ) / 24);
+            setLengthOfStay(numberOfNights);
 
             // converts cost to number, removes any character that isnt integer or decimal, multiplies by number of nights
             setRentalCost((Number(booking.cost_per_night.replace(/[^0-9.]/g, ''))) * numberOfNights);
@@ -52,6 +54,9 @@ const MathComponent = ({ booking, type }) => {
     } else 
     if (type === 'gross') {
         return grossBookingAmount.toFixed(2);
+    } else
+    if (type === 'lengthOfStay') {
+        return lengthOfStay.toFixed()
     }
 };
 
