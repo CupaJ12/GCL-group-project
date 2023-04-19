@@ -245,22 +245,24 @@ function EditFinancialModal(props) {
                                     type="net" />}
                             </div>
                         </div>
-                        <div className="financial-nav-btn-div">
-                            <button
-                                type="submit"
-                                className="submit-btn"
-                                onClick={props.onClose}
-                            >
-                                SUBMIT
-                            </button>
-                            <button
-                                type="button"
-                                className="cancel-add-financial-btn"
-                                onClick={() => setCancelModalVisible(true)}
-                            >
-                                CANCEL
-                            </button>
-                            <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
+                        <div className="financial-buttons">
+                            <div className="financial-nav-btn-div">
+                                <button
+                                    type="submit"
+                                    className="financial-submit-btn"
+                                    onClick={props.onClose}
+                                >
+                                    SUBMIT
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cancel-add-financial-btn"
+                                    onClick={() => setCancelModalVisible(true)}
+                                >
+                                    CANCEL
+                                </button>
+                                <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
+                            </div>
                         </div>
                     </form>
                 </div>

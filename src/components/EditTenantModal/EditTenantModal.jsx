@@ -78,7 +78,7 @@ function EditTenantModal(props) {
         >
             <div className="modal">
                 <div className="tenant-modal-content">
-                    <form className="edit-tenant-form" onSubmit={() => saveTenant()} >
+                    <form className="edit-tenant-form" onSubmit={() => {saveTenant(); props.setChange()}} >
                         <div className="tenant-section-header">
                             Edit Tenant
                         </div>
@@ -161,7 +161,7 @@ function EditTenantModal(props) {
                             <div className="tenant-nav-btn-div">
                                 <button
                                     type="submit"
-                                    className="submit-btn"
+                                    className="tenant-submit-btn"
                                     disabled={!canSubmit}
                                     onClick={props.onClose}
                                 >

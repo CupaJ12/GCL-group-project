@@ -23,8 +23,6 @@
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
     overflow: scroll;
-    /* display: flex;
-    justify-content: center; */
 }
 
 .modal.enter-done {
@@ -94,10 +92,8 @@
     grid-template-columns: repeat(2, 1fr);
     column-gap: 15px;
     column-width: 15rem;
-    /* width: 95%; */
-    /* margin: auto; */
-    /* padding-top: 15px; */
     margin-bottom: 0px;
+    margin: auto;
 }
 
 .edit-financial-form {
@@ -129,11 +125,6 @@
 }
 
 .edit-financial-toggle-switch {
-    /* display: flex;
-    justify-content: space-between;
-    margin-left: 100px;
-    margin-right: 100px; */
-    /* width: 300px; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -165,4 +156,31 @@
 
 .toggle-div {
     text-align: center;
+}
+
+.financial-submit-btn {
+    font-size: 38px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 4px black;
+    border-radius: 10px;
+    padding: 20px;
+    border-color: #3c6a2f;
+    background-color: white;
+    color: #3c6a2f;
+}
+
+.financial-submit-btn:disabled {
+    opacity: 20%;
+}
+
+.financial-submit-btn:hover:not([disabled]) {
+    background-color: #3c6a2f;
+    color: white;
+    box-shadow: 0 0 15px #a8bba2;
+}
+
+.financial-buttons {
+    width: auto;
+    margin: auto;
 }
