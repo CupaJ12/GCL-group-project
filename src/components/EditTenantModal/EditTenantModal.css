@@ -119,11 +119,11 @@
     color: #3c6a2f;
 }
 
-.tenant-financial-submit-btn:disabled {
+.tenant-submit-btn:disabled {
     opacity: 20%;
 }
 
-.tenant-financial-submit-btn:hover:not([disabled]) {
+.tenant-submit-btn:hover:not([disabled]) {
     background-color: #3c6a2f;
     color: white;
     box-shadow: 0 0 15px #a8bba2;

@@ -63,7 +63,7 @@ function EditTenantModal(props) {
                 checkOut: checkOut
             }
         });
-       props.setChange();
+        props.setChange();
     };
 
 
@@ -78,7 +78,7 @@ function EditTenantModal(props) {
         >
             <div className="modal">
                 <div className="tenant-modal-content">
-                    <form className="edit-tenant-form" onSubmit={() => {saveTenant(); props.setChange()}} >
+                    <form className="edit-tenant-form" onSubmit={() => { saveTenant(); props.setChange() }} >
                         <div className="tenant-section-header">
                             Edit Tenant
                         </div>
@@ -157,6 +157,13 @@ function EditTenantModal(props) {
                                         />
                                     </LocalizationProvider>
                                 </div>
+                            </div>
+                            <div>
+                                {!canSubmit &&
+                                    <section className="fees-finalized-disclaimer">
+                                        Change(s) need to be made before submitting, otherwise click CANCEL to close window
+                                    </section>
+                                }
                             </div>
                             <div className="tenant-nav-btn-div">
                                 <button
