@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     `SELECT "booking".*, "property"."name" AS "property_name"
     FROM "booking"
     JOIN "property" ON "booking"."property_id" = "property"."id"
-    ORDER BY "check_in_date" DESC
+    ORDER BY "entry_date" DESC
     LIMIT 10`;
   pool.query(queryText)
     .then((result) => {

@@ -44,9 +44,9 @@ function BookingsFolder() {
                         {
                             bookings.map(booking => (
                                 <div className="bookings" key={booking.id}>
+                                    <h1> <i><u><strong> {booking.customer_first_name} {booking.customer_last_name}'s Booking </strong></u></i> </h1>
                                     <h4> Property Name: <i><u> {booking.property_name} </u></i> </h4>
                                     <h4> Is Booking Finalized: <i><u> {booking.finalized ? 'YES' : 'NO'} </u></i> </h4>
-                                    <h4> Customer Name: <i><u> {booking.customer_first_name} {booking.customer_last_name} </u></i> </h4>
                                     <h4> Checkin Date: </h4> <h3> <i><u> {new Date(booking.check_in_date).toLocaleDateString('en-US', dateProper)} </u></i> </h3>
                                     <h4> Checkout Date: </h4> <h3> <i><u> {new Date(booking.check_out_date).toLocaleDateString('en-US', dateProper)} </u></i> </h3>
                                     <br></br>
