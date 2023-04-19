@@ -106,7 +106,50 @@ router.get('/', (req, res) => {
     } else {
         res.sendStatus(403);
     }
-})
+});
+
+// post new comment
+router.post('/comments', (req, res) => {
+    if (req.isAuthenticated()) {
+        const queryText = `INSERT INTO "comment" (comment, user_id, booking_id) VALUES ($1, $2, $3);`;
+        pool.query(queryText, [req.body.comment, req.body.user_id, req.body.booking_id])
+        .then(result => {
+            res.sendStatus(201);
+        })
+        .catch((err) => {
+            res.sendStatus(500);
+            console.log('error with posting new comment: ', err)
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+// get comments
+router.get('/comments/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log('in comments get with id: ', req.params.id);
+        const queryText = `
+            SELECT "comment".*, "user"."username" FROM "booking"
+            JOIN "comment" ON "comment"."booking_id" = "booking"."id"
+            JOIN "user" ON "user"."id" = "comment"."user_id"
+            WHERE "booking"."id" = $1
+            ORDER BY "comment"."id";
+        `;
+        pool
+		.query(queryText, [req.params.id])
+		.then((result) => {
+            console.log('get comments results: ', result.rows);
+			res.send(result.rows);
+		})
+		.catch((error) => {
+			console.log('Error getting comments', error);
+			res.sendStatus(500);
+		});
+    } else {
+        res.sendStatus(403);
+    }
+});
 
 // update tenants
 router.put('/tenant/:id', (req, res) => {
@@ -153,6 +196,16 @@ router.put('/financial/:id', (req, res) => {
         .catch((err) => {
             console.log('edit financial route failed:', err);
         });       
-})
+});
+
+router.delete('/comments/:id', (req, res) => {
+    const id = req.params.id;
+    const queryText = `DELETE FROM "comment" WHERE "id" = $1;`;
+    pool.query(queryText, [id])
+    .then((result) => res.sendStatus(201))
+    .catch((err) => {
+        console.log('server error deleting comment: ', err);
+    });
+});
 
 module.exports = router;

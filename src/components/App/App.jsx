@@ -52,7 +52,7 @@ function App() {
           </Route>
 
           {/* route for modal page */}
-          <Route 
+          <Route
             exact
             path="/modal"
           >
@@ -79,11 +79,11 @@ function App() {
           >
             {user.approved ? <BookingSheet /> : <Redirect to="/user" />}
           </ProtectedRoute>
-          
+
           {/* Protected route for FindBooking */}
           <ProtectedRoute
-          exact
-          path="/findBooking"
+            exact
+            path="/findBooking"
           >
             {user.approved ? <FindBooking /> : <Redirect to="/user" />}
           </ProtectedRoute>
@@ -96,10 +96,8 @@ function App() {
             <AddNewPropertyForm />
           </ProtectedRoute>
 
-          {/* Protected route for Add Vendor Form - bryan */}
-
-           {/* Protected route for Admin Panel - bryan */}
-           <ProtectedRoute
+          {/* Protected route for Admin Panel - bryan */}
+          <ProtectedRoute
             exact
             path="/adminpanel"
           >
