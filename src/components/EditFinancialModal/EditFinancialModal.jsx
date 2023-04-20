@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
@@ -81,18 +81,19 @@ function EditFinancialModal(props) {
         });
     };
 
-    console.log(taxResponsibility);
+    const elementRef = useRef(null);
 
     // ReactDOM.createPortal create the div outside of the parent so it won't break the parent's css
     return ReactDOM.createPortal(
         // CSSTransition is a built-in method that render div into or remove the div into the DOM
         // npm install react-transition-group, to use this built-in method
         <CSSTransition
+            nodeRef={elementRef}
             in={props.show}
             unmountOnExit
             timeout={{ enter: 50, exit: 200 }}
         >
-            <div className="modal">
+            <div className="modal" ref={elementRef}>
                 <div className="financial-modal-content">
                     <form className="edit-financial-form" onSubmit={() => saveFinancial()}>
                         <div className="financial-section-header">

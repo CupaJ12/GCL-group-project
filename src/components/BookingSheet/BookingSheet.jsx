@@ -4,7 +4,7 @@ import './BookingSheet.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EditTenantModal from '../EditTenantModal/EditTenantModal';
 import EditFinancialModal from '../EditFinancialModal/EditFinancialModal';
@@ -63,6 +63,7 @@ function BookingSheet() {
 			} 
 		});
 	}
+
 
 	// conditional rendering: if no booking, return error message
 	if (!booking) {
