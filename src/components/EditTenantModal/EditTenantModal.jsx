@@ -63,7 +63,9 @@ function EditTenantModal(props) {
                 checkOut: checkOut
             }
         });
+        props.onClose();
         props.setChange();
+        location.reload();
     };
 
 
@@ -74,11 +76,11 @@ function EditTenantModal(props) {
         <CSSTransition
             in={props.show}
             unmountOnExit
-            timeout={{ enter: 50, exit: 200 }}
+            timeout={{ enter: 50, exit: 5000 }}
         >
             <div className="modal">
                 <div className="tenant-modal-content">
-                    <form className="edit-tenant-form" onSubmit={() => { saveTenant(); props.setChange() }} >
+                    <form className="edit-tenant-form" onSubmit={() => saveTenant()} >
                         <div className="tenant-section-header">
                             Edit Tenant
                         </div>
@@ -170,7 +172,7 @@ function EditTenantModal(props) {
                                     type="submit"
                                     className="tenant-submit-btn"
                                     disabled={!canSubmit}
-                                    onClick={props.onClose}
+                                    // onClick={props.onClose}
                                 >
                                     SUBMIT
                                 </button>

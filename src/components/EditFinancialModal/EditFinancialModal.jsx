@@ -49,6 +49,10 @@ function EditFinancialModal(props) {
         setVendor(booking.vendor);
     }, [booking]);
 
+    useEffect(() => {
+        setCancelModalVisible(false);
+    }, [props.show]);
+
     // new booking to be used as prop for MathComponent
     const booking2 = {
         id: booking.id,

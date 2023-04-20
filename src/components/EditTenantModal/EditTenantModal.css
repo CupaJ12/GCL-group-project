@@ -1,4 +1,3 @@
-
 .modal {
     position: fixed;
     left: 0;
@@ -19,7 +18,6 @@
     padding: 40px;
     margin: auto;
     width: 50%;
-    /* height: 500px; */
     height: 70%;
     background-color: white;
     border-radius: 10px;
@@ -36,11 +34,11 @@
     opacity: 0;
 }
 
-.modal.enter-done .financial-modal-content {
+.modal.enter-done .tenant-modal-content {
     transform: translateY(0);
 }
 
-.modal.exit .financial-modal-content {
+.modal.exit .tenant-modal-content {
     transform: translateY(-200px);
 }
 
