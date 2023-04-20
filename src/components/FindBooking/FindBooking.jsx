@@ -16,16 +16,13 @@ function FindBooking() {
 
     return (
         <div className="find-booking-container">
-            <div className="title">Find Bookings</div>
+            <button className="back-btn" onClick={() => history.push('/')}>HOME</button>
+            <br />
             <input className="searchbar" placeholder="search first name, last name, property, or date"></input>
             <br></br>
-            <button className="label">SEARCH</button>
-            <div className="section-header">Results...</div>
-                <div>
-                    <BookingsFolder />
-                    {/* last 10 bookings */}
-                </div>
-            <button className="back-btn" onClick={() => history.push('/')}>HOME</button>
+            <button className="search-btn">SEARCH</button>
+            <div className="section-header">Recently Entered Bookings</div>
+                <BookingsFolder />
         </div>
     )
 }

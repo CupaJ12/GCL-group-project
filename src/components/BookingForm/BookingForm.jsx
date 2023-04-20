@@ -9,7 +9,7 @@ import CurrencyInput from './CurrencyInput';
 import { TaxToggleSwitch, FeesFinalizedToggleSwitch } from './ToggleSwitch';
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
 import AddNewVendorForm from '../AddNewVendorForm/AddNewVendorForm';
-import CancelValidation from '../CancelValidationModal/CancelValidationModal';
+import CancelBookingModal from './CancelBookingModal';
 import BookingConfirmationModal from './BookingConfirmationModal';
 import ModalChild from '../Modal/ModalChild';
 import './BookingForm.css';
@@ -174,7 +174,7 @@ const BookingForm = () => {
         <div className="booking-form-container">  
             <AddNewPropertyForm modalVisible={propertyModalVisible} onClose={() => {setPropertyModalVisible(false); setNewItem(newItem + 1)}}/>
             <AddNewVendorForm modalVisible={vendorModalVisible} onClose={() => {setVendorModalVisible(false); setNewItem(newItem + 1)}}/>
-            <CancelValidation show={cancelModalVisible} onConfirm={() => {history.push('/'); setCancelModalVisible(false)}} onDeny={() => setCancelModalVisible(false)}/>
+            <CancelBookingModal show={cancelModalVisible} onConfirm={() => {history.push('/'); setCancelModalVisible(false)}} onDeny={() => setCancelModalVisible(false)}/>
             <BookingConfirmationModal show={bookingConfirmationModalVisible} onConfirm={() => {setBookingConfirmationModalVisible(false); history.push('/bookingform')}} />
             <form key="booking-form" onSubmit={onSubmit}>
                 <section className="required">* indicates required fields</section>
