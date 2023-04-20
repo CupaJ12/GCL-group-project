@@ -30,6 +30,7 @@ function BookingSheet() {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
 		dispatch({ type: 'GET_VENDORS' });
 		dispatch({ type: 'FETCH_COMMENTS', payload: Number(id)});
+		window.scrollTo(0, 0);
 	}, []);
 
 	useEffect(() => {

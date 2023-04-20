@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import './FindBooking.css';
 import BookingsFolder from "../BookingsFolder/BookingsFolder";
@@ -8,6 +8,9 @@ import { useHistory } from "react-router-dom";
 
 
 function FindBooking() {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+	}, []);
 
     const history = useHistory();
 

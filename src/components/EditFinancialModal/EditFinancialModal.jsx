@@ -30,6 +30,9 @@ function EditFinancialModal(props) {
 
     // const taxResponsibility = useSelector((store) => store.taxResponsibility);
 
+    useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
     const dispatch = useDispatch();
 

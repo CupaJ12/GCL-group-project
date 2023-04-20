@@ -61,6 +61,7 @@ const BookingForm = () => {
     useEffect(() => {
         dispatch({type: 'GET_VENDORS'});
         dispatch({type: 'GET_PROPERTIES'});
+        window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
