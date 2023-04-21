@@ -51,11 +51,11 @@ const UserStatus = () => {
                         <p>
                             <b>registered on:</b> 
                             <br />
-                            <p>{registrationDate.toLocaleDateString('en-US', options)}</p>
-                            <button className={appUser.admin ? "delete-btn" : "approve-btn"} onClick={() => {handleClick(appUser.admin, appUser.id)}}>{appUser.admin ? 'Remove Admin' : 'Make Admin'}</button>
+                            {registrationDate.toLocaleDateString('en-US', options)}
+                        </p>
+                            <button className="approve-btn" onClick={() => {handleClick(appUser.admin, appUser.id)}}>{appUser.admin ? 'Remove Admin' : 'Make Admin'}</button>
                             <br />
                             <button className="delete-btn" onClick={() => {setDeleteModalVisible(true); setDeletedUser(appUser)}}>Delete User</button>
-                        </p>
                     </div>
                 )
             })}

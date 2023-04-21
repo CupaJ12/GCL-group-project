@@ -25,23 +25,40 @@ const AdminPanel = () => {
     return (
         <div className="admin-container">
             <div className="admin-nav-div">
-                {/* <button onClick={() => history.push('/bookingform')} className="nav-med-btn">Add Booking</button>
-                <button onClick={() => history.push('/findBooking')} className="nav-med-btn">Find Booking</button> */}
+                <div className="nav-btns">
+                    <button onClick={() => history.push('/')} className="back-btn">Home</button>
+                </div>
                 <p>*click below to expand details and make changes to user accounts</p>
                 <br />
                 {unapprovedUsers.length > 0 &&
                     <div className="admin-div-content">
-                        <section onClick={() => setShowApprovalWindow(!showApprovalWindow)} className="admin-section-header">({unapprovedUsers.length}) Unapproved Users</section>
+                        <section onClick={() => setShowApprovalWindow(!showApprovalWindow)} className="admin-section-header">
+                            <section className="expand-details">
+                                {showApprovalWindow ? '-' : '+'}
+                            </section>
+
+                            <section className="details-header">
+                                ({unapprovedUsers.length}) Unapproved Users
+                            </section>
+                        </section>
                         {showApprovalWindow && <UserApprovalWindow />}
                     </div>
                 }
+
                 {approvedUsers.length > 0 &&
-                <div className="admin-div-content">
-                    <section onClick={() => setShowUsersWindow(!showUsersWindow)} className="admin-section-header">({approvedUsers.length}) Approved Users</section>
-                    {showUsersWindow && <UserStatus />}
-                </div>
+                    <div className="admin-div-content">
+                        <section onClick={() => setShowUsersWindow(!showUsersWindow)} className="admin-section-header">
+                            <section className="expand-details">
+                                {showUsersWindow ? '-' : '+'}
+                            </section>
+
+                            <section className="details-header">
+                                ({approvedUsers.length}) Approved Users
+                            </section>
+                        </section>
+                        {showUsersWindow && <UserStatus />}
+                    </div>
                 }
-                <button onClick={() => history.push('/')} className="nav-med-btn">Home</button>
             </div>
         </div>
     );

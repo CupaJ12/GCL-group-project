@@ -1,0 +1,16 @@
+.cancel-validation-btn {
+    margin: 10px;
+    display: inline-block;
+}
+
+.cancel-validation-container {
+    background-color: white;
+    color: #294d20;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.modal-warning {
+    font-size: 20px;
+}
