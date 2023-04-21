@@ -17,7 +17,7 @@ const TaxToggleSwitch = (props) => {
                 onClick={() => props.setTaxResponsibility()}
             />
             <section className="slider round"></section>
-            <div className="responsibility-text">{props.taxResponsibility === false ? 'us' : 'them'}</div>
+            <div className="responsibility-text">{props.taxResponsibility === false ? 'them' : 'us'}</div>
         </label>
     )
 };

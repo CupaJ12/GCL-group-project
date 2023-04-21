@@ -200,10 +200,6 @@ function BookingSheet() {
 				onChange={(event) => { setComment(event.target.value) }}
 			/>
 			<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
-			<div className='bookingsheet-home-btn-div'>
-				<button className='bookingsheet-home-btn'>Home</button>
-			</div>
-
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
 				setChange={() => setChange(change + 1)}

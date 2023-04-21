@@ -8,6 +8,7 @@ function BookingsFolder() {
     const history = useHistory();
     const dispatch = useDispatch();
     const dateProper = { year: 'numeric', month: 'long', day: 'numeric' };
+    const [search, setSearch] = useState(false);
 
     useEffect(() => {
         dispatch({
@@ -38,6 +39,7 @@ function BookingsFolder() {
                 <u> 10 most recent bookings by date: </u>
             </h1>
 
+            {}
             <section>
                 {bookings.length > 0 &&
                     <>
