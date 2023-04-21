@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 
 function FindBooking() {
-[search, setSearch] = useState('');
+// [search, setSearch] = useState('');
 
     const history = useHistory();
 

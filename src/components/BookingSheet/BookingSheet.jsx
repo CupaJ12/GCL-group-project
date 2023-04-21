@@ -211,8 +211,14 @@ function BookingSheet() {
 				show={showFinancial}
 				booking={booking}
 			/>
+			{/* home button */}
+			<button onClick={() => history.push('/')} className="nav-med-btn">Home</button>
 		</div>
+		
 	)
+	
 };
+
+
 
 export default BookingSheet;
