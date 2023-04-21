@@ -30,6 +30,9 @@ function EditFinancialModal(props) {
 
     // const taxResponsibility = useSelector((store) => store.taxResponsibility);
 
+    useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
     const dispatch = useDispatch();
 
@@ -48,6 +51,10 @@ function EditFinancialModal(props) {
         setFinalized(booking.finalized);
         setVendor(booking.vendor);
     }, [booking]);
+
+    useEffect(() => {
+        setCancelModalVisible(false);
+    }, [props.show]);
 
     // new booking to be used as prop for MathComponent
     const booking2 = {
@@ -92,7 +99,16 @@ function EditFinancialModal(props) {
                 <div className="financial-modal-content">
                     <form className="edit-financial-form" onSubmit={() => saveFinancial()}>
                         <div className="financial-section-header">
-                            <h3>Edit Financial</h3>
+                            Edit Financial
+                        </div>
+                        <div>
+                        {finalized &&
+                            <section className="fees-finalized-disclaimer">
+                                Fees are finalized and the inputs are locked.
+                                <br />
+                                To update input values, please set the "Fees Finalized" toggle to "no"
+                            </section>
+                        }
                         </div>
                         <div className="edit-financial-container">
                             <div className="financial-modal-input-div">
@@ -102,6 +118,7 @@ function EditFinancialModal(props) {
                                         key="cost-per-night"
                                         placeholder="$0.00"
                                         className="financial-input"
+                                        disabled={finalized}
                                         type="text"
                                         name="cost-per-night"
                                         value={costPerNight}
@@ -116,6 +133,7 @@ function EditFinancialModal(props) {
                                         key="cleaning-fee"
                                         placeholder="$0.00"
                                         className="financial-input"
+                                        disabled={finalized}
                                         type="text"
                                         name="cleaning-fee"
                                         value={cleaningFee}
@@ -130,6 +148,7 @@ function EditFinancialModal(props) {
                                         key="pet-fee"
                                         placeholder="$0.00"
                                         className="financial-input"
+                                        disabled={finalized}
                                         type="text"
                                         name="pet-fee"
                                         value={petFee}
@@ -144,6 +163,7 @@ function EditFinancialModal(props) {
                                         key="lodging-tax"
                                         placeholder="$0.00"
                                         className="financial-input"
+                                        disabled={finalized}
                                         type="text"
                                         name="lodging-tax"
                                         value={lodgingTax}
@@ -168,6 +188,7 @@ function EditFinancialModal(props) {
                                     <select
                                         // disabled={feesFinalized} 
                                         className="financial-vendor-dropdown"
+                                        disabled={finalized}
                                         value={vendor}
                                         onChange={(event) => setVendor(event.target.value)}
                                     >
@@ -186,6 +207,7 @@ function EditFinancialModal(props) {
                                         key="vendor-commission"
                                         placeholder="$0.00"
                                         className="financial-input"
+                                        disabled={finalized}
                                         type="text"
                                         name="vendor-commission"
                                         value={vendorCommission}
@@ -200,6 +222,7 @@ function EditFinancialModal(props) {
                                         key="vendor-fee"
                                         placeholder="$0.00"
                                         className="financial-input"
+                                        disabled={finalized}
                                         type="text"
                                         name="vendor-fee"
                                         value={vendorFee}
@@ -214,6 +237,7 @@ function EditFinancialModal(props) {
                                         key="discount"
                                         placeholder="$0.00"
                                         className="financial-input"
+                                        disabled={finalized}
                                         type="text"
                                         name="discount"
                                         value={discount}
@@ -245,22 +269,24 @@ function EditFinancialModal(props) {
                                     type="net" />}
                             </div>
                         </div>
-                        <div className="financial-nav-btn-div">
-                            <button
-                                type="submit"
-                                className="submit-btn"
-                                onClick={props.onClose}
-                            >
-                                SUBMIT
-                            </button>
-                            <button
-                                type="button"
-                                className="cancel-add-financial-btn"
-                                onClick={() => setCancelModalVisible(true)}
-                            >
-                                CANCEL
-                            </button>
-                            <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
+                        <div className="financial-buttons">
+                            <div className="financial-nav-btn-div">
+                                <button
+                                    type="submit"
+                                    className="financial-submit-btn"
+                                    onClick={props.onClose}
+                                >
+                                    SUBMIT
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cancel-add-financial-btn"
+                                    onClick={() => setCancelModalVisible(true)}
+                                >
+                                    CANCEL
+                                </button>
+                                <CancelValidation show={cancelModalVisible} onConfirm={props.onClose} onDeny={() => setCancelModalVisible(false)} />
+                            </div>
                         </div>
                     </form>
                 </div>

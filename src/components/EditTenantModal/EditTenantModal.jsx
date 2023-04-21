@@ -26,9 +26,12 @@ function EditTenantModal(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+    useEffect(() => {
         setCancelModalVisible(false);
     }, [props.show]);
-
 
     useEffect(() => {
         setFirstName(props.booking.customer_first_name);
@@ -63,7 +66,9 @@ function EditTenantModal(props) {
                 checkOut: checkOut
             }
         });
-       props.setChange();
+        props.onClose();
+        props.setChange();
+        location.reload();
     };
 
 
@@ -74,7 +79,7 @@ function EditTenantModal(props) {
         <CSSTransition
             in={props.show}
             unmountOnExit
-            timeout={{ enter: 50, exit: 200 }}
+            timeout={{ enter: 50, exit: 5000 }}
         >
             <div className="modal">
                 <div className="tenant-modal-content">
@@ -158,12 +163,19 @@ function EditTenantModal(props) {
                                     </LocalizationProvider>
                                 </div>
                             </div>
+                            <div>
+                                {!canSubmit &&
+                                    <section className="fees-finalized-disclaimer">
+                                        Change(s) need to be made before submitting, otherwise click CANCEL to close window
+                                    </section>
+                                }
+                            </div>
                             <div className="tenant-nav-btn-div">
                                 <button
                                     type="submit"
-                                    className="submit-btn"
+                                    className="tenant-submit-btn"
                                     disabled={!canSubmit}
-                                    onClick={props.onClose}
+                                    // onClick={props.onClose}
                                 >
                                     SUBMIT
                                 </button>
