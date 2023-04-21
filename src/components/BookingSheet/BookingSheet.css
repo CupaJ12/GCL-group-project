@@ -116,3 +116,24 @@
     background-color: #3c6a2f;
     transition: .3s;
 }
+
+.bookingsheet-home-btn-div {
+    text-align: center;
+}
+
+.bookingsheet-home-btn {
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #a8bba2;
+    color: white;
+}
+
+.bookingsheet-home-btn:hover {
+    background-color: #3c6a2f;
+    transition: .3s;
+}

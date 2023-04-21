@@ -29,7 +29,7 @@ function BookingSheet() {
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
 		dispatch({ type: 'GET_VENDORS' });
-		dispatch({ type: 'FETCH_COMMENTS', payload: Number(id)});
+		dispatch({ type: 'FETCH_COMMENTS', payload: Number(id) });
 	}, []);
 
 	useEffect(() => {
@@ -43,11 +43,11 @@ function BookingSheet() {
 	}, [booking]);
 
 	const handleSubmit = () => {
-		dispatch({ 
-			type: 'POST_COMMENT', 
+		dispatch({
+			type: 'POST_COMMENT',
 			payload: {
-				comment, 
-				booking_id: id, 
+				comment,
+				booking_id: id,
 				user_id: user.id
 			}
 		});
@@ -55,12 +55,12 @@ function BookingSheet() {
 	};
 
 	const handleDelete = (commentId) => {
-		dispatch({ 
-			type: 'DELETE_COMMENT', 
+		dispatch({
+			type: 'DELETE_COMMENT',
 			payload: {
-				id: commentId, 
+				id: commentId,
 				booking_id: id
-			} 
+			}
 		});
 	}
 
@@ -132,7 +132,7 @@ function BookingSheet() {
 				</div>
 			</div>
 
-			<hr className="divider"/>
+			<hr className="divider" />
 
 			<div className="booking-sheet-container">
 				<div className="booking-sheet-financial-div">
@@ -155,9 +155,9 @@ function BookingSheet() {
 				<div className="money-total">
 					$<MathComponent booking={booking} type='net' /> {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
 				</div>
-			</div>		
+			</div>
 
-			<hr className="divider"/>
+			<hr className="divider" />
 
 			<div className="booking-sheet-container">
 				<div className="booking-sheet-financial-div">
@@ -184,12 +184,12 @@ function BookingSheet() {
 					})}
 					<br />
 					<br />
-					<hr className="divider"/>
+					<hr className="divider" />
 				</div>
 			}
 			<div className="comment-input-div">
 				<label className="label" htmlFor="comment">Add A Comment</label>
-			</div>          
+			</div>
 			<input
 				id="comment"
 				name="comment"
@@ -197,9 +197,12 @@ function BookingSheet() {
 				value={comment}
 				placeholder="new comment"
 				className="tenant-input"
-				onChange={(event) => {setComment(event.target.value)}}
+				onChange={(event) => { setComment(event.target.value) }}
 			/>
 			<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
+			<div className='bookingsheet-home-btn-div'>
+				<button className='bookingsheet-home-btn'>Home</button>
+			</div>
 
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
