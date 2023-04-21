@@ -26,9 +26,12 @@ function EditTenantModal(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+    useEffect(() => {
         setCancelModalVisible(false);
     }, [props.show]);
-
 
     useEffect(() => {
         setFirstName(props.booking.customer_first_name);

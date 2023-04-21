@@ -121,4 +121,11 @@
     transition: .3s;
 }
 
+.nav-btns {
+    text-align: center;
+}
 
+.empty-comment-warning {
+    color: red;
+    padding-left: 20px;
+}

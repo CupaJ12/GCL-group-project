@@ -13,6 +13,7 @@ import MathComponent from '../MathComponent/MathComponent';
 function BookingSheet() {
 	const [comment, setComment] = useState('');
 	const dispatch = useDispatch();
+	const [emptyComment, setEmptyComment] = useState(false);
 	const history = useHistory();
 	const { id } = useParams();
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -29,7 +30,8 @@ function BookingSheet() {
 	useEffect(() => {
 		dispatch({ type: 'FETCH_BOOKING_BY_ID', payload: id });
 		dispatch({ type: 'GET_VENDORS' });
-		dispatch({ type: 'FETCH_COMMENTS', payload: Number(id) });
+		dispatch({ type: 'FETCH_COMMENTS', payload: Number(id)});
+		window.scrollTo(0, 0);
 	}, []);
 
 	useEffect(() => {
@@ -43,14 +45,21 @@ function BookingSheet() {
 	}, [booking]);
 
 	const handleSubmit = () => {
-		dispatch({
-			type: 'POST_COMMENT',
-			payload: {
-				comment,
-				booking_id: id,
-				user_id: user.id
-			}
-		});
+		if (comment.length === 0) {
+			setEmptyComment(true);
+			return
+		} else
+		if (comment.length > 0) {
+			setEmptyComment(false);
+			dispatch({ 
+				type: 'POST_COMMENT', 
+				payload: {
+					comment, 
+					booking_id: id, 
+					user_id: user.id
+				}
+			});
+		}
 		setComment('');
 	};
 
@@ -72,7 +81,10 @@ function BookingSheet() {
 
 	return (
 		<div className="booking-form-container">
-
+			<div className="nav-btns">
+				<button className="back-btn" onClick={() => history.push('/findBooking')}>BACK</button>
+				<button className="back-btn" onClick={() => history.push('/')}>HOME</button>
+			</div>
 			<div className="property-select-container">
 				<div className="section-header">Property</div>
 				<section className="property-header">{booking.property_name}</section>
@@ -199,6 +211,8 @@ function BookingSheet() {
 				className="tenant-input"
 				onChange={(event) => { setComment(event.target.value) }}
 			/>
+			{emptyComment && <section className="empty-comment-warning">comment cannot be blank!</section>}
+			<br />
 			<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}

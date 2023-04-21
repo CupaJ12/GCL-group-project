@@ -1,0 +1,53 @@
+.bookings-div {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-width: 15rem;
+    column-gap: 35px;
+    width: 90%;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.booking-summary {
+    box-shadow: 0px 0px 3px #294d20;;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 30px;
+    width: 90%;
+    color: #294d20;
+    text-align: center;
+}
+
+.booking-details-btn {
+    background-color: #3c6a2f;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.booking-details-btn:hover {
+    background-color: #294d20;
+    transition: .3s;
+}
+
+.booking-detail-primary {
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.booking-detail {
+    padding-bottom: 10px;
+    font-size: 15px;
+    font-weight: normal;
+}
