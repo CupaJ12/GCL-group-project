@@ -41,6 +41,11 @@ function SearchResult() {
                         }
                     </div>
                 }
+                {bookings.length === 0 && 
+                    <div>
+                        <p>No result found, try using a different keyword or date.</p>
+                    </div>
+                }
             </section>
     )
 };
