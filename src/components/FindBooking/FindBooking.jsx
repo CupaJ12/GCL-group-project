@@ -22,11 +22,11 @@ function FindBooking() {
         //     alert('please enter input');
         // }
         if (/^\d{2}\/\d{2}\/\d{4}$/ || /^\d{1}\/\d{1}\/\d{4}$/.test(inputValue)) {
-            let date = new Date(inputValue).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
-            console.log('new date in searchButton', date);
+            // let date = new Date(inputValue).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+            // console.log('new date in searchButton', date);
             dispatch({
                 type: 'SEARCH',
-                payload: encodeURIComponent(date)
+                payload: encodeURIComponent(inputValue)
             })
         } else {
             dispatch({
@@ -35,7 +35,7 @@ function FindBooking() {
             })
         }
         setSearch(true);
-        setInputValue('');
+        // setInputValue('');
     }
 
     return (
