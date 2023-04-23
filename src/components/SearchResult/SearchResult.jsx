@@ -43,7 +43,7 @@ function SearchResult() {
                 }
                 {bookings.length === 0 && 
                     <div>
-                        <p>No result found, try using a different keyword or date.</p>
+                        <p>No result found, try using a different keyword or date (mm/dd/yyyy).</p>
                     </div>
                 }
             </section>

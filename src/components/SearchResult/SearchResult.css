@@ -18,8 +18,10 @@
     padding: 20px;
     margin: 30px;
     width: 90%;
+    max-width: 300px;
     color: #294d20;
     text-align: center;
+    word-break: break-word;
 }
 
 .search-booking-details-btn {

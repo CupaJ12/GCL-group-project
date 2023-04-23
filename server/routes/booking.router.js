@@ -216,7 +216,9 @@ router.get('/search/:query', (req, res) => {
     const queryText = `SELECT "booking".*, "property"."name" AS "property_name"
     FROM "booking"
     JOIN "property" ON "booking"."property_id" = "property"."id"
-    WHERE $1 = ANY (ARRAY[LOWER("customer_first_name"), LOWER("customer_last_name"), LOWER("property"."name"), to_char("check_in_date", 'MM/DD/YYYY') ]);`;
+    WHERE $1 = ANY (ARRAY[LOWER("customer_first_name"), LOWER("customer_last_name"), LOWER("property"."name"), to_char("check_in_date", 'MM/DD/YYYY') ])
+    ORDER BY "entry_date"
+    DESC;`;
     pool
         .query(queryText, [query])
         .then((result) => res.send(result.rows))
