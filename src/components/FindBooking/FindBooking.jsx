@@ -55,7 +55,7 @@ function FindBooking() {
                 </div>
             }
             {!search &&
-                <div className="bookings-folder">
+                <div>
                     <div className="section-header">Recently Entered Bookings</div>
                     <BookingsFolder />
                 </div>
