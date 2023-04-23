@@ -12,6 +12,38 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+@media only screen and (max-width: 1380px) { 
+    .bookings-div {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-width: 15rem;
+        column-gap: 35px;
+        width: 90%;
+        color: white;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 10px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+@media only screen and (max-width: 1130px) { 
+    .bookings-div {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-width: 15rem;
+        column-gap: 35px;
+        width: 90%;
+        color: white;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 10px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
 .booking-summary {
     box-shadow: 0px 0px 3px #294d20;;
     border-radius: 20px;
