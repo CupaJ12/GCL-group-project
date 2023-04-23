@@ -18,18 +18,24 @@ function FindBooking() {
 
     const searchButton = () => {
         console.log('search Button clicked', inputValue);
-        if (/^\d{2}\/\d{2}\/\d{4}$/.test(inputValue)) {
+        // if (inputValue === '') {
+        //     alert('please enter input');
+        // }
+        if (/^\d{2}\/\d{2}\/\d{4}$/ || /^\d{1}\/\d{1}\/\d{4}$/.test(inputValue)) {
+            let date = new Date(inputValue).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+            console.log('new date in searchButton', date);
             dispatch({
                 type: 'SEARCH',
-                payload: encodeURIComponent(inputValue)
-            })    
+                payload: encodeURIComponent(date)
+            })
         } else {
             dispatch({
                 type: 'SEARCH',
                 payload: inputValue
             })
         }
-        setSearch(true);  
+        setSearch(true);
+        setInputValue('');
     }
 
     return (
@@ -41,17 +47,18 @@ function FindBooking() {
                 HOME
             </button>
             <br />
-            <input 
-                className="searchbar" 
+            <input
+                className="searchbar"
                 placeholder="search first name, last name, property, or check-in date (mm/dd/yyyy)"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                />
+            />
             <br></br>
             <button className="search-btn" onClick={() => searchButton()}>SEARCH</button>
             {search &&
                 <div>
-                    < SearchResult/>
+                    <div className="section-header">Search Result</div>
+                    < SearchResult inputValue={inputValue} />
                 </div>
             }
             {!search &&
