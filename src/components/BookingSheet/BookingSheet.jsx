@@ -4,7 +4,7 @@ import './BookingSheet.css';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import EditTenantModal from '../EditTenantModal/EditTenantModal';
 import EditFinancialModal from '../EditFinancialModal/EditFinancialModal';
@@ -64,14 +64,15 @@ function BookingSheet() {
 	};
 
 	const handleDelete = (commentId) => {
-		dispatch({ 
-			type: 'DELETE_COMMENT', 
+		dispatch({
+			type: 'DELETE_COMMENT',
 			payload: {
-				id: commentId, 
+				id: commentId,
 				booking_id: id
-			} 
+			}
 		});
 	}
+
 
 	// conditional rendering: if no booking, return error message
 	if (!booking) {
@@ -143,7 +144,7 @@ function BookingSheet() {
 				</div>
 			</div>
 
-			<hr className="divider"/>
+			<hr className="divider" />
 
 			<div className="booking-sheet-container">
 				<div className="booking-sheet-financial-div">
@@ -166,9 +167,9 @@ function BookingSheet() {
 				<div className="money-total">
 					$<MathComponent booking={booking} type='net' /> {/* potential rounding descrepancies when youre trying to round a number thats exactly half way between two numbers git ad */}
 				</div>
-			</div>		
+			</div>
 
-			<hr className="divider"/>
+			<hr className="divider" />
 
 			<div className="booking-sheet-container">
 				<div className="booking-sheet-financial-div">
@@ -195,12 +196,12 @@ function BookingSheet() {
 					})}
 					<br />
 					<br />
-					<hr className="divider"/>
+					<hr className="divider" />
 				</div>
 			}
 			<div className="comment-input-div">
 				<label className="label" htmlFor="comment">Add A Comment</label>
-			</div>          
+			</div>
 			<input
 				id="comment"
 				name="comment"
@@ -208,12 +209,11 @@ function BookingSheet() {
 				value={comment}
 				placeholder="new comment"
 				className="tenant-input"
-				onChange={(event) => {setComment(event.target.value)}}
+				onChange={(event) => { setComment(event.target.value) }}
 			/>
 			{emptyComment && <section className="empty-comment-warning">comment cannot be blank!</section>}
 			<br />
 			<button className="comment-submit-btn" onClick={handleSubmit}>Submit</button>
-
 			<EditTenantModal
 				onClose={() => setShowTenant(false)}
 				setChange={() => setChange(change + 1)}

@@ -69,6 +69,18 @@ function* updateFinancial(action) {
     }
 }
 
+function* searchBooking(action) {
+    const payload = action.payload;
+    try {
+        console.log('searchBooking saga hit', action.payload);
+        const response = yield axios.get(`/api/booking/search/${payload}`);
+        console.log(response);
+        yield put({ type: 'SET_BOOKINGS', payload: response.data});
+    } catch (err) {
+        console.log('error with searchBooking saga', err)
+    }
+}
+
 function* bookingsSaga() {
     yield takeEvery('FETCH_BOOKINGS', fetchBookings);
     yield takeEvery('FETCH_BY_DETAILS', fetchDetails);
@@ -76,6 +88,7 @@ function* bookingsSaga() {
     yield takeLatest('FETCH_BOOKING_BY_ID', fetchByID);
     yield takeEvery('EDIT_TENANT_INFO', updateTenant);
     yield takeEvery('EDIT_FINANCIAL_INFO', updateFinancial);
+    yield takeEvery('SEARCH', searchBooking);
 }
 
 export default bookingsSaga;

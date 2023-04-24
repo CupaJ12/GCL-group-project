@@ -35,6 +35,10 @@
     font-size: 20px;
 }
 
+.booking-sheet-edit-btn:hover {
+    color: rgb(6, 222, 42);
+}
+
 .booking-sheet-section-header {
     width: 95%;
     margin: auto;

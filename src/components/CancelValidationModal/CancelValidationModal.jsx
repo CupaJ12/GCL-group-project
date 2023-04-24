@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { CSSTransition } from "react-transition-group";
 import ReactDOM from "react-dom";
 import AddNewPropertyForm from '../AddNewPropertyForm/AddNewPropertyForm';
@@ -6,16 +6,19 @@ import './CancelValidationModal.css';
 
 const CancelValidation = ({ onConfirm, onDeny, show }) => {
 
+    const elementRef = useRef(null);
+
     // ReactDOM.createPortal create the div outside of the parent so it won't break the parent's css
     return ReactDOM.createPortal(
         // CSSTransition is a built-in method that render or remove the div into the DOM
         // npm install react-transition-group, to use this built-in method
         <CSSTransition
+            nodeRef={elementRef}
             in={show}
             unmountOnExit
             timeout={{ enter: 0, exit: 300 }}
         >
-            <div className="modal">
+            <div className="modal" ref={elementRef}>
 
                 <div className="cancel-validation-container">
                     <h1>are you sure you wish to cancel?</h1>
