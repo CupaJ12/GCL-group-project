@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-
+require('dotenv').config();
 // GET route to get single booking by ID
 
 router.get('/:id', (req, res) => {
@@ -29,6 +29,27 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log('in booking router post request with: ', req.body);
+
+            // Email notification
+            // const sgMail = require('@sendgrid/mail');
+            // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+            // const sendMail = async (msg) => {
+            //     try{
+            //         await sgMail.send(msg);
+            //         console.log("message send!");
+            //     }catch (error) {
+            //         console.error(error);   // check for env var 
+            //     }
+            // };
+
+            // sendMail({
+            //     to: 'bakarelmi1@gmail.com',
+            //     from: 'goldclaimlodge100@gmail.com',
+            //     subject: 'New Booking was created!',
+            //     text: 'Hello, we are notifying you that we have a new booking created!',
+            // });
+
     if (req.isAuthenticated()) {
         const queryText = `INSERT INTO "booking" (
             customer_first_name, 
